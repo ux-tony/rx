@@ -7,10 +7,9 @@
   --line: rgba(23, 21, 18, 0.12);
   --accent: #9a6845;
   --shadow: 0 22px 70px rgba(33, 25, 19, 0.09);
-  --radius-xl: 32px;
-  --radius-lg: 24px;
-  --radius-md: 18px;
-  --container: 1320px;
+  --radius-xl: 0;
+  --radius-lg: 0;
+  --radius-md: 0;
 }
 
 * {
@@ -41,9 +40,9 @@ img {
 }
 
 .page-shell {
-  width: min(calc(100% - 40px), var(--container));
-  margin: 0 auto;
-  padding: 24px 0 80px;
+  width: 100%;
+  margin: 0;
+  padding: 24px 24px 80px;
 }
 
 .hero {
@@ -68,7 +67,6 @@ img {
 .hero-copy {
   padding: 42px;
   background: linear-gradient(180deg, var(--surface-strong) 0%, rgba(255, 255, 255, 0.76) 100%);
-  border-radius: 38px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -88,7 +86,7 @@ img {
 
 .hero-badge {
   padding: 9px 14px;
-  border-radius: 999px;
+  border-radius: 0;
   background: rgba(154, 104, 69, 0.08);
   color: var(--accent);
 }
@@ -123,7 +121,7 @@ img {
   justify-content: center;
   min-height: 52px;
   padding: 0 22px;
-  border-radius: 999px;
+  border-radius: 0;
   font-weight: 700;
   transition:
     transform 180ms ease,
@@ -176,7 +174,6 @@ img {
 .hero-visual {
   position: relative;
   overflow: hidden;
-  border-radius: 38px;
   min-height: 720px;
 }
 
@@ -202,7 +199,7 @@ img {
 .hero-note {
   align-self: flex-start;
   padding: 12px 16px;
-  border-radius: 999px;
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(12px);
   font-size: 0.92rem;
@@ -271,7 +268,7 @@ img {
 .category-pill {
   padding: 10px 14px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.6);
   color: var(--muted);
   font-size: 0.92rem;
@@ -288,7 +285,6 @@ img {
   flex-direction: column;
   grid-column: span 4;
   overflow: hidden;
-  border-radius: var(--radius-xl);
   background: rgba(255, 255, 255, 0.74);
   transition:
     transform 180ms ease,
@@ -373,7 +369,6 @@ img {
 
 .service-card {
   padding: 28px;
-  border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.62);
 }
 
@@ -401,7 +396,6 @@ img {
 .faq-shell {
   margin-top: 132px;
   padding: 34px;
-  border-radius: 34px;
   background: rgba(255, 255, 255, 0.7);
 }
 
@@ -423,7 +417,6 @@ img {
 .contact-strip {
   margin-top: 132px;
   padding: 40px;
-  border-radius: 38px;
   background:
     linear-gradient(120deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.74)),
     radial-gradient(circle at top right, rgba(154, 104, 69, 0.18), transparent 34%);
@@ -461,16 +454,11 @@ img {
 
 @media (max-width: 780px) {
   .page-shell {
-    width: min(calc(100% - 24px), var(--container));
+    width: 100%;
     padding-top: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
     padding-bottom: 56px;
-  }
-
-  .hero-copy,
-  .hero-visual,
-  .contact-strip,
-  .faq-shell {
-    border-radius: 26px;
   }
 
   .hero-copy,
