@@ -1,5 +1,6 @@
 {
   "name": "rx-architect-portfolio",
+  "description": "Minimalist MVP web portfolio application for an architect studio built with Next.js, TypeScript and Mantine.",
   "version": "0.1.0",
   "private": true,
   "scripts": {

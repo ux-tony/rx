@@ -15,9 +15,10 @@ export default function HomePage() {
           eyebrow="Проекты"
           title="Архитектурные пространства, где материал и свет работают на ощущение тишины."
           description="Подборка демонстрационных кейсов для MVP. В реальном проекте этот блок подключается к CMS или headless API."
+          fullWidth
         />
 
-        <div className="category-row" aria-label="Категории проектов">
+        <div className="category-row category-row-hidden" aria-label="Категории проектов">
           {projectCategories.map((category) => (
             <span className="category-pill" key={category}>
               {category}
