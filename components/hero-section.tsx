@@ -1,4 +1,6 @@
+import Image from "next/image";
 import type { Metric } from "@/data/site-data";
+import architectPhoto from "@/img/Foto001.jpg";
 
 type HeroSectionProps = {
   metrics: Metric[];
@@ -43,9 +45,14 @@ export function HeroSection({ metrics }: HeroSectionProps) {
       </div>
 
       <div className="hero-visual">
-        <div className="hero-visual-placeholder">
-          <span>Фото архитектора</span>
-        </div>
+        <Image
+          src={architectPhoto}
+          alt="Портрет архитектора"
+          className="hero-portrait"
+          fill
+          priority
+          sizes="(max-width: 1180px) 100vw, 48vw"
+        />
       </div>
     </section>
   );
