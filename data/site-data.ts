@@ -3,8 +3,10 @@ export type Project = {
   title: string;
   category: string;
   location: string;
+  year?: number;
   description: string;
   image: string;
+  gallery?: string[];
 };
 
 export type Metric = {
@@ -42,7 +44,12 @@ export const projects: Project[] = [
     location: "Москва",
     description: "Дом с центральным световым атриумом, монолитной пластикой фасада и спокойной палитрой натурального камня.",
     image:
-      "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80"
+    ]
   },
   {
     slug: "frame-villa",
@@ -51,7 +58,12 @@ export const projects: Project[] = [
     location: "Сочи",
     description: "Линейная композиция с длинными видовыми коридорами, приватным внутренним двором и интегрированным ландшафтом.",
     image:
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1600&q=80"
+    ]
   },
   {
     slug: "gallery-passage",
@@ -60,7 +72,12 @@ export const projects: Project[] = [
     location: "Санкт-Петербург",
     description: "Мягкая реконструкция общественного пространства с акцентом на маршрут, световые акценты и событийный сценарий.",
     image:
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1600&q=80"
+    ]
   },
   {
     slug: "atrium-lofts",
@@ -69,7 +86,12 @@ export const projects: Project[] = [
     location: "Казань",
     description: "Камерный жилой объект с ритмичным фасадом, террасами и общими пространствами без визуальной перегрузки.",
     image:
-      "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1600&q=80"
+    ]
   },
   {
     slug: "quiet-hotel",
@@ -78,7 +100,12 @@ export const projects: Project[] = [
     location: "Ереван",
     description: "Бутик-отель, построенный на балансе тактильных материалов, теплого света и приватной атмосферы в общественных зонах.",
     image:
-      "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80"
+    ]
   },
   {
     slug: "stone-courtyard",
@@ -87,7 +114,12 @@ export const projects: Project[] = [
     location: "Тбилиси",
     description: "Интерьерный кейс с монохромной палитрой, цельными объемами хранения и природной фактурой камня и дерева.",
     image:
-      "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80",
+    gallery: [
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1600&q=80"
+    ]
   }
 ];
 

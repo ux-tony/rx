@@ -18,7 +18,8 @@ export const projectsQuery = groq`
     location,
     description,
     "slug": slug.current,
-    "image": coverImage.asset->url
+    "image": coverImage.asset->url,
+    "gallery": gallery[].asset->url
   }
 `;
 

@@ -1,6 +1,7 @@
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
+import { mockSeedTool } from "@/sanity/plugins/mock-seed-tool";
 import { sanityBasePath, sanityDataset, sanityProjectId } from "@/sanity/env";
 import { schemaTypes } from "@/sanity/schemaTypes";
 
@@ -10,7 +11,7 @@ export default defineConfig({
   projectId: sanityProjectId,
   dataset: sanityDataset,
   basePath: sanityBasePath,
-  plugins: [structureTool(), visionTool()],
+  plugins: [structureTool(), visionTool(), mockSeedTool()],
   schema: {
     types: schemaTypes
   }

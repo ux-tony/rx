@@ -9,6 +9,7 @@ type SanityProject = {
   location?: string;
   description?: string;
   image?: string;
+  gallery?: string[];
 };
 
 export async function getProjects(): Promise<Project[]> {
@@ -23,7 +24,8 @@ export async function getProjects(): Promise<Project[]> {
         category: item.category || "",
         location: item.location || "",
         description: item.description || "",
-        image: item.image as string
+        image: item.image as string,
+        gallery: item.gallery || []
       }));
   } catch {
     return [];
