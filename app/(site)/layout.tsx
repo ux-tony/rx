@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ColorSchemeScript, MantineProvider, createTheme, mantineHtmlProps } from "@mantine/core";
 import { Manrope } from "next/font/google";
 import "@mantine/core/styles.css";
-import "./globals.css";
+import "../globals.css";
 
 const manrope = Manrope({
   subsets: ["latin", "cyrillic"],

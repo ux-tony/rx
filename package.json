@@ -12,9 +12,12 @@
   "dependencies": {
     "@mantine/core": "^7.17.8",
     "@mantine/hooks": "^7.17.8",
+    "@sanity/vision": "latest",
     "next": "^15.3.0",
+    "next-sanity": "latest",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "sanity": "latest"
   },
   "devDependencies": {
     "@types/node": "^22.14.1",
