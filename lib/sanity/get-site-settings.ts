@@ -3,6 +3,7 @@ import { siteSettingsQuery } from "@/lib/sanity/queries";
 
 export type SiteSettings = {
   studioName?: string;
+  logoUrl?: string;
   heroTitle?: string;
   heroDescription?: string;
   contactEmail?: string;

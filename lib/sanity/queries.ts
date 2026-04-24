@@ -3,6 +3,7 @@ import { groq } from "next-sanity";
 export const siteSettingsQuery = groq`
   *[_type == "siteSettings"][0]{
     studioName,
+    "logoUrl": logo.asset->url,
     heroTitle,
     heroDescription,
     contactEmail,

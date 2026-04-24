@@ -84,20 +84,27 @@ img {
   text-transform: uppercase;
 }
 
-.logo-mock {
+.hero-logo {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.52);
+  overflow: hidden;
+}
+
+.hero-logo-image {
+  object-fit: contain;
+}
+
+.hero-logo-placeholder {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 78px;
-  min-height: 42px;
-  padding: 0 16px;
-  border: 1px solid var(--line);
-  max-width: 100%;
-  font-size: 0.98rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.1em;
   color: var(--foreground);
-  background: rgba(255, 255, 255, 0.52);
 }
 
 .hero-copy h1 {

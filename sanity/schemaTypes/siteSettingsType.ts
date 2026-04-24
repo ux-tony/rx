@@ -11,6 +11,14 @@ export const siteSettingsType = defineType({
       type: "string"
     }),
     defineField({
+      name: "logo",
+      title: "Логотип 80x80",
+      type: "image",
+      options: {
+        hotspot: true
+      }
+    }),
+    defineField({
       name: "heroTitle",
       title: "Hero-заголовок",
       type: "string"
