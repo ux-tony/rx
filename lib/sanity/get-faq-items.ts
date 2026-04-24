@@ -1,4 +1,3 @@
-import { cache } from "react";
 import type { FaqItem } from "@/data/site-data";
 import { sanityClient } from "@/lib/sanity/client";
 import { faqItemsQuery } from "@/lib/sanity/queries";
@@ -8,7 +7,7 @@ type SanityFaqItem = {
   answer?: string;
 };
 
-export const getFaqItems = cache(async (): Promise<FaqItem[]> => {
+export async function getFaqItems(): Promise<FaqItem[]> {
   try {
     const items = await sanityClient.fetch<SanityFaqItem[]>(faqItemsQuery);
 
@@ -21,4 +20,4 @@ export const getFaqItems = cache(async (): Promise<FaqItem[]> => {
   } catch {
     return [];
   }
-});
+}

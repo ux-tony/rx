@@ -8,6 +8,8 @@ import { getFaqItems } from "@/lib/sanity/get-faq-items";
 import { getProjects } from "@/lib/sanity/get-projects";
 import { getSiteSettings } from "@/lib/sanity/get-site-settings";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const siteSettings = await getSiteSettings();
   const cmsProjects = await getProjects();

@@ -1,4 +1,3 @@
-import { cache } from "react";
 import type { Project } from "@/data/site-data";
 import { sanityClient } from "@/lib/sanity/client";
 import { projectsQuery } from "@/lib/sanity/queries";
@@ -12,7 +11,7 @@ type SanityProject = {
   image?: string;
 };
 
-export const getProjects = cache(async (): Promise<Project[]> => {
+export async function getProjects(): Promise<Project[]> {
   try {
     const items = await sanityClient.fetch<SanityProject[]>(projectsQuery);
 
@@ -29,4 +28,4 @@ export const getProjects = cache(async (): Promise<Project[]> => {
   } catch {
     return [];
   }
-});
+}

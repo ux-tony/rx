@@ -1,4 +1,3 @@
-import { cache } from "react";
 import { sanityClient } from "@/lib/sanity/client";
 import { siteSettingsQuery } from "@/lib/sanity/queries";
 
@@ -11,10 +10,10 @@ export type SiteSettings = {
   architectPhotoUrl?: string;
 };
 
-export const getSiteSettings = cache(async (): Promise<SiteSettings | null> => {
+export async function getSiteSettings(): Promise<SiteSettings | null> {
   try {
     return await sanityClient.fetch<SiteSettings | null>(siteSettingsQuery);
   } catch {
     return null;
   }
-});
+}
