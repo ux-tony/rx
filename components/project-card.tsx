@@ -57,45 +57,55 @@ export function ProjectCard({ project }: ProjectCardProps) {
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}
-        centered
-        size="xl"
-        padding="md"
-        overlayProps={{ backgroundOpacity: 0.82, blur: 3 }}
-        title={project.title}
+        fullScreen
+        padding={0}
+        withCloseButton={false}
+        overlayProps={{ backgroundOpacity: 0.15, color: "#000000", blur: 0 }}
+        styles={{
+          content: {
+            background: "transparent"
+          },
+          body: {
+            padding: 0
+          }
+        }}
       >
         <div className="project-gallery-shell">
           <div className="project-gallery-stage">
             <img alt={project.title} className="project-gallery-image" src={gallery[activeIndex]} />
-          </div>
-
-          {gallery.length > 1 ? (
-            <div className="project-gallery-controls">
-              <ActionIcon aria-label="Предыдущее изображение" onClick={showPrev} radius={0} size="lg" variant="default">
-                {"<"}
-              </ActionIcon>
-              <span className="project-gallery-counter">
-                {activeIndex + 1} / {gallery.length}
-              </span>
-              <ActionIcon aria-label="Следующее изображение" onClick={showNext} radius={0} size="lg" variant="default">
-                {">"}
-              </ActionIcon>
-            </div>
-          ) : null}
-
-          {gallery.length > 1 ? (
-            <div className="project-gallery-thumbs">
-              {gallery.map((image, index) => (
-                <button
-                  className={`project-gallery-thumb${index === activeIndex ? " is-active" : ""}`}
-                  key={`${project.slug}-${index}`}
-                  onClick={() => setActiveIndex(index)}
-                  type="button"
+            {gallery.length > 1 ? (
+              <>
+                <ActionIcon
+                  aria-label="Предыдущее изображение"
+                  className="project-gallery-arrow project-gallery-arrow-left"
+                  onClick={showPrev}
+                  radius={0}
+                  size="xl"
+                  variant="default"
                 >
-                  <img alt={`${project.title} ${index + 1}`} src={image} />
-                </button>
-              ))}
-            </div>
-          ) : null}
+                  {"<"}
+                </ActionIcon>
+                <ActionIcon
+                  aria-label="Следующее изображение"
+                  className="project-gallery-arrow project-gallery-arrow-right"
+                  onClick={showNext}
+                  radius={0}
+                  size="xl"
+                  variant="default"
+                >
+                  {">"}
+                </ActionIcon>
+              </>
+            ) : null}
+            <button
+              aria-label="Закрыть галерею"
+              className="project-gallery-close"
+              onClick={() => setOpened(false)}
+              type="button"
+            >
+              ×
+            </button>
+          </div>
         </div>
       </Modal>
     </>
