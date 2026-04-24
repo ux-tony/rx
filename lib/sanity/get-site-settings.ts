@@ -1,3 +1,4 @@
+import type { Metric } from "@/data/site-data";
 import { sanityClient } from "@/lib/sanity/client";
 import { siteSettingsQuery } from "@/lib/sanity/queries";
 
@@ -6,6 +7,11 @@ export type SiteSettings = {
   logoUrl?: string;
   heroTitle?: string;
   heroDescription?: string;
+  primaryCtaLabel?: string;
+  primaryCtaHref?: string;
+  secondaryCtaLabel?: string;
+  secondaryCtaHref?: string;
+  metrics?: Metric[];
   projectsEyebrow?: string;
   projectsTitle?: string;
   projectsDescription?: string;

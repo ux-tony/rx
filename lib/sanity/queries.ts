@@ -7,6 +7,14 @@ export const siteSettingsQuery = groq`
       "logoUrl": logo.asset->url,
       heroTitle,
       heroDescription,
+      primaryCtaLabel,
+      primaryCtaHref,
+      secondaryCtaLabel,
+      secondaryCtaHref,
+      metrics[]{
+        value,
+        label
+      },
       "architectPhotoUrl": architectPhoto.asset->url
     },
     "projects": *[_type == "projectsSection"][0]{

@@ -8,7 +8,25 @@ export const heroSectionType = defineType({
     studioName: "Roman Kharchenko Studio",
     heroTitle: "Архитектурная студия Романа Харченко.",
     heroDescription:
-      "Частная архитектурная практика с фокусом на ясную композицию, материал и выверенную атмосферу пространства."
+      "Частная архитектурная практика с фокусом на ясную композицию, материал и выверенную атмосферу пространства.",
+    primaryCtaLabel: "Смотреть проекты",
+    primaryCtaHref: "#projects",
+    secondaryCtaLabel: "Обсудить задачу",
+    secondaryCtaHref: "#contact",
+    metrics: [
+      {
+        value: "18",
+        label: "концептов в коллекции MVP для будущего каталога"
+      },
+      {
+        value: "2-3",
+        label: "колонки на desktop с сохранением чистой мобильной сетки"
+      },
+      {
+        value: "1",
+        label: "акцентный оттенок во всей визуальной системе"
+      }
+    ]
   },
   fields: [
     defineField({
@@ -42,6 +60,57 @@ export const heroSectionType = defineType({
       options: {
         hotspot: true
       }
+    }),
+    defineField({
+      name: "primaryCtaLabel",
+      title: "Основная кнопка: текст",
+      type: "string"
+    }),
+    defineField({
+      name: "primaryCtaHref",
+      title: "Основная кнопка: ссылка",
+      type: "string"
+    }),
+    defineField({
+      name: "secondaryCtaLabel",
+      title: "Вторая кнопка: текст",
+      type: "string"
+    }),
+    defineField({
+      name: "secondaryCtaHref",
+      title: "Вторая кнопка: ссылка",
+      type: "string"
+    }),
+    defineField({
+      name: "metrics",
+      title: "Метрики",
+      type: "array",
+      of: [
+        defineField({
+          name: "metric",
+          title: "Метрика",
+          type: "object",
+          fields: [
+            defineField({
+              name: "value",
+              title: "Значение",
+              type: "string"
+            }),
+            defineField({
+              name: "label",
+              title: "Описание",
+              type: "text",
+              rows: 3
+            })
+          ],
+          preview: {
+            select: {
+              title: "value",
+              subtitle: "label"
+            }
+          }
+        })
+      ]
     })
   ],
   preview: {

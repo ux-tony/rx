@@ -15,6 +15,11 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
   const heroDescription =
     siteSettings?.heroDescription ||
     "Частная архитектурная практика с фокусом на ясную композицию, материал и выверенную атмосферу пространства.";
+  const primaryCtaLabel = siteSettings?.primaryCtaLabel || "Смотреть проекты";
+  const primaryCtaHref = siteSettings?.primaryCtaHref || "#projects";
+  const secondaryCtaLabel = siteSettings?.secondaryCtaLabel || "Обсудить задачу";
+  const secondaryCtaHref = siteSettings?.secondaryCtaHref || "#contact";
+  const resolvedMetrics = siteSettings?.metrics && siteSettings.metrics.length > 0 ? siteSettings.metrics : metrics;
   const architectPhotoSrc = siteSettings?.architectPhotoUrl || architectPhoto;
 
   return (
@@ -39,17 +44,17 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
         </div>
 
         <div className="hero-actions">
-          <a className="button-primary" href="#projects">
-            Смотреть проекты
+          <a className="button-primary" href={primaryCtaHref}>
+            {primaryCtaLabel}
           </a>
-          <a className="button-secondary" href="#contact">
-            Обсудить задачу
+          <a className="button-secondary" href={secondaryCtaHref}>
+            {secondaryCtaLabel}
           </a>
         </div>
 
         <div className="hero-metrics">
-          {metrics.map((metric) => (
-            <article className="metric-card" key={metric.label}>
+          {resolvedMetrics.map((metric) => (
+            <article className="metric-card" key={`${metric.value}-${metric.label}`}>
               <p className="metric-value">{metric.value}</p>
               <p className="metric-label">{metric.label}</p>
             </article>
