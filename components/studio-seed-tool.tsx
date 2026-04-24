@@ -3,7 +3,16 @@
 import { useState } from "react";
 import { Alert, Button, Group, Loader, Stack, Text } from "@mantine/core";
 import { useClient } from "sanity";
-import { mockFaqItems, mockProjects, mockServices, mockSiteSettings } from "@/sanity/mock-content";
+import {
+  mockContactsSection,
+  mockFaqItems,
+  mockFaqSection,
+  mockHeroSection,
+  mockProjects,
+  mockProjectsSection,
+  mockServices,
+  mockServicesSection
+} from "@/sanity/mock-content";
 
 type UploadedImage = {
   _type: "image";
@@ -38,7 +47,7 @@ export function StudioSeedTool() {
       setMessage("Импортируем mock-данные в Sanity...");
 
       const existing = await client.fetch<{ _id: string }[]>(
-        '*[_type in ["siteSettings","project","service","faqItem"]]{_id}'
+        '*[_type in ["heroSection","projectsSection","servicesSection","faqSection","contactsSection","project","service","faqItem"]]{_id}'
       );
 
       let transaction = client.transaction();
@@ -50,9 +59,33 @@ export function StudioSeedTool() {
       await transaction.commit();
 
       await client.createOrReplace({
-        _id: "siteSettings",
-        _type: "siteSettings",
-        ...mockSiteSettings
+        _id: "heroSection",
+        _type: "heroSection",
+        ...mockHeroSection
+      });
+
+      await client.createOrReplace({
+        _id: "projectsSection",
+        _type: "projectsSection",
+        ...mockProjectsSection
+      });
+
+      await client.createOrReplace({
+        _id: "servicesSection",
+        _type: "servicesSection",
+        ...mockServicesSection
+      });
+
+      await client.createOrReplace({
+        _id: "faqSection",
+        _type: "faqSection",
+        ...mockFaqSection
+      });
+
+      await client.createOrReplace({
+        _id: "contactsSection",
+        _type: "contactsSection",
+        ...mockContactsSection
       });
 
       for (const item of mockFaqItems) {
@@ -119,8 +152,8 @@ export function StudioSeedTool() {
             Импорт mock-данных
           </Text>
           <Text c="dimmed" mt={8}>
-            Этот импорт очистит текущие документы типов `Секции сайта`, `Проект`, `Услуга` и `FAQ`, а затем загрузит
-            стартовый контент из MVP прямо в ваш Sanity project.
+            Этот импорт очистит текущие документы секций `Hero`, `Проекты`, `Услуги`, `FAQ`, `Контакты`, а также типы
+            `Проект`, `Услуга` и `FAQ`, а затем загрузит стартовый контент из MVP прямо в ваш Sanity project.
           </Text>
         </div>
 

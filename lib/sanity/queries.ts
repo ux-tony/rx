@@ -1,26 +1,36 @@
 import { groq } from "next-sanity";
 
 export const siteSettingsQuery = groq`
-  *[_type == "siteSettings"][0]{
-    studioName,
-    "logoUrl": logo.asset->url,
-    heroTitle,
-    heroDescription,
-    projectsEyebrow,
-    projectsTitle,
-    projectsDescription,
-    servicesEyebrow,
-    servicesTitle,
-    servicesDescription,
-    faqEyebrow,
-    faqTitle,
-    faqDescription,
-    contactsEyebrow,
-    contactsTitle,
-    contactsDescription,
-    contactEmail,
-    contactPhone,
-    "architectPhotoUrl": architectPhoto.asset->url
+  {
+    "hero": *[_type == "heroSection"][0]{
+      studioName,
+      "logoUrl": logo.asset->url,
+      heroTitle,
+      heroDescription,
+      "architectPhotoUrl": architectPhoto.asset->url
+    },
+    "projects": *[_type == "projectsSection"][0]{
+      projectsEyebrow,
+      projectsTitle,
+      projectsDescription
+    },
+    "services": *[_type == "servicesSection"][0]{
+      servicesEyebrow,
+      servicesTitle,
+      servicesDescription
+    },
+    "faq": *[_type == "faqSection"][0]{
+      faqEyebrow,
+      faqTitle,
+      faqDescription
+    },
+    "contacts": *[_type == "contactsSection"][0]{
+      contactsEyebrow,
+      contactsTitle,
+      contactsDescription,
+      contactEmail,
+      contactPhone
+    }
   }
 `;
 

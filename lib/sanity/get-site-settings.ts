@@ -25,7 +25,25 @@ export type SiteSettings = {
 
 export async function getSiteSettings(): Promise<SiteSettings | null> {
   try {
-    return await sanityClient.fetch<SiteSettings | null>(siteSettingsQuery);
+    const data = await sanityClient.fetch<{
+      hero?: Partial<SiteSettings> | null;
+      projects?: Partial<SiteSettings> | null;
+      services?: Partial<SiteSettings> | null;
+      faq?: Partial<SiteSettings> | null;
+      contacts?: Partial<SiteSettings> | null;
+    } | null>(siteSettingsQuery);
+
+    if (!data) {
+      return null;
+    }
+
+    return {
+      ...(data.hero || {}),
+      ...(data.projects || {}),
+      ...(data.services || {}),
+      ...(data.faq || {}),
+      ...(data.contacts || {})
+    };
   } catch {
     return null;
   }
