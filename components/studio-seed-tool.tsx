@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Alert, Button, Group, Loader, Stack, Text } from "@mantine/core";
 import { useClient } from "sanity";
-import { mockFaqItems, mockProjects, mockSiteSettings } from "@/sanity/mock-content";
+import { mockFaqItems, mockProjects, mockServices, mockSiteSettings } from "@/sanity/mock-content";
 
 type UploadedImage = {
   _type: "image";
@@ -38,7 +38,7 @@ export function StudioSeedTool() {
       setMessage("Импортируем mock-данные в Sanity...");
 
       const existing = await client.fetch<{ _id: string }[]>(
-        '*[_type in ["siteSettings","project","faqItem"]]{_id}'
+        '*[_type in ["siteSettings","project","service","faqItem"]]{_id}'
       );
 
       let transaction = client.transaction();
@@ -65,6 +65,17 @@ export function StudioSeedTool() {
         });
       }
 
+      for (const item of mockServices) {
+        await client.createOrReplace({
+          _id: `service-${item.index}`,
+          _type: "service",
+          index: item.index,
+          title: item.title,
+          description: item.description,
+          published: true
+        });
+      }
+
       for (const project of mockProjects) {
         const coverImage = await uploadImage(project.image, `${project.slug}-cover.jpg`);
         const gallery =
@@ -85,8 +96,6 @@ export function StudioSeedTool() {
             current: project.slug
           },
           category: project.category,
-          location: project.location,
-          year: project.year,
           coverImage,
           gallery,
           description: project.description,
@@ -110,8 +119,8 @@ export function StudioSeedTool() {
             Импорт mock-данных
           </Text>
           <Text c="dimmed" mt={8}>
-            Этот импорт очистит текущие документы типов `Настройки сайта`, `Проект` и `FAQ`, а
-            затем загрузит стартовый контент из MVP прямо в ваш Sanity project.
+            Этот импорт очистит текущие документы типов `Секции сайта`, `Проект`, `Услуга` и `FAQ`, а затем загрузит
+            стартовый контент из MVP прямо в ваш Sanity project.
           </Text>
         </div>
 

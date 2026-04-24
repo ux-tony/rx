@@ -6,6 +6,18 @@ export type SiteSettings = {
   logoUrl?: string;
   heroTitle?: string;
   heroDescription?: string;
+  projectsEyebrow?: string;
+  projectsTitle?: string;
+  projectsDescription?: string;
+  servicesEyebrow?: string;
+  servicesTitle?: string;
+  servicesDescription?: string;
+  faqEyebrow?: string;
+  faqTitle?: string;
+  faqDescription?: string;
+  contactsEyebrow?: string;
+  contactsTitle?: string;
+  contactsDescription?: string;
   contactEmail?: string;
   contactPhone?: string;
   architectPhotoUrl?: string;

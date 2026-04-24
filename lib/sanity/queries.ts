@@ -6,6 +6,18 @@ export const siteSettingsQuery = groq`
     "logoUrl": logo.asset->url,
     heroTitle,
     heroDescription,
+    projectsEyebrow,
+    projectsTitle,
+    projectsDescription,
+    servicesEyebrow,
+    servicesTitle,
+    servicesDescription,
+    faqEyebrow,
+    faqTitle,
+    faqDescription,
+    contactsEyebrow,
+    contactsTitle,
+    contactsDescription,
     contactEmail,
     contactPhone,
     "architectPhotoUrl": architectPhoto.asset->url
@@ -27,5 +39,13 @@ export const faqItemsQuery = groq`
   *[_type == "faqItem"] | order(order asc, _createdAt asc){
     question,
     answer
+  }
+`;
+
+export const servicesQuery = groq`
+  *[_type == "service" && published == true] | order(index asc, _createdAt asc){
+    index,
+    title,
+    description
   }
 `;

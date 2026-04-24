@@ -17,6 +17,12 @@ export type FaqItem = {
   answer: string;
 };
 
+export type ServiceItem = {
+  index: string;
+  title: string;
+  description: string;
+};
+
 export const metrics: Metric[] = [
   {
     value: "18",
@@ -115,7 +121,7 @@ export const projects: Project[] = [
   }
 ];
 
-export const services = [
+export const services: ServiceItem[] = [
   {
     index: "01",
     title: "Private Residences",
