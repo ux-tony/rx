@@ -10,8 +10,7 @@ export const mockSiteSettings = {
 };
 
 export const mockProjects = projects.map((project) => ({
-  ...project,
-  year: 2026
+  ...project
 }));
 
 export const mockFaqItems = faqItems.map((item, index) => ({

@@ -2,8 +2,6 @@ export type Project = {
   slug: string;
   title: string;
   category: string;
-  location: string;
-  year?: number;
   description: string;
   image: string;
   gallery?: string[];
@@ -41,7 +39,6 @@ export const projects: Project[] = [
     slug: "house-atria",
     title: "House Atria",
     category: "Частная резиденция",
-    location: "Москва",
     description: "Дом с центральным световым атриумом, монолитной пластикой фасада и спокойной палитрой натурального камня.",
     image:
       "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=80",
@@ -55,7 +52,6 @@ export const projects: Project[] = [
     slug: "frame-villa",
     title: "Frame Villa",
     category: "Загородный дом",
-    location: "Сочи",
     description: "Линейная композиция с длинными видовыми коридорами, приватным внутренним двором и интегрированным ландшафтом.",
     image:
       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
@@ -69,7 +65,6 @@ export const projects: Project[] = [
     slug: "gallery-passage",
     title: "Gallery Passage",
     category: "Культурное пространство",
-    location: "Санкт-Петербург",
     description: "Мягкая реконструкция общественного пространства с акцентом на маршрут, световые акценты и событийный сценарий.",
     image:
       "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
@@ -83,7 +78,6 @@ export const projects: Project[] = [
     slug: "atrium-lofts",
     title: "Atrium Lofts",
     category: "Девелопмент",
-    location: "Казань",
     description: "Камерный жилой объект с ритмичным фасадом, террасами и общими пространствами без визуальной перегрузки.",
     image:
       "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80",
@@ -97,7 +91,6 @@ export const projects: Project[] = [
     slug: "quiet-hotel",
     title: "Quiet Hotel",
     category: "Hospitality",
-    location: "Ереван",
     description: "Бутик-отель, построенный на балансе тактильных материалов, теплого света и приватной атмосферы в общественных зонах.",
     image:
       "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1200&q=80",
@@ -111,7 +104,6 @@ export const projects: Project[] = [
     slug: "stone-courtyard",
     title: "Stone Courtyard",
     category: "Интерьер",
-    location: "Тбилиси",
     description: "Интерьерный кейс с монохромной палитрой, цельными объемами хранения и природной фактурой камня и дерева.",
     image:
       "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80",

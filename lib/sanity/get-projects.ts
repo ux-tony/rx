@@ -6,7 +6,6 @@ type SanityProject = {
   slug?: string;
   title?: string;
   category?: string;
-  location?: string;
   description?: string;
   image?: string;
   gallery?: string[];
@@ -22,7 +21,6 @@ export async function getProjects(): Promise<Project[]> {
         slug: item.slug as string,
         title: item.title as string,
         category: item.category || "",
-        location: item.location || "",
         description: item.description || "",
         image: item.image as string,
         gallery: item.gallery || []

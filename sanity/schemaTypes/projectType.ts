@@ -27,16 +27,6 @@ export const projectType = defineType({
       type: "string"
     }),
     defineField({
-      name: "location",
-      title: "Локация",
-      type: "string"
-    }),
-    defineField({
-      name: "year",
-      title: "Год",
-      type: "number"
-    }),
-    defineField({
       name: "coverImage",
       title: "Обложка",
       type: "image",
@@ -75,7 +65,7 @@ export const projectType = defineType({
   preview: {
     select: {
       title: "title",
-      subtitle: "location",
+      subtitle: "category",
       media: "coverImage"
     }
   }

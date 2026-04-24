@@ -15,7 +15,6 @@ export const projectsQuery = groq`
   *[_type == "project" && published == true] | order(_createdAt desc){
     title,
     category,
-    location,
     description,
     "slug": slug.current,
     "image": coverImage.asset->url,
