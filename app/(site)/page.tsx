@@ -4,11 +4,14 @@ import { FaqSection } from "@/components/faq-section";
 import { HeroSection } from "@/components/hero-section";
 import { ProjectCard } from "@/components/project-card";
 import { SectionHeading } from "@/components/section-heading";
+import { getSiteSettings } from "@/lib/sanity/get-site-settings";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const siteSettings = await getSiteSettings();
+
   return (
     <main className="page-shell">
-      <HeroSection metrics={metrics} />
+      <HeroSection metrics={metrics} siteSettings={siteSettings} />
 
       <section className="content-section" id="projects">
         <SectionHeading
@@ -54,7 +57,10 @@ export default function HomePage() {
       </section>
 
       <FaqSection items={faqItems} />
-      <ContactStrip />
+      <ContactStrip
+        contactEmail={siteSettings?.contactEmail}
+        contactPhone={siteSettings?.contactPhone}
+      />
     </main>
   );
 }

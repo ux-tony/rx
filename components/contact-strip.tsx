@@ -1,4 +1,13 @@
-export function ContactStrip() {
+type ContactStripProps = {
+  contactEmail?: string | null;
+  contactPhone?: string | null;
+};
+
+export function ContactStrip({ contactEmail, contactPhone }: ContactStripProps) {
+  const email = contactEmail || "studio@rx-architect.test";
+  const phone = contactPhone || "+7 (999) 000-00-00";
+  const phoneHref = `tel:${phone.replace(/[^\d+]/g, "")}`;
+
   return (
     <section className="contact-strip" id="contact">
       <p className="eyebrow">Контакт</p>
@@ -9,11 +18,11 @@ export function ContactStrip() {
       </p>
 
       <div className="contact-actions">
-        <a className="button-primary" href="mailto:studio@rx-architect.test">
-          studio@rx-architect.test
+        <a className="button-primary" href={`mailto:${email}`}>
+          {email}
         </a>
-        <a className="button-secondary" href="tel:+79990000000">
-          +7 (999) 000-00-00
+        <a className="button-secondary" href={phoneHref}>
+          {phone}
         </a>
       </div>
     </section>

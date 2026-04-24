@@ -1,28 +1,34 @@
 import Image from "next/image";
 import type { Metric } from "@/data/site-data";
 import architectPhoto from "@/img/Foto001.jpg";
+import type { SiteSettings } from "@/lib/sanity/get-site-settings";
 
 type HeroSectionProps = {
   metrics: Metric[];
+  siteSettings?: SiteSettings | null;
 };
 
-export function HeroSection({ metrics }: HeroSectionProps) {
+export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
+  const studioName = siteSettings?.studioName || "Roman Kharchenko Studio";
+  const heroTitle = siteSettings?.heroTitle || "Архитектурная студия Романа Харченко.";
+  const heroDescription =
+    siteSettings?.heroDescription ||
+    "Частная архитектурная практика с фокусом на ясную композицию, материал и выверенную атмосферу пространства.";
+  const architectPhotoSrc = siteSettings?.architectPhotoUrl || architectPhoto;
+
   return (
     <section className="hero">
       <div className="hero-copy">
         <div className="hero-topline">
-          <div className="logo-mock" aria-label="Логотип студии">
-            RK
+          <div className="logo-mock" aria-label="Название студии">
+            {studioName}
           </div>
         </div>
 
         <div className="section-heading">
           <p className="eyebrow">Архитектурная студия</p>
-          <h1>Архитектурная студия Романа Харченко.</h1>
-          <p>
-            Частная архитектурная практика с фокусом на ясную композицию, материал и выверенную
-            атмосферу пространства.
-          </p>
+          <h1>{heroTitle}</h1>
+          <p>{heroDescription}</p>
         </div>
 
         <div className="hero-actions">
@@ -46,7 +52,7 @@ export function HeroSection({ metrics }: HeroSectionProps) {
 
       <div className="hero-visual">
         <Image
-          src={architectPhoto}
+          src={architectPhotoSrc}
           alt="Портрет архитектора"
           className="hero-portrait"
           fill

@@ -92,9 +92,10 @@ img {
   min-height: 42px;
   padding: 0 16px;
   border: 1px solid var(--line);
-  font-size: 1.15rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
+  max-width: 100%;
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   color: var(--foreground);
   background: rgba(255, 255, 255, 0.52);
 }
