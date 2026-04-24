@@ -4,10 +4,16 @@ import { FaqSection } from "@/components/faq-section";
 import { HeroSection } from "@/components/hero-section";
 import { ProjectCard } from "@/components/project-card";
 import { SectionHeading } from "@/components/section-heading";
+import { getFaqItems } from "@/lib/sanity/get-faq-items";
+import { getProjects } from "@/lib/sanity/get-projects";
 import { getSiteSettings } from "@/lib/sanity/get-site-settings";
 
 export default async function HomePage() {
   const siteSettings = await getSiteSettings();
+  const cmsProjects = await getProjects();
+  const cmsFaqItems = await getFaqItems();
+  const resolvedProjects = cmsProjects.length > 0 ? cmsProjects : projects;
+  const resolvedFaqItems = cmsFaqItems.length > 0 ? cmsFaqItems : faqItems;
 
   return (
     <main className="page-shell">
@@ -30,7 +36,7 @@ export default async function HomePage() {
         </div>
 
         <div className="projects-grid">
-          {projects.map((project) => (
+          {resolvedProjects.map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}
         </div>
@@ -56,7 +62,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <FaqSection items={faqItems} />
+      <FaqSection items={resolvedFaqItems} />
       <ContactStrip
         contactEmail={siteSettings?.contactEmail}
         contactPhone={siteSettings?.contactPhone}
