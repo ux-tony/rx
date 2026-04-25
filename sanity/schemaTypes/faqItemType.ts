@@ -4,6 +4,7 @@ export const faqItemType = defineType({
   name: "faqItem",
   title: "FAQ",
   type: "document",
+  __experimental_formPreviewTitle: false,
   fields: [
     defineField({
       name: "question",

@@ -4,6 +4,7 @@ export const projectType = defineType({
   name: "project",
   title: "Проект",
   type: "document",
+  __experimental_formPreviewTitle: false,
   fields: [
     defineField({
       name: "title",

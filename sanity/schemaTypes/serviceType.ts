@@ -4,6 +4,7 @@ export const serviceType = defineType({
   name: "service",
   title: "Услуга",
   type: "document",
+  __experimental_formPreviewTitle: false,
   fields: [
     defineField({
       name: "index",
