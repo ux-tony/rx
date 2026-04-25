@@ -16,23 +16,23 @@ export const studioStructure: StructureResolver = (S) =>
               S.listItem()
                 .id("hero-section-item")
                 .title("Hero секция")
-                .child(S.document().schemaType("heroSection").documentId("heroSection")),
+                .child(S.document().schemaType("heroSection").documentId("heroSection").title("")),
               S.listItem()
                 .id("projects-section-item")
                 .title("Проекты")
-                .child(S.document().schemaType("projectsSection").documentId("projectsSection")),
+                .child(S.document().schemaType("projectsSection").documentId("projectsSection").title("")),
               S.listItem()
                 .id("services-section-item")
                 .title("Услуги")
-                .child(S.document().schemaType("servicesSection").documentId("servicesSection")),
+                .child(S.document().schemaType("servicesSection").documentId("servicesSection").title("")),
               S.listItem()
                 .id("faq-section-item")
                 .title("FAQ")
-                .child(S.document().schemaType("faqSection").documentId("faqSection")),
+                .child(S.document().schemaType("faqSection").documentId("faqSection").title("")),
               S.listItem()
                 .id("contacts-section-item")
                 .title("Контакты")
-                .child(S.document().schemaType("contactsSection").documentId("contactsSection"))
+                .child(S.document().schemaType("contactsSection").documentId("contactsSection").title(""))
             ])
         ),
       S.documentTypeListItem("project").id("projects-documents").title("Проект"),
