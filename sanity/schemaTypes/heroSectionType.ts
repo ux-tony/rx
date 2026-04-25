@@ -7,9 +7,12 @@ export const heroSectionType = defineType({
   __experimental_formPreviewTitle: false,
   initialValue: {
     studioName: "Roman Kharchenko Studio",
+    heroEyebrow: "Архитектурная студия",
     heroTitle: "Архитектурная студия Романа Харченко.",
     heroDescription:
       "Частная архитектурная практика с фокусом на ясную композицию, материал и выверенную атмосферу пространства.",
+    seoTitle: "Roman Kharchenko Studio",
+    seoDescription: "Минималистичное портфолио архитектурной студии с акцентом на проекты, свет, материал и визуальную подачу.",
     primaryCtaLabel: "Смотреть проекты",
     primaryCtaHref: "#projects",
     secondaryCtaLabel: "Обсудить задачу",
@@ -33,6 +36,13 @@ export const heroSectionType = defineType({
     defineField({
       name: "studioName",
       title: "Название студии",
+      description: "Брендовое название студии. Сейчас используется как служебное имя и alt для логотипа.",
+      type: "string"
+    }),
+    defineField({
+      name: "heroEyebrow",
+      title: "Подпись над заголовком",
+      description: "Небольшая подпись над главным заголовком, сейчас это текст «Архитектурная студия».",
       type: "string"
     }),
     defineField({
@@ -53,6 +63,19 @@ export const heroSectionType = defineType({
       title: "Описание",
       type: "text",
       rows: 4
+    }),
+    defineField({
+      name: "seoTitle",
+      title: "SEO Title",
+      description: "Заголовок страницы для браузера и поисковиков.",
+      type: "string"
+    }),
+    defineField({
+      name: "seoDescription",
+      title: "SEO Description",
+      description: "Meta description для поисковиков и предпросмотра страницы.",
+      type: "text",
+      rows: 3
     }),
     defineField({
       name: "architectPhoto",

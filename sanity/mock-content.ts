@@ -2,8 +2,11 @@ import { faqItems, projects, services } from "@/data/site-data";
 
 export const mockHeroSection = {
   studioName: "Roman Kharchenko Studio",
+  heroEyebrow: "Архитектурная студия",
   heroTitle: "Архитектурная студия Романа Харченко.",
   heroDescription: "Частная архитектурная практика с фокусом на ясную композицию, материал и выверенную атмосферу пространства.",
+  seoTitle: "Roman Kharchenko Studio",
+  seoDescription: "Минималистичное портфолио архитектурной студии с акцентом на проекты, свет, материал и визуальную подачу.",
   primaryCtaLabel: "Смотреть проекты",
   primaryCtaHref: "#projects",
   secondaryCtaLabel: "Обсудить задачу",

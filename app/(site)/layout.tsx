@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ColorSchemeScript, MantineProvider, createTheme, mantineHtmlProps } from "@mantine/core";
 import { Manrope } from "next/font/google";
+import { getSiteSettings } from "@/lib/sanity/get-site-settings";
 import "@mantine/core/styles.css";
 import "../globals.css";
 
@@ -17,10 +18,16 @@ const theme = createTheme({
   }
 });
 
-export const metadata: Metadata = {
-  title: "RX Architect",
-  description: "Минималистичное портфолио архитектора с акцентом на проекты и визуальную подачу."
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteSettings = await getSiteSettings();
+
+  return {
+    title: siteSettings?.seoTitle || "RX Architect",
+    description:
+      siteSettings?.seoDescription ||
+      "Минималистичное портфолио архитектора с акцентом на проекты и визуальную подачу."
+  };
+}
 
 export default function RootLayout({
   children

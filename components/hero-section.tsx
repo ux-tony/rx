@@ -10,6 +10,7 @@ type HeroSectionProps = {
 
 export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
   const studioName = siteSettings?.studioName || "Roman Kharchenko Studio";
+  const heroEyebrow = siteSettings?.heroEyebrow || "Архитектурная студия";
   const logoUrl = siteSettings?.logoUrl;
   const heroTitle = siteSettings?.heroTitle || "Архитектурная студия Романа Харченко.";
   const heroDescription =
@@ -38,7 +39,7 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
         </div>
 
         <div className="section-heading">
-          <p className="eyebrow">Архитектурная студия</p>
+          <p className="eyebrow">{heroEyebrow}</p>
           <h1>{heroTitle}</h1>
           <p>{heroDescription}</p>
         </div>

@@ -4,9 +4,12 @@ export const siteSettingsQuery = groq`
   {
     "hero": *[_type == "heroSection"][0]{
       studioName,
+      heroEyebrow,
       "logoUrl": logo.asset->url,
       heroTitle,
       heroDescription,
+      seoTitle,
+      seoDescription,
       primaryCtaLabel,
       primaryCtaHref,
       secondaryCtaLabel,

@@ -4,9 +4,12 @@ import { siteSettingsQuery } from "@/lib/sanity/queries";
 
 export type SiteSettings = {
   studioName?: string;
+  heroEyebrow?: string;
   logoUrl?: string;
   heroTitle?: string;
   heroDescription?: string;
+  seoTitle?: string;
+  seoDescription?: string;
   primaryCtaLabel?: string;
   primaryCtaHref?: string;
   secondaryCtaLabel?: string;
