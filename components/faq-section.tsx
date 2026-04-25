@@ -21,6 +21,7 @@ export function FaqSection({ items, eyebrow, title, description }: FaqSectionPro
           description ||
           "На этапе MVP интерактивный FAQ собран на Mantine Accordion и стилизован под общую визуальную систему, чтобы сохранить стек из ТЗ."
         }
+        fullWidth
       />
 
       <Accordion chevronPosition="right" radius="md" variant="default">
