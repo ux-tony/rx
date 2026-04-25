@@ -324,14 +324,16 @@ img {
 
 .project-gallery-shell {
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
 }
 
 .project-gallery-stage {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100dvh;
   background: rgba(0, 0, 0, 0.02);
+  overflow: hidden;
 }
 
 .project-gallery-image {

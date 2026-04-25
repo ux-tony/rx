@@ -63,10 +63,13 @@ export function ProjectCard({ project }: ProjectCardProps) {
         overlayProps={{ backgroundOpacity: 0.15, color: "#000000", blur: 0 }}
         styles={{
           content: {
-            background: "transparent"
+            background: "transparent",
+            overflow: "hidden"
           },
           body: {
-            padding: 0
+            padding: 0,
+            height: "100dvh",
+            overflow: "hidden"
           }
         }}
       >
