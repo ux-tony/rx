@@ -4,6 +4,7 @@ export const heroSectionType = defineType({
   name: "heroSection",
   title: "Hero секция",
   type: "document",
+  __experimental_formPreviewTitle: false,
   initialValue: {
     studioName: "Roman Kharchenko Studio",
     heroTitle: "Архитектурная студия Романа Харченко.",

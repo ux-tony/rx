@@ -4,6 +4,7 @@ export const contactsSectionType = defineType({
   name: "contactsSection",
   title: "Контакты",
   type: "document",
+  __experimental_formPreviewTitle: false,
   initialValue: {
     contactsEyebrow: "КОНТАКТЫ",
     contactsTitle: "Готовы собрать полноценный каталог проектов, формы заявок и редактор контента.",

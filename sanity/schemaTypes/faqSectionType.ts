@@ -4,6 +4,7 @@ export const faqSectionType = defineType({
   name: "faqSection",
   title: "FAQ",
   type: "document",
+  __experimental_formPreviewTitle: false,
   initialValue: {
     faqEyebrow: "FAQ",
     faqTitle: "Точечное применение Mantine без ощущения шаблонной библиотеки.",

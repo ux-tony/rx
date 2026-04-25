@@ -4,6 +4,7 @@ export const projectsSectionType = defineType({
   name: "projectsSection",
   title: "Проекты",
   type: "document",
+  __experimental_formPreviewTitle: false,
   initialValue: {
     projectsEyebrow: "ПРОЕКТЫ",
     projectsTitle: "Архитектурные пространства, где материал и свет работают на ощущение тишины.",

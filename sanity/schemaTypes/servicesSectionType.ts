@@ -4,6 +4,7 @@ export const servicesSectionType = defineType({
   name: "servicesSection",
   title: "Услуги",
   type: "document",
+  __experimental_formPreviewTitle: false,
   initialValue: {
     servicesEyebrow: "ПОДХОД",
     servicesTitle: "Спокойный интерфейс, где проекты говорят сами за себя.",
