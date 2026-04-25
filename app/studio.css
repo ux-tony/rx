@@ -14,6 +14,26 @@ body {
   box-sizing: border-box;
 }
 
+/* Tighten Sanity Studio form spacing without affecting the public site */
+[data-ui="FormField"] {
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+
+[data-ui="FormField"] > div {
+  row-gap: 8px !important;
+}
+
+[data-ui="PaneContent"] [data-ui="Stack"],
+[data-ui="DialogCard"] [data-ui="Stack"] {
+  gap: 8px !important;
+}
+
+[data-ui="DialogCard"] [data-ui="FormField"] {
+  margin-top: 6px !important;
+  margin-bottom: 6px !important;
+}
+
 .studio-setup {
   min-height: 100vh;
   display: grid;
