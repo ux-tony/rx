@@ -33,7 +33,7 @@ export const projectsSectionType = defineType({
   preview: {
     prepare() {
       return {
-        title: "Проекты"
+        title: ""
       };
     }
   }

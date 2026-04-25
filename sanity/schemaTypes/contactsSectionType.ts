@@ -45,7 +45,7 @@ export const contactsSectionType = defineType({
   preview: {
     prepare() {
       return {
-        title: "Контакты"
+        title: ""
       };
     }
   }
