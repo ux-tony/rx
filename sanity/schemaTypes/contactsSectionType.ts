@@ -6,12 +6,14 @@ export const contactsSectionType = defineType({
   type: "document",
   __experimental_formPreviewTitle: false,
   initialValue: {
-    contactsEyebrow: "КОНТАКТЫ",
-    contactsTitle: "Готовы собрать полноценный каталог проектов, формы заявок и редактор контента.",
+    contactsEyebrow: "Сотрудничество",
+    contactsTitle:
+      "Открыты к новым частным и коммерческим проектам, где важны качество среды, ясная архитектурная логика и внимательная работа с деталями.",
     contactsDescription:
-      "Сейчас сайт работает на mock-данных и демонстрирует визуальный каркас MVP. Следующим этапом сюда можно подключить CMS, real media storage, формы обратной связи и мультиязычность.",
+      "Подключаемся к интерьерным и архитектурным задачам разного масштаба: от частных пространств до гостиниц, ресторанов, фасадов и территорий коммерческих объектов. На старте обсуждаем задачу, рамку бюджета и состав этапов, чтобы собрать рабочий маршрут без лишних итераций.",
     contactEmail: "studio@rx-architect.test",
-    contactPhone: "+7 (999) 000-00-00"
+    contactPhone: "+7 (999) 000-00-00",
+    telegramUrl: "https://t.me/"
   },
   fields: [
     defineField({
@@ -29,7 +31,7 @@ export const contactsSectionType = defineType({
       name: "contactsDescription",
       title: "Описание",
       type: "text",
-      rows: 4
+      rows: 5
     }),
     defineField({
       name: "contactEmail",
@@ -40,6 +42,19 @@ export const contactsSectionType = defineType({
       name: "contactPhone",
       title: "Телефон",
       type: "string"
+    }),
+    defineField({
+      name: "telegramUrl",
+      title: "Telegram URL",
+      type: "string"
+    }),
+    defineField({
+      name: "contactImage",
+      title: "Изображение справа",
+      type: "image",
+      options: {
+        hotspot: true
+      }
     })
   ],
   preview: {

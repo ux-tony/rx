@@ -12,30 +12,23 @@ import { getSiteSettings } from "@/lib/sanity/get-site-settings";
 export const dynamic = "force-dynamic";
 
 const fallbackProjectsHeading = {
-  eyebrow: "ПРОЕКТЫ",
-  title: "Архитектурные пространства, где материал и свет работают на ощущение тишины.",
-  description: "Подборка демонстрационных кейсов для MVP. В реальном проекте этот блок подключается к CMS или headless API."
+  eyebrow: "Проекты",
+  title: "Архитектурные пространства, где материал, свет и масштаб работают на спокойное впечатление.",
+  description: "Подборка демонстрационных кейсов с акцентом на частные резиденции, интерьеры, общественные пространства и hospitality."
 };
 
 const fallbackServicesHeading = {
-  eyebrow: "ПОДХОД",
-  title: "Спокойный интерфейс, где проекты говорят сами за себя.",
+  eyebrow: "Услуги",
+  title: "Проектирование пространств от первой идеи до согласованного архитектурного образа.",
   description:
-    "Визуальный язык сайта построен вокруг чистой сетки, больших отступов и тактильных архитектурных кадров без лишнего интерфейсного шума."
+    "Студия разрабатывает жилые и общественные интерьеры, фасады зданий, гостиницы и рестораны, а также ландшафтный дизайн и концепции территорий для коммерческих объектов."
 };
 
 const fallbackFaqHeading = {
-  eyebrow: "FAQ",
-  title: "Точечное применение Mantine без ощущения шаблонной библиотеки.",
+  eyebrow: "Вопросы и ответы",
+  title: "Частые вопросы, которые помогают быстро понять формат работы, сроки и состав архитектурного проекта.",
   description:
-    "На этапе MVP интерактивный FAQ собран на Mantine Accordion и стилизован под общую визуальную систему, чтобы сохранить стек из ТЗ."
-};
-
-const fallbackContactsHeading = {
-  eyebrow: "КОНТАКТЫ",
-  title: "Готовы собрать полноценный каталог проектов, формы заявок и редактор контента.",
-  description:
-    "Сейчас сайт работает на mock-данных и демонстрирует визуальный каркас MVP. Следующим этапом сюда можно подключить CMS, real media storage, формы обратной связи и мультиязычность."
+    "Собрали базовые вопросы заказчиков перед стартом: про бюджет, сроки, объём проектирования, участие в процессе и сопровождение реализации."
 };
 
 export default async function HomePage() {
@@ -84,7 +77,7 @@ export default async function HomePage() {
           />
         </div>
 
-        <div className="service-list" aria-label="Направления работы">
+        <div className="service-list" aria-label="Услуги студии">
           {resolvedServices.map((service) => (
             <article className="service-card" key={`${service.index}-${service.title}`}>
               <p className="service-index">{service.index}</p>
@@ -97,9 +90,9 @@ export default async function HomePage() {
 
       <FaqSection
         items={resolvedFaqItems}
-        eyebrow={siteSettings?.faqEyebrow}
-        title={siteSettings?.faqTitle}
-        description={siteSettings?.faqDescription}
+        eyebrow={siteSettings?.faqEyebrow || fallbackFaqHeading.eyebrow}
+        title={siteSettings?.faqTitle || fallbackFaqHeading.title}
+        description={siteSettings?.faqDescription || fallbackFaqHeading.description}
       />
 
       <ContactStrip
@@ -108,6 +101,8 @@ export default async function HomePage() {
         description={siteSettings?.contactsDescription}
         contactEmail={siteSettings?.contactEmail}
         contactPhone={siteSettings?.contactPhone}
+        telegramUrl={siteSettings?.telegramUrl}
+        contactImageUrl={siteSettings?.contactImageUrl}
       />
     </main>
   );

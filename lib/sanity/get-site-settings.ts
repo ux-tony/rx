@@ -29,6 +29,8 @@ export type SiteSettings = {
   contactsDescription?: string;
   contactEmail?: string;
   contactPhone?: string;
+  telegramUrl?: string;
+  contactImageUrl?: string;
   architectPhotoUrl?: string;
 };
 

@@ -39,6 +39,12 @@ img {
   max-width: 100%;
 }
 
+.button-reset {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
 .page-shell {
   width: 100%;
   margin: 0;
@@ -158,7 +164,8 @@ img {
 
 .button-primary:hover,
 .button-secondary:hover,
-.project-card:hover {
+.project-card:hover,
+.contact-telegram:hover {
   transform: translateY(-4px);
 }
 
@@ -175,9 +182,11 @@ img {
 
 .metric-value {
   margin: 0 0 10px;
-  font-size: clamp(1.6rem, 3vw, 2.3rem);
-  font-weight: 800;
-  letter-spacing: -0.05em;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 900;
+  letter-spacing: -0.08em;
+  color: var(--accent);
+  line-height: 0.95;
 }
 
 .metric-label {
@@ -192,19 +201,27 @@ img {
   min-height: 720px;
 }
 
-.hero-image {
-  position: absolute;
-  inset: 0;
-  background-position: center;
-  background-size: cover;
-  transform: scale(1.02);
-}
-
 .hero-portrait {
   position: absolute;
   inset: 0;
   object-fit: cover;
   object-position: center;
+}
+
+.discussion-modal .mantine-Modal-content,
+.discussion-modal .mantine-Tabs-tab,
+.discussion-modal .mantine-Input-input,
+.discussion-modal .mantine-Input-wrapper,
+.discussion-modal .mantine-Textarea-input {
+  border-radius: 0;
+}
+
+.discussion-modal-header {
+  padding: 18px 22px 0;
+}
+
+.discussion-modal-body {
+  padding: 18px 22px 24px;
 }
 
 .content-section {
@@ -261,7 +278,6 @@ img {
 .category-pill {
   padding: 10px 14px;
   border: 1px solid var(--line);
-  border-radius: 0;
   background: rgba(255, 255, 255, 0.6);
   color: var(--muted);
   font-size: 0.92rem;
@@ -418,13 +434,13 @@ img {
 }
 
 .service-card h3,
-.contact-strip h2 {
+.contact-copy h2 {
   margin: 0 0 10px;
   font-size: clamp(1.35rem, 2vw, 2rem);
 }
 
 .service-card p,
-.contact-strip p {
+.contact-copy p {
   margin: 0;
   color: var(--muted);
   line-height: 1.75;
@@ -449,12 +465,13 @@ img {
 }
 
 .faq-shell .mantine-Accordion-control {
-  padding: 20px 0;
+  padding: 22px 14px;
   font-size: 1.05rem;
   font-weight: 700;
 }
 
 .faq-shell .mantine-Accordion-panel {
+  padding: 0 14px 22px;
   color: var(--muted);
   line-height: 1.75;
 }
@@ -462,21 +479,79 @@ img {
 .contact-strip {
   margin-top: 132px;
   padding: 40px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.72fr);
+  gap: 28px;
+  align-items: stretch;
   background:
     linear-gradient(120deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.74)),
     radial-gradient(circle at top right, rgba(154, 104, 69, 0.18), transparent 34%);
+}
+
+.contact-copy {
+  display: grid;
+  align-content: start;
+  gap: 18px;
 }
 
 .contact-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  margin-top: 24px;
+  margin-top: 12px;
+}
+
+.contact-telegram {
+  width: 52px;
+  height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.65);
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.contact-telegram-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.contact-visual {
+  position: relative;
+  min-height: 360px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.contact-visual-image {
+  object-fit: cover;
+}
+
+.contact-visual-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(135deg, rgba(154, 104, 69, 0.16), transparent 58%),
+    rgba(255, 255, 255, 0.52);
+  color: var(--muted);
+  font-size: 0.88rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 @media (max-width: 1180px) {
   .hero,
-  .split-layout {
+  .split-layout,
+  .contact-strip {
     grid-template-columns: 1fr;
   }
 

@@ -2,14 +2,14 @@ import { defineField, defineType } from "sanity";
 
 export const faqSectionType = defineType({
   name: "faqSection",
-  title: "FAQ",
+  title: "Вопросы и ответы",
   type: "document",
   __experimental_formPreviewTitle: false,
   initialValue: {
-    faqEyebrow: "FAQ",
-    faqTitle: "Точечное применение Mantine без ощущения шаблонной библиотеки.",
+    faqEyebrow: "Вопросы и ответы",
+    faqTitle: "Частые вопросы, которые помогают быстро понять формат работы, сроки и состав архитектурного проекта.",
     faqDescription:
-      "На этапе MVP интерактивный FAQ собран на Mantine Accordion и стилизован под общую визуальную систему, чтобы сохранить стек из ТЗ."
+      "Собрали базовые вопросы заказчиков перед стартом: про бюджет, сроки, объём проектирования, участие в процессе и сопровождение реализации."
   },
   fields: [
     defineField({
@@ -33,7 +33,7 @@ export const faqSectionType = defineType({
   preview: {
     prepare() {
       return {
-        title: "FAQ"
+        title: "Вопросы и ответы"
       };
     }
   }

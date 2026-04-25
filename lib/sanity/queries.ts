@@ -40,7 +40,9 @@ export const siteSettingsQuery = groq`
       contactsTitle,
       contactsDescription,
       contactEmail,
-      contactPhone
+      contactPhone,
+      telegramUrl,
+      "contactImageUrl": contactImage.asset->url
     }
   }
 `;

@@ -15,16 +15,16 @@ export function FaqSection({ items, eyebrow, title, description }: FaqSectionPro
   return (
     <section className="faq-shell">
       <SectionHeading
-        eyebrow={eyebrow || "FAQ"}
-        title={title || "Точечное применение Mantine без ощущения шаблонной библиотеки."}
+        eyebrow={eyebrow || "Вопросы и ответы"}
+        title={title || "Частые вопросы, которые помогают быстро понять формат работы, сроки и состав архитектурного проекта."}
         description={
           description ||
-          "На этапе MVP интерактивный FAQ собран на Mantine Accordion и стилизован под общую визуальную систему, чтобы сохранить стек из ТЗ."
+          "Собрали базовые вопросы заказчиков перед стартом: про бюджет, сроки, объём проектирования, участие в процессе и сопровождение реализации."
         }
         fullWidth
       />
 
-      <Accordion chevronPosition="right" radius="md" variant="default">
+      <Accordion chevronPosition="right" radius={0} variant="default">
         {items.map((item) => (
           <Accordion.Item key={item.question} value={item.question}>
             <Accordion.Control>{item.question}</Accordion.Control>
