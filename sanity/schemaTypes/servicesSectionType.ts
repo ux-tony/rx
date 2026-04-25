@@ -33,7 +33,7 @@ export const servicesSectionType = defineType({
   preview: {
     prepare() {
       return {
-        title: ""
+        title: "Услуги"
       };
     }
   }

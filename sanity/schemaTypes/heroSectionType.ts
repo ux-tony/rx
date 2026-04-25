@@ -117,7 +117,7 @@ export const heroSectionType = defineType({
   preview: {
     prepare() {
       return {
-        title: ""
+        title: "Hero секция"
       };
     }
   }

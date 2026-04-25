@@ -33,7 +33,7 @@ export const faqSectionType = defineType({
   preview: {
     prepare() {
       return {
-        title: ""
+        title: "FAQ"
       };
     }
   }
