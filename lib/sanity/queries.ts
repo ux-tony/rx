@@ -47,10 +47,18 @@ export const siteSettingsQuery = groq`
   }
 `;
 
+export const projectCategoriesQuery = groq`
+  *[_type == "projectCategory"] | order(order asc, title asc){
+    title,
+    "slug": slug.current
+  }
+`;
+
 export const projectsQuery = groq`
   *[_type == "project" && published == true] | order(_createdAt desc){
     title,
-    category,
+    "category": category->title,
+    "categorySlug": category->slug.current,
     description,
     "slug": slug.current,
     "image": coverImage.asset->url,

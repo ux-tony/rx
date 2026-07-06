@@ -27,14 +27,15 @@ export const studioStructure: StructureResolver = (S) =>
                 .child(S.document().schemaType("servicesSection").documentId("servicesSection").title("Услуги")),
               S.listItem()
                 .id("faq-section-item")
-                .title("FAQ")
-                .child(S.document().schemaType("faqSection").documentId("faqSection").title("FAQ")),
+                .title("Вопросы и ответы")
+                .child(S.document().schemaType("faqSection").documentId("faqSection").title("Вопросы и ответы")),
               S.listItem()
                 .id("contacts-section-item")
                 .title("Контакты")
                 .child(S.document().schemaType("contactsSection").documentId("contactsSection").title("Контакты"))
             ])
         ),
+      S.documentTypeListItem("projectCategory").id("project-categories").title("Категории проектов"),
       S.documentTypeListItem("project").id("projects-documents").title("Проекты (Портфолио)"),
       S.documentTypeListItem("faqItem").id("faq-documents").title("Вопросы и ответы"),
       S.documentTypeListItem("service").id("services-documents").title("Услуги")

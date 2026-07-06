@@ -1,4 +1,4 @@
-import { faqItems, projects, services } from "@/data/site-data";
+import { faqItems, projectCategories, projects, services } from "@/data/site-data";
 
 export const mockHeroSection = {
   studioName: "Roman Kharchenko Studio",
@@ -52,13 +52,20 @@ export const mockFaqSection = {
 
 export const mockContactsSection = {
   contactsEyebrow: "Сотрудничество",
-  contactsTitle: "Открыты к новым частным и коммерческим проектам, где важны качество среды, ясная архитектурная логика и внимательная работа с деталями.",
+  contactsTitle:
+    "Открыты к новым частным и коммерческим проектам, где важны качество среды, ясная архитектурная логика и внимательная работа с деталями.",
   contactsDescription:
     "Подключаемся к интерьерным и архитектурным задачам разного масштаба: от частных пространств до гостиниц, ресторанов, фасадов и территорий коммерческих объектов. На старте обсуждаем задачу, рамку бюджета и состав этапов, чтобы собрать рабочий маршрут без лишних итераций.",
   contactEmail: "studio@rx-architect.test",
   contactPhone: "+7 (999) 000-00-00",
   telegramUrl: "https://t.me/"
 };
+
+export const mockProjectCategories = projectCategories.map((category, index) => ({
+  title: category.title,
+  slug: category.slug,
+  order: (index + 1) * 10
+}));
 
 export const mockProjects = projects.map((project) => ({
   ...project

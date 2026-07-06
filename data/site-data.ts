@@ -2,9 +2,15 @@ export type Project = {
   slug: string;
   title: string;
   category: string;
+  categorySlug?: string;
   description: string;
   image: string;
   gallery?: string[];
+};
+
+export type ProjectCategory = {
+  title: string;
+  slug: string;
 };
 
 export type Metric = {
@@ -38,13 +44,19 @@ export const metrics: Metric[] = [
   }
 ];
 
-export const projectCategories = ["Частные резиденции", "Интерьеры", "Общественные пространства", "Hospitality"];
+export const projectCategories: ProjectCategory[] = [
+  { title: "Частные резиденции", slug: "private-residences" },
+  { title: "Интерьеры", slug: "interiors" },
+  { title: "Общественные пространства", slug: "public-spaces" },
+  { title: "Hospitality", slug: "hospitality" }
+];
 
 export const projects: Project[] = [
   {
     slug: "house-atria",
     title: "House Atria",
     category: "Частные резиденции",
+    categorySlug: "private-residences",
     description: "Просторный дом с внутренним атриумом, мягким сценарием света и сдержанной палитрой натурального камня.",
     image:
       "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=80",
@@ -58,6 +70,7 @@ export const projects: Project[] = [
     slug: "frame-villa",
     title: "Frame Villa",
     category: "Частные резиденции",
+    categorySlug: "private-residences",
     description: "Загородная вилла с длинными видовыми осями, приватным внутренним двором и интегрированным ландшафтом.",
     image:
       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
@@ -71,6 +84,7 @@ export const projects: Project[] = [
     slug: "gallery-passage",
     title: "Gallery Passage",
     category: "Общественные пространства",
+    categorySlug: "public-spaces",
     description: "Реконструкция общественного пространства с акцентом на маршрут, световые акценты и событийный сценарий.",
     image:
       "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
@@ -84,6 +98,7 @@ export const projects: Project[] = [
     slug: "atrium-lofts",
     title: "Atrium Lofts",
     category: "Общественные пространства",
+    categorySlug: "public-spaces",
     description: "Камерный жилой объект с ритмичным фасадом, террасами и продуманными общими пространствами.",
     image:
       "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80",
@@ -97,6 +112,7 @@ export const projects: Project[] = [
     slug: "quiet-hotel",
     title: "Quiet Hotel",
     category: "Hospitality",
+    categorySlug: "hospitality",
     description: "Бутик-отель, построенный на балансе тактильных материалов, тёплого света и приватной атмосферы.",
     image:
       "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1200&q=80",
@@ -110,6 +126,7 @@ export const projects: Project[] = [
     slug: "stone-courtyard",
     title: "Stone Courtyard",
     category: "Интерьеры",
+    categorySlug: "interiors",
     description: "Интерьерный кейс с монохромной палитрой, цельными объёмами хранения и природной фактурой камня и дерева.",
     image:
       "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80",

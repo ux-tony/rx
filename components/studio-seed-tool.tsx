@@ -8,6 +8,7 @@ import {
   mockFaqItems,
   mockFaqSection,
   mockHeroSection,
+  mockProjectCategories,
   mockProjects,
   mockProjectsSection,
   mockServices,
@@ -47,7 +48,7 @@ export function StudioSeedTool() {
       setMessage("Импортируем mock-данные в Sanity...");
 
       const existing = await client.fetch<{ _id: string }[]>(
-        '*[_type in ["heroSection","projectsSection","servicesSection","faqSection","contactsSection","project","service","faqItem"]]{_id}'
+        '*[_type in ["heroSection","projectsSection","servicesSection","faqSection","contactsSection","projectCategory","project","service","faqItem"]]{_id}'
       );
 
       let transaction = client.transaction();
@@ -87,6 +88,19 @@ export function StudioSeedTool() {
         _type: "contactsSection",
         ...mockContactsSection
       });
+
+      for (const category of mockProjectCategories) {
+        await client.createOrReplace({
+          _id: `project-category-${category.slug}`,
+          _type: "projectCategory",
+          title: category.title,
+          slug: {
+            _type: "slug",
+            current: category.slug
+          },
+          order: category.order
+        });
+      }
 
       for (const item of mockFaqItems) {
         await client.createOrReplace({
@@ -128,7 +142,10 @@ export function StudioSeedTool() {
             _type: "slug",
             current: project.slug
           },
-          category: project.category,
+          category: {
+            _type: "reference",
+            _ref: `project-category-${project.categorySlug}`
+          },
           coverImage,
           gallery,
           description: project.description,
@@ -152,8 +169,7 @@ export function StudioSeedTool() {
             Импорт mock-данных
           </Text>
           <Text c="dimmed" mt={8}>
-            Этот импорт очистит текущие документы секций `Hero`, `Проекты`, `Услуги`, `FAQ`, `Контакты`, а также типы
-            `Проект`, `Услуга` и `FAQ`, а затем загрузит стартовый контент из MVP прямо в ваш Sanity project.
+            Этот импорт очистит текущие документы секций, категории проектов, проекты, услуги и FAQ, а затем загрузит стартовый контент из MVP прямо в ваш Sanity project.
           </Text>
         </div>
 

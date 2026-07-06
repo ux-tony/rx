@@ -2,6 +2,7 @@ import { contactsSectionType } from "@/sanity/schemaTypes/contactsSectionType";
 import { faqItemType } from "@/sanity/schemaTypes/faqItemType";
 import { faqSectionType } from "@/sanity/schemaTypes/faqSectionType";
 import { heroSectionType } from "@/sanity/schemaTypes/heroSectionType";
+import { projectCategoryType } from "@/sanity/schemaTypes/projectCategoryType";
 import { projectType } from "@/sanity/schemaTypes/projectType";
 import { projectsSectionType } from "@/sanity/schemaTypes/projectsSectionType";
 import { serviceType } from "@/sanity/schemaTypes/serviceType";
@@ -13,6 +14,7 @@ export const schemaTypes = [
   servicesSectionType,
   faqSectionType,
   contactsSectionType,
+  projectCategoryType,
   projectType,
   serviceType,
   faqItemType

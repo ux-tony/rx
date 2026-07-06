@@ -25,7 +25,9 @@ export const projectType = defineType({
     defineField({
       name: "category",
       title: "Категория",
-      type: "string"
+      type: "reference",
+      to: [{ type: "projectCategory" }],
+      validation: (rule) => rule.required()
     }),
     defineField({
       name: "coverImage",
@@ -52,7 +54,7 @@ export const projectType = defineType({
     }),
     defineField({
       name: "description",
-      title: "Краткое описание",
+      title: "Описание",
       type: "text",
       rows: 4
     }),
@@ -66,7 +68,7 @@ export const projectType = defineType({
   preview: {
     select: {
       title: "title",
-      subtitle: "category",
+      subtitle: "category.title",
       media: "coverImage"
     }
   }
