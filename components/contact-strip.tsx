@@ -1,4 +1,5 @@
 import Image from "next/image";
+import architectPhoto from "@/img/Foto001.jpg";
 import { TelegramIcon } from "@/components/telegram-icon";
 
 type ContactStripProps = {
@@ -20,45 +21,50 @@ export function ContactStrip({
   telegramUrl,
   contactImageUrl
 }: ContactStripProps) {
-  const email = contactEmail || "studio@rx-architect.test";
-  const phone = contactPhone || "+7 (999) 000-00-00";
-  const phoneHref = `tel:${phone.replace(/[^\d+]/g, "")}`;
-  const telegramHref = telegramUrl || "https://t.me/";
+  const phoneHref = contactPhone ? `tel:${contactPhone.replace(/[^\d+]/g, "")}` : null;
+  const hasContacts = Boolean(contactEmail || phoneHref || telegramUrl);
 
   return (
     <section className="contact-strip" id="contact">
       <div className="contact-copy">
         <p className="eyebrow">{eyebrow || "Сотрудничество"}</p>
-        <h2>
-          {title ||
-            "Открыты к новым частным и коммерческим проектам, где важны качество среды, ясная архитектурная логика и внимательная работа с деталями."}
-        </h2>
+        <h2>{title || "Обсудим пространство, которое должно точно отвечать вашей задаче."}</h2>
         <p>
           {description ||
-            "Подключаемся к интерьерным и архитектурным задачам разного масштаба: от частных пространств до гостиниц, ресторанов, фасадов и территорий коммерческих объектов. На старте обсуждаем задачу, рамку бюджета и состав этапов, чтобы собрать рабочий маршрут без лишних итераций."}
+            "На первой встрече определим цели, масштаб, сроки и состав проекта. После разговора предложим понятный маршрут работы без лишних этапов."}
         </p>
 
-        <div className="contact-actions">
-          <a className="button-primary" href={`mailto:${email}`}>
-            {email}
-          </a>
-          <a className="button-secondary" href={phoneHref}>
-            {phone}
-          </a>
-          <a className="contact-telegram" href={telegramHref} aria-label="Telegram" target="_blank" rel="noreferrer">
-            <TelegramIcon className="contact-telegram-icon" />
-          </a>
-        </div>
+        {hasContacts ? (
+          <div className="contact-actions">
+            {contactEmail ? (
+              <a className="button-primary" href={`mailto:${contactEmail}`}>
+                {contactEmail}
+              </a>
+            ) : null}
+            {phoneHref && contactPhone ? (
+              <a className="button-secondary" href={phoneHref}>
+                {contactPhone}
+              </a>
+            ) : null}
+            {telegramUrl ? (
+              <a className="contact-telegram" href={telegramUrl} aria-label="Telegram" target="_blank" rel="noreferrer">
+                <TelegramIcon className="contact-telegram-icon" />
+              </a>
+            ) : null}
+          </div>
+        ) : (
+          <p className="contact-note">Контактные данные появятся здесь после публикации в Sanity.</p>
+        )}
       </div>
 
       <div className="contact-visual">
-        {contactImageUrl ? (
-          <Image alt="Визуал сотрудничества" className="contact-visual-image" fill src={contactImageUrl} sizes="(max-width: 1180px) 100vw, 38vw" />
-        ) : (
-          <div className="contact-visual-placeholder">
-            <span>Изображение / moodboard</span>
-          </div>
-        )}
+        <Image
+          alt="Роман Харченко в архитектурной студии"
+          className="contact-visual-image"
+          fill
+          src={contactImageUrl || architectPhoto}
+          sizes="(max-width: 1180px) 100vw, 38vw"
+        />
       </div>
     </section>
   );
