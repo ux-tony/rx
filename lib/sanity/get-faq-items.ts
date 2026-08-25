@@ -12,7 +12,7 @@ export async function getFaqItems(): Promise<FaqItem[]> {
     const items = await sanityClient.fetch<SanityFaqItem[]>(faqItemsQuery);
 
     return items
-      .filter((item) => item.question && item.answer)
+      .filter((item) => item.question && item.answer && !/^тест(?:\s|$)/i.test(item.question.trim()))
       .map((item) => ({
         question: item.question as string,
         answer: item.answer as string

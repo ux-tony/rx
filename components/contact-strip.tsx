@@ -1,4 +1,6 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
 import { TelegramIcon } from "@/components/telegram-icon";
 
 type ContactStripProps = {
@@ -8,7 +10,6 @@ type ContactStripProps = {
   contactEmail?: string | null;
   contactPhone?: string | null;
   telegramUrl?: string | null;
-  contactImageUrl?: string | null;
 };
 
 export function ContactStrip({
@@ -17,49 +18,88 @@ export function ContactStrip({
   description,
   contactEmail,
   contactPhone,
-  telegramUrl,
-  contactImageUrl
+  telegramUrl
 }: ContactStripProps) {
-  const email = contactEmail || "studio@rx-architect.test";
-  const phone = contactPhone || "+7 (999) 000-00-00";
-  const phoneHref = `tel:${phone.replace(/[^\d+]/g, "")}`;
-  const telegramHref = telegramUrl || "https://t.me/";
+  const [message, setMessage] = useState("");
+  const phoneHref = contactPhone ? `tel:${contactPhone.replace(/[^\d+]/g, "")}` : null;
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (!contactEmail) {
+      setMessage("Укажите контактный email в Sanity, чтобы форма могла подготовить обращение.");
+      return;
+    }
+
+    const data = new FormData(event.currentTarget);
+    const name = String(data.get("name") || "").trim();
+    const contact = String(data.get("contact") || "").trim();
+    const task = String(data.get("task") || "").trim();
+    const subject = encodeURIComponent(`Новый проект: ${name}`);
+    const body = encodeURIComponent(`Имя: ${name}\nКонтакт: ${contact}\n\nО проекте:\n${task}`);
+
+    setMessage("Открываем ваше почтовое приложение с подготовленным обращением.");
+    window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
+  }
 
   return (
     <section className="contact-strip" id="contact">
       <div className="contact-copy">
-        <p className="eyebrow">{eyebrow || "Сотрудничество"}</p>
-        <h2>
-          {title ||
-            "Открыты к новым частным и коммерческим проектам, где важны качество среды, ясная архитектурная логика и внимательная работа с деталями."}
-        </h2>
+        <p className="eyebrow">{eyebrow || "Контакты"}</p>
+        <h2>{title || "Расскажите о будущем проекте."}</h2>
         <p>
           {description ||
-            "Подключаемся к интерьерным и архитектурным задачам разного масштаба: от частных пространств до гостиниц, ресторанов, фасадов и территорий коммерческих объектов. На старте обсуждаем задачу, рамку бюджета и состав этапов, чтобы собрать рабочий маршрут без лишних итераций."}
+            "Опишите задачу, масштаб и желаемые сроки. Мы свяжемся с вами, уточним вводные и предложим понятный следующий шаг."}
         </p>
 
-        <div className="contact-actions">
-          <a className="button-primary" href={`mailto:${email}`}>
-            {email}
-          </a>
-          <a className="button-secondary" href={phoneHref}>
-            {phone}
-          </a>
-          <a className="contact-telegram" href={telegramHref} aria-label="Telegram" target="_blank" rel="noreferrer">
-            <TelegramIcon className="contact-telegram-icon" />
-          </a>
+        <div className="contact-links" aria-label="Прямые контакты студии">
+          {contactEmail ? <a href={`mailto:${contactEmail}`}>{contactEmail}</a> : null}
+          {phoneHref && contactPhone ? <a href={phoneHref}>{contactPhone}</a> : null}
+          {telegramUrl ? (
+            <a className="contact-telegram" href={telegramUrl} aria-label="Telegram" target="_blank" rel="noreferrer">
+              <TelegramIcon className="contact-telegram-icon" />
+              <span>Telegram</span>
+            </a>
+          ) : null}
         </div>
       </div>
 
-      <div className="contact-visual">
-        {contactImageUrl ? (
-          <Image alt="Визуал сотрудничества" className="contact-visual-image" fill src={contactImageUrl} sizes="(max-width: 1180px) 100vw, 38vw" />
-        ) : (
-          <div className="contact-visual-placeholder">
-            <span>Изображение / moodboard</span>
-          </div>
-        )}
-      </div>
+      <form className="contact-form" onSubmit={handleSubmit}>
+        <div className="contact-field">
+          <label htmlFor="contact-name">Имя</label>
+          <input id="contact-name" name="name" autoComplete="name" placeholder="Как к вам обращаться" required />
+        </div>
+
+        <div className="contact-field">
+          <label htmlFor="contact-value">Телефон или email</label>
+          <input id="contact-value" name="contact" placeholder="Удобный способ связи" required />
+        </div>
+
+        <div className="contact-field">
+          <label htmlFor="contact-task">О проекте</label>
+          <textarea
+            id="contact-task"
+            name="task"
+            placeholder="Тип объекта, площадь, сроки и основная задача"
+            rows={6}
+            required
+          />
+        </div>
+
+        <div className="contact-form-footer">
+          <button className="button-primary" type="submit" disabled={!contactEmail}>
+            Подготовить обращение
+          </button>
+          <p>
+            {contactEmail
+              ? "После нажатия откроется ваше почтовое приложение. Отправка произойдёт только после вашего подтверждения."
+              : "Форма станет активной после добавления email в Sanity."}
+          </p>
+        </div>
+        <p className="contact-form-status" aria-live="polite">
+          {message}
+        </p>
+      </form>
     </section>
   );
 }
