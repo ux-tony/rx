@@ -17,7 +17,9 @@
     "next-sanity": "^11.6.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sanity": "^4.14.2"
+    "sanity": "^4.14.2",
+    "styled-components": "^6.1.15",
+    "xstate": "^5.25.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.1",

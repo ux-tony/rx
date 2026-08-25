@@ -23,7 +23,7 @@ export function ProjectsSection({ projects, categories, eyebrow, title, descript
       return projects;
     }
 
-    return projects.filter((project) => (project.categorySlug || project.category) === activeCategory);
+    return projects.filter((project) => project.category === activeCategory);
   }, [activeCategory, projects]);
 
   const availableCategories = useMemo(() => {
@@ -34,7 +34,7 @@ export function ProjectsSection({ projects, categories, eyebrow, title, descript
     return Array.from(
       new Map(
         projects.map((project) => [
-          project.categorySlug || project.category,
+          project.category,
           {
             slug: project.categorySlug || project.category,
             title: project.category
@@ -59,9 +59,9 @@ export function ProjectsSection({ projects, categories, eyebrow, title, descript
 
         {availableCategories.map((category) => (
           <button
-            className={`category-pill-button${activeCategory === category.slug ? " category-pill-active" : ""}`}
+            className={`category-pill-button${activeCategory === category.title ? " category-pill-active" : ""}`}
             key={category.slug}
-            onClick={() => setActiveCategory(category.slug)}
+            onClick={() => setActiveCategory(category.title)}
             type="button"
           >
             {category.title}

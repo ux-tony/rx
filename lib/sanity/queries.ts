@@ -57,7 +57,7 @@ export const projectCategoriesQuery = groq`
 export const projectsQuery = groq`
   *[_type == "project" && published == true] | order(_createdAt desc){
     title,
-    "category": category->title,
+    "category": coalesce(category->title, category),
     "categorySlug": category->slug.current,
     description,
     "slug": slug.current,
