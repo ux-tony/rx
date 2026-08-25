@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import type { Metric } from "@/data/site-data";
-import architectPhoto from "@/img/Foto001.jpg";
+import architectPhoto from "@/img/Foto001-white-studio.png";
 import { DiscussionModal } from "@/components/discussion-modal";
 import type { SiteSettings } from "@/lib/sanity/get-site-settings";
 
@@ -32,7 +32,7 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
   const primaryCtaHref = siteSettings?.primaryCtaHref || "#projects";
   const secondaryCtaLabel = siteSettings?.secondaryCtaLabel || "Обсудить задачу";
   const resolvedMetrics = siteSettings?.metrics && siteSettings.metrics.length > 0 ? siteSettings.metrics : metrics.length > 0 ? metrics : editorialMetrics;
-  const architectPhotoSrc = siteSettings?.architectPhotoUrl || architectPhoto;
+  const architectPhotoSrc = architectPhoto;
 
   return (
     <>
