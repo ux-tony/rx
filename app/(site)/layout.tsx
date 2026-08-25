@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ColorSchemeScript, MantineProvider, createTheme, mantineHtmlProps } from "@mantine/core";
-import { Manrope, Noto_Serif_Display } from "next/font/google";
+import { Manrope } from "next/font/google";
 import { getSiteSettings } from "@/lib/sanity/get-site-settings";
 import "@mantine/core/styles.css";
 import "../globals.css";
@@ -8,12 +8,6 @@ import "../globals.css";
 const manrope = Manrope({
   subsets: ["latin", "cyrillic"],
   weight: ["400", "500", "600", "700", "800"]
-});
-
-const editorial = Noto_Serif_Display({
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600"],
-  variable: "--font-editorial"
 });
 
 const theme = createTheme({
@@ -45,7 +39,7 @@ export default function RootLayout({
       <head>
         <ColorSchemeScript defaultColorScheme="light" />
       </head>
-      <body className={`${manrope.className} ${editorial.variable}`}>
+      <body className={manrope.className}>
         <MantineProvider defaultColorScheme="light" theme={theme}>
           {children}
         </MantineProvider>

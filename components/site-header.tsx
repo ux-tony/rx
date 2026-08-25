@@ -7,6 +7,7 @@ type SiteHeaderProps = {
 
 export function SiteHeader({ studioName, logoUrl }: SiteHeaderProps) {
   const name = studioName || "Roman Kharchenko Studio";
+  const displayName = name.replace(/\s+Studio$/i, "");
 
   return (
     <header className="site-header">
@@ -20,7 +21,7 @@ export function SiteHeader({ studioName, logoUrl }: SiteHeaderProps) {
             RX
           </span>
         )}
-        <span>{name}</span>
+        <span>{displayName}</span>
       </a>
 
       <nav className="site-nav" aria-label="Основная навигация">

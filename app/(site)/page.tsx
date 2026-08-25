@@ -94,7 +94,6 @@ export default async function HomePage() {
         contactEmail={siteSettings?.contactEmail}
         contactPhone={siteSettings?.contactPhone}
         telegramUrl={siteSettings?.telegramUrl}
-        contactImageUrl={siteSettings?.contactImageUrl}
       />
 
       <SiteFooter studioName={siteSettings?.studioName} />
