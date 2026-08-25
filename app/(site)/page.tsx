@@ -49,7 +49,7 @@ export default async function HomePage() {
 
   return (
     <main className="page-shell" id="top">
-      <SiteHeader studioName={siteSettings?.studioName} logoUrl={siteSettings?.logoUrl} />
+      <SiteHeader studioName={siteSettings?.studioName} logoUrl={siteSettings?.logoUrl} contactEmail={siteSettings?.contactEmail} />
       <HeroSection metrics={siteSettings?.metrics || []} siteSettings={siteSettings} />
 
       <ProjectsSection

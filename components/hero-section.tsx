@@ -1,6 +1,10 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import type { Metric } from "@/data/site-data";
 import architectPhoto from "@/img/Foto001.jpg";
+import { DiscussionModal } from "@/components/discussion-modal";
 import type { SiteSettings } from "@/lib/sanity/get-site-settings";
 
 type HeroSectionProps = {
@@ -15,6 +19,7 @@ const editorialMetrics: Metric[] = [
 ];
 
 export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
+  const [opened, setOpened] = useState(false);
   const heroEyebrow = siteSettings?.heroEyebrow || "Архитектурная студия";
   const configuredHeroTitle = siteSettings?.heroTitle || "Романа Харченко";
   const heroTitle = configuredHeroTitle.trim().split(/\s+/).length <= 2
@@ -43,9 +48,9 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
             <a className="button-primary" href={primaryCtaHref}>
               {primaryCtaLabel}
             </a>
-            <a className="button-secondary" href="#contact">
+            <button className="button-secondary button-reset" onClick={() => setOpened(true)} type="button">
               {secondaryCtaLabel}
-            </a>
+            </button>
           </div>
         </div>
 
@@ -71,6 +76,8 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
           ))}
         </section>
       ) : null}
+
+      <DiscussionModal contactEmail={siteSettings?.contactEmail} opened={opened} onClose={() => setOpened(false)} />
     </>
   );
 }

@@ -56,6 +56,8 @@ a:focus-visible {
 
 .button-reset {
   border: 0;
+  background: transparent;
+  color: inherit;
   cursor: pointer;
 }
 
@@ -306,6 +308,33 @@ a:focus-visible {
   padding-top: var(--space-section);
 }
 
+.discussion-modal .mantine-Modal-content,
+.discussion-modal .mantine-Input-input,
+.discussion-modal .mantine-Textarea-input,
+.discussion-modal .mantine-FileInput-input,
+.discussion-modal .mantine-Tabs-tab,
+.discussion-modal .mantine-Button-root {
+  border-radius: 0;
+}
+
+.discussion-modal-header {
+  padding: 24px 28px 0;
+}
+
+.discussion-modal-body {
+  padding: 22px 28px 30px;
+}
+
+.discussion-modal .mantine-Modal-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.discussion-modal .mantine-Tabs-tab[data-active] {
+  border-color: var(--foreground);
+  color: var(--foreground);
+}
+
 .section-heading {
   display: grid;
   gap: 20px;
@@ -389,7 +418,7 @@ a:focus-visible {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(56px, 7vw, 96px) clamp(24px, 3vw, 48px);
 }
 
@@ -450,12 +479,12 @@ a:focus-visible {
 .project-body {
   padding-top: 18px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 8px 24px;
+  grid-template-columns: 1fr;
+  gap: 8px;
 }
 
 .project-meta {
-  grid-column: 2;
+  grid-column: 1;
   grid-row: 1;
   color: var(--accent);
   font-size: 0.72rem;
@@ -465,7 +494,7 @@ a:focus-visible {
 
 .project-title {
   grid-column: 1;
-  grid-row: 1;
+  grid-row: 2;
   font-size: clamp(1.5rem, 2.4vw, 2.7rem);
   font-weight: 700;
   line-height: 1.08;
@@ -473,7 +502,8 @@ a:focus-visible {
 }
 
 .project-description {
-  grid-column: 1 / -1;
+  grid-column: 1;
+  grid-row: 3;
   max-width: 42rem;
   color: var(--muted);
   line-height: 1.6;
@@ -789,6 +819,10 @@ a:focus-visible {
 
   .hero {
     grid-template-columns: 1fr 0.82fr;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .split-layout,

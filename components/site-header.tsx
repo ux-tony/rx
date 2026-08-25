@@ -1,11 +1,17 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
+import { DiscussionModal } from "@/components/discussion-modal";
 
 type SiteHeaderProps = {
   studioName?: string | null;
   logoUrl?: string | null;
+  contactEmail?: string | null;
 };
 
-export function SiteHeader({ studioName, logoUrl }: SiteHeaderProps) {
+export function SiteHeader({ studioName, logoUrl, contactEmail }: SiteHeaderProps) {
+  const [opened, setOpened] = useState(false);
   const name = studioName || "Roman Kharchenko Studio";
   const displayName = name.replace(/\s+Studio$/i, "");
 
@@ -31,9 +37,11 @@ export function SiteHeader({ studioName, logoUrl }: SiteHeaderProps) {
         <a href="#contact">Контакты</a>
       </nav>
 
-      <a className="site-header-cta" href="#contact">
+      <button className="site-header-cta button-reset" onClick={() => setOpened(true)} type="button">
         Обсудить проект
-      </a>
+      </button>
+
+      <DiscussionModal contactEmail={contactEmail} opened={opened} onClose={() => setOpened(false)} />
     </header>
   );
 }
