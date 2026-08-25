@@ -4,112 +4,82 @@ import { useState } from "react";
 import { Button, FileInput, Modal, Stack, Tabs, Text, TextInput, Textarea } from "@mantine/core";
 
 type DiscussionModalProps = {
-  contactEmail?: string | null;
   opened: boolean;
   onClose: () => void;
 };
 
-export function DiscussionModal({ contactEmail, opened, onClose }: DiscussionModalProps) {
-  const [projectStatus, setProjectStatus] = useState("");
-
-  function closeModal() {
-    setProjectStatus("");
-    onClose();
-  }
-
-  function handleNewProject(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    if (!contactEmail) {
-      return;
-    }
-
-    const data = new FormData(event.currentTarget);
-    const name = String(data.get("name") || "").trim();
-    const phone = String(data.get("phone") || "").trim();
-    const task = String(data.get("task") || "").trim();
-    const subject = encodeURIComponent(`Новый проект: ${name}`);
-    const body = encodeURIComponent(`Имя: ${name}\nТелефон: ${phone}\n\nЗадача:\n${task}`);
-
-    window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
-  }
-
-  function handleCurrentProject(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const projectNumber = String(data.get("projectNumber") || "").trim();
-    setProjectStatus(`Проект ${projectNumber} принят для поиска. Доступ к карточке подключим на следующем этапе.`);
-  }
+export function DiscussionModal({ opened, onClose }: DiscussionModalProps) {
+  const [requestSent, setRequestSent] = useState(false);
+  const [projectOpened, setProjectOpened] = useState(false);
 
   return (
     <Modal
       opened={opened}
-      onClose={closeModal}
-      title="Обсудить проект"
+      onClose={() => {
+        setRequestSent(false);
+        setProjectOpened(false);
+        onClose();
+      }}
+      title="Обсудить задачу"
       centered
       radius={0}
       size="lg"
-      overlayProps={{ backgroundOpacity: 0.2, blur: 2 }}
+      overlayProps={{ backgroundOpacity: 0.18, blur: 2 }}
       classNames={{ content: "discussion-modal", header: "discussion-modal-header", body: "discussion-modal-body" }}
     >
       <Tabs defaultValue="new" variant="outline" radius={0}>
         <Tabs.List grow>
-          <Tabs.Tab value="new">Новый проект</Tabs.Tab>
-          <Tabs.Tab value="current">Текущий проект</Tabs.Tab>
+          <Tabs.Tab value="new">Новая</Tabs.Tab>
+          <Tabs.Tab value="current">Текущая</Tabs.Tab>
         </Tabs.List>
 
         <Tabs.Panel value="new" pt="lg">
-          <form onSubmit={handleNewProject}>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              setRequestSent(true);
+            }}
+          >
             <Stack gap="md">
-              <TextInput autoComplete="name" label="ФИО" name="name" placeholder="Имя и фамилия" radius={0} required />
-              <TextInput
-                autoComplete="tel"
-                label="Контактный телефон"
-                name="phone"
-                placeholder="+7 900 000-00-00"
-                radius={0}
-                type="tel"
-                required
-              />
-              <Textarea
-                label="Задача"
-                name="task"
-                placeholder="Расскажите об объекте, сроках и ожидаемом результате"
-                radius={0}
-                minRows={5}
-                required
-              />
+              <TextInput label="ФИО" placeholder="Введите имя и фамилию" radius={0} required />
+              <TextInput label="Контактный телефон" placeholder="+7 (___) ___-__-__" radius={0} required />
+              <Textarea label="Задача" placeholder="Коротко опишите объект, формат работ и ожидания" radius={0} minRows={5} required />
               <FileInput
-                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                description="Выбранные файлы нужно будет приложить в открывшемся почтовом окне."
-                label="Документы"
-                placeholder="План, ТЗ или референсы"
+                label="Прикрепить документы"
+                placeholder="План, ТЗ, референсы, фото"
                 radius={0}
                 multiple
                 clearable
               />
-              <Button disabled={!contactEmail} type="submit" radius={0}>
-                Продолжить в почте
-              </Button>
-              {!contactEmail ? (
+              {requestSent ? (
                 <Text c="dimmed" size="sm">
-                  Для отправки нужно указать контактный email в Sanity.
+                  Заявка зафиксирована в интерфейсе MVP. На следующем этапе подключим реальную отправку в CRM или почту.
                 </Text>
               ) : null}
+              <Button type="submit" radius={0}>
+                Отправить
+              </Button>
             </Stack>
           </form>
         </Tabs.Panel>
 
         <Tabs.Panel value="current" pt="lg">
-          <form onSubmit={handleCurrentProject}>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              setProjectOpened(true);
+            }}
+          >
             <Stack gap="md">
-              <TextInput label="Номер проекта" name="projectNumber" placeholder="Например, RH-024" radius={0} required />
+              <TextInput label="Номер проекта" placeholder="Например, RH-024" radius={0} required />
+              {projectOpened ? (
+                <Text c="dimmed" size="sm">
+                  В production-версии по номеру будет открываться карточка текущего проекта с этапами, комментариями и файлами.
+                </Text>
+              ) : null}
               <Button type="submit" radius={0} variant="default">
-                Открыть проект
+                Открыть
               </Button>
-              <Text aria-live="polite" c="dimmed" size="sm">
-                {projectStatus}
-              </Text>
             </Stack>
           </form>
         </Tabs.Panel>

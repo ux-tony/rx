@@ -4,8 +4,6 @@ import { FaqSection } from "@/components/faq-section";
 import { HeroSection } from "@/components/hero-section";
 import { ProjectsSection } from "@/components/projects-section";
 import { SectionHeading } from "@/components/section-heading";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
 import { getFaqItems } from "@/lib/sanity/get-faq-items";
 import { getProjectCategories } from "@/lib/sanity/get-project-categories";
 import { getProjects } from "@/lib/sanity/get-projects";
@@ -48,8 +46,7 @@ export default async function HomePage() {
   const resolvedFaqItems = cmsFaqItems.length > 0 ? cmsFaqItems : faqItems;
 
   return (
-    <main className="page-shell" id="top">
-      <SiteHeader studioName={siteSettings?.studioName} logoUrl={siteSettings?.logoUrl} contactEmail={siteSettings?.contactEmail} />
+    <main className="page-shell">
       <HeroSection metrics={siteSettings?.metrics || []} siteSettings={siteSettings} />
 
       <ProjectsSection
@@ -60,7 +57,7 @@ export default async function HomePage() {
         description={siteSettings?.projectsDescription || fallbackProjectsHeading.description}
       />
 
-      <section className="content-section split-layout" id="services">
+      <section className="content-section split-layout">
         <div>
           <SectionHeading
             eyebrow={siteSettings?.servicesEyebrow || fallbackServicesHeading.eyebrow}
@@ -94,9 +91,8 @@ export default async function HomePage() {
         contactEmail={siteSettings?.contactEmail}
         contactPhone={siteSettings?.contactPhone}
         telegramUrl={siteSettings?.telegramUrl}
+        contactImageUrl={siteSettings?.contactImageUrl}
       />
-
-      <SiteFooter studioName={siteSettings?.studioName} />
     </main>
   );
 }

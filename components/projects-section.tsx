@@ -1,6 +1,6 @@
 "use client";
 
-import { startTransition, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import type { Project, ProjectCategory } from "@/data/site-data";
 import { ProjectCard } from "@/components/project-card";
 import { SectionHeading } from "@/components/section-heading";
@@ -44,52 +44,36 @@ export function ProjectsSection({ projects, categories, eyebrow, title, descript
     );
   }, [categories, projects]);
 
-  function selectCategory(category: string) {
-    startTransition(() => setActiveCategory(category));
-  }
-
   return (
-    <section className="content-section projects-section" id="projects">
+    <section className="content-section" id="projects">
       <SectionHeading eyebrow={eyebrow} title={title} description={description} fullWidth />
 
-      <div className="projects-toolbar">
-        <div className="category-row" aria-label="Категории проектов" role="group">
+      <div className="category-row" aria-label="Категории проектов">
+        <button
+          className={`category-pill-button${activeCategory === ALL_CATEGORY ? " category-pill-active" : ""}`}
+          onClick={() => setActiveCategory(ALL_CATEGORY)}
+          type="button"
+        >
+          Все проекты
+        </button>
+
+        {availableCategories.map((category) => (
           <button
-            aria-pressed={activeCategory === ALL_CATEGORY}
-            className={`category-pill-button${activeCategory === ALL_CATEGORY ? " category-pill-active" : ""}`}
-            onClick={() => selectCategory(ALL_CATEGORY)}
+            className={`category-pill-button${activeCategory === category.title ? " category-pill-active" : ""}`}
+            key={category.slug}
+            onClick={() => setActiveCategory(category.title)}
             type="button"
           >
-            Все проекты
+            {category.title}
           </button>
-
-          {availableCategories.map((category) => (
-            <button
-              aria-pressed={activeCategory === category.title}
-              className={`category-pill-button${activeCategory === category.title ? " category-pill-active" : ""}`}
-              key={category.slug}
-              onClick={() => selectCategory(category.title)}
-              type="button"
-            >
-              {category.title}
-            </button>
-          ))}
-        </div>
-
-        <p className="projects-count" aria-live="polite">
-          {visibleProjects.length} {visibleProjects.length === 1 ? "проект" : "проектов"}
-        </p>
+        ))}
       </div>
 
-      {visibleProjects.length > 0 ? (
-        <div className="projects-grid">
-          {visibleProjects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
-          ))}
-        </div>
-      ) : (
-        <p className="projects-empty">В этой категории пока нет опубликованных проектов.</p>
-      )}
+      <div className="projects-grid">
+        {visibleProjects.map((project) => (
+          <ProjectCard key={project.slug} project={project} />
+        ))}
+      </div>
     </section>
   );
 }

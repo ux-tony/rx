@@ -13,7 +13,7 @@ type FaqSectionProps = {
 
 export function FaqSection({ items, eyebrow, title, description }: FaqSectionProps) {
   return (
-    <section className="faq-shell" id="faq">
+    <section className="faq-shell">
       <SectionHeading
         eyebrow={eyebrow || "Вопросы и ответы"}
         title={title || "Частые вопросы, которые помогают быстро понять формат работы, сроки и состав архитектурного проекта."}
