@@ -163,12 +163,39 @@ a:focus-visible {
 }
 
 .hero {
+  position: relative;
   min-height: min(820px, calc(100svh - 88px));
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
   align-items: stretch;
   background: var(--hero-background);
-  border-bottom: 1px solid var(--line);
+}
+
+.hero::after,
+.hero-metrics::after,
+.content-section:not(.projects-section)::before,
+.faq-shell::before,
+.contact-strip::before,
+.contact-strip::after {
+  content: "";
+  position: absolute;
+  right: calc(var(--space-page) * -1);
+  left: calc(var(--space-page) * -1);
+  height: 1px;
+  background: var(--line);
+  pointer-events: none;
+}
+
+.hero::after,
+.hero-metrics::after,
+.contact-strip::after {
+  bottom: 0;
+}
+
+.content-section:not(.projects-section)::before,
+.faq-shell::before,
+.contact-strip::before {
+  top: 0;
 }
 
 .hero-copy {
@@ -268,9 +295,9 @@ a:focus-visible {
 }
 
 .hero-metrics {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  border-bottom: 1px solid var(--line);
 }
 
 .metric-card {
@@ -307,6 +334,7 @@ a:focus-visible {
 }
 
 .content-section {
+  position: relative;
   padding-top: var(--space-section);
 }
 
@@ -646,9 +674,9 @@ a:focus-visible {
 }
 
 .faq-shell {
+  position: relative;
   margin-top: var(--space-section);
   padding-top: 34px;
-  border-top: 1px solid var(--line-strong);
 }
 
 .faq-shell .mantine-Accordion-item {
@@ -656,25 +684,34 @@ a:focus-visible {
 }
 
 .faq-shell .mantine-Accordion-control {
-  min-height: 52px;
-  padding: 10px 8px;
+  min-height: 0;
+  padding: 12px 28px 6px;
   font-size: clamp(0.96rem, 1.15vw, 1.08rem);
   font-weight: 500;
 }
 
+.faq-shell .mantine-Accordion-chevron {
+  width: 28px;
+  min-width: 28px;
+}
+
+.faq-shell .mantine-Accordion-chevron svg {
+  width: 22px !important;
+  height: 22px !important;
+}
+
 .faq-shell .mantine-Accordion-panel {
   max-width: 68rem;
-  padding: 0 8px 16px;
+  padding: 4px 28px 16px;
   color: var(--muted);
   line-height: 1.7;
 }
 
 .contact-strip {
+  position: relative;
   margin-top: var(--space-section);
   display: grid;
   grid-template-columns: minmax(0, 0.82fr) minmax(420px, 1.18fr);
-  border-top: 1px solid var(--line-strong);
-  border-bottom: 1px solid var(--line-strong);
 }
 
 .contact-copy {
@@ -1070,8 +1107,12 @@ a:focus-visible {
   }
 
   .faq-shell .mantine-Accordion-control {
-    min-height: 48px;
-    padding: 9px 4px;
+    min-height: 0;
+    padding: 12px 18px 6px;
+  }
+
+  .faq-shell .mantine-Accordion-panel {
+    padding: 4px 18px 14px;
   }
 
   .contact-copy {
