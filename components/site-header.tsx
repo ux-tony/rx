@@ -1,19 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import { DiscussionModal } from "@/components/discussion-modal";
 
 type SiteHeaderProps = {
   studioName?: string | null;
   logoUrl?: string | null;
-  contactEmail?: string | null;
+  contactPhone?: string | null;
 };
 
-export function SiteHeader({ studioName, logoUrl, contactEmail }: SiteHeaderProps) {
-  const [opened, setOpened] = useState(false);
+export function SiteHeader({ studioName, logoUrl, contactPhone }: SiteHeaderProps) {
   const name = studioName || "Roman Kharchenko Studio";
   const displayName = name.replace(/\s+Studio$/i, "");
+  const phone = contactPhone || "8 (928) 000-00-00";
+  const phoneHref = `tel:${phone.replace(/[^\d+]/g, "")}`;
 
   return (
     <header className="site-header">
@@ -37,11 +36,9 @@ export function SiteHeader({ studioName, logoUrl, contactEmail }: SiteHeaderProp
         <a href="#contact">Контакты</a>
       </nav>
 
-      <button className="site-header-cta button-reset" onClick={() => setOpened(true)} type="button">
-        Обсудить проект
-      </button>
-
-      <DiscussionModal contactEmail={contactEmail} opened={opened} onClose={() => setOpened(false)} />
+      <a className="site-header-cta" href={phoneHref} aria-label={`Позвонить: ${phone}`}>
+        {phone}
+      </a>
     </header>
   );
 }

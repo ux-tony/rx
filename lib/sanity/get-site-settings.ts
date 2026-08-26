@@ -39,6 +39,9 @@ const heroEyebrow = "Архитектурная студия";
 const heroTitle = "Роман Харченко. Архитектор.";
 const heroDescription =
   "Я создаю пространства, в которых архитектура, интерьер и ландшафт работают как единое целое. В основе каждого проекта: характер места, ясная логика и внимание к тому, как человек будет жить, работать и чувствовать себя внутри.";
+const projectsTitle = "Проекты студии.";
+const servicesTitle = "Направления работы.";
+const faqTitle = "О работе над проектом.";
 
 function cleanCopy(value?: string | null) {
   const normalized = value?.trim();
@@ -77,6 +80,24 @@ function migrateHeroDescription(value?: string | null) {
     : normalized;
 }
 
+function migrateSectionTitle(value: string | null | undefined, section: "projects" | "services" | "faq") {
+  const normalized = cleanCopy(value);
+
+  if (section === "projects" && normalized?.startsWith("Архитектурные пространства")) {
+    return projectsTitle;
+  }
+
+  if (section === "services" && normalized?.startsWith("Проектирование пространств от первой идеи")) {
+    return servicesTitle;
+  }
+
+  if (section === "faq" && normalized?.startsWith("Частые вопросы, которые помогают")) {
+    return faqTitle;
+  }
+
+  return normalized;
+}
+
 export async function getSiteSettings(): Promise<SiteSettings | null> {
   try {
     const data = await sanityClient.fetch<{
@@ -113,13 +134,13 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
       secondaryCtaHref: merged.secondaryCtaHref,
       metrics: merged.metrics?.filter((metric) => cleanCopy(metric.value) && cleanCopy(metric.label)),
       projectsEyebrow: cleanCopy(merged.projectsEyebrow),
-      projectsTitle: cleanCopy(merged.projectsTitle),
+      projectsTitle: migrateSectionTitle(merged.projectsTitle, "projects"),
       projectsDescription: cleanCopy(merged.projectsDescription),
       servicesEyebrow: cleanCopy(merged.servicesEyebrow),
-      servicesTitle: cleanCopy(merged.servicesTitle),
+      servicesTitle: migrateSectionTitle(merged.servicesTitle, "services"),
       servicesDescription: cleanCopy(merged.servicesDescription),
       faqEyebrow: cleanCopy(merged.faqEyebrow),
-      faqTitle: cleanCopy(merged.faqTitle),
+      faqTitle: migrateSectionTitle(merged.faqTitle, "faq"),
       faqDescription: cleanCopy(merged.faqDescription),
       contactsEyebrow: cleanCopy(merged.contactsEyebrow),
       contactsTitle: cleanCopy(merged.contactsTitle),

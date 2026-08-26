@@ -72,7 +72,7 @@ export function ContactStrip({
 
         <div className="contact-field">
           <label htmlFor="contact-value">Телефон или email</label>
-          <input id="contact-value" name="contact" placeholder="Удобный способ связи" required />
+          <input id="contact-value" name="contact" placeholder="8 (928) 000-00-00 или email" required />
         </div>
 
         <div className="contact-field">

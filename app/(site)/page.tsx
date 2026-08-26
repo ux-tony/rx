@@ -16,20 +16,21 @@ export const dynamic = "force-dynamic";
 
 const fallbackProjectsHeading = {
   eyebrow: "Проекты",
-  title: "Архитектурные пространства, где материал, свет и масштаб работают на спокойное впечатление.",
-  description: "Подборка демонстрационных кейсов с акцентом на частные резиденции, интерьеры, общественные пространства и hospitality."
+  title: "Проекты студии.",
+  description:
+    "Частные и общественные пространства, интерьеры, фасады и территории, в которых архитектурная идея доведена до ясного и цельного решения."
 };
 
 const fallbackServicesHeading = {
   eyebrow: "Услуги",
-  title: "Проектирование пространств от первой идеи до согласованного архитектурного образа.",
+  title: "Направления работы.",
   description:
     "Студия разрабатывает жилые и общественные интерьеры, фасады зданий, гостиницы и рестораны, а также ландшафтный дизайн и концепции территорий для коммерческих объектов."
 };
 
 const fallbackFaqHeading = {
   eyebrow: "Вопросы и ответы",
-  title: "Частые вопросы, которые помогают быстро понять формат работы, сроки и состав архитектурного проекта.",
+  title: "О работе над проектом.",
   description:
     "Собрали базовые вопросы заказчиков перед стартом: про бюджет, сроки, объём проектирования, участие в процессе и сопровождение реализации."
 };
@@ -49,7 +50,7 @@ export default async function HomePage() {
 
   return (
     <main className="page-shell" id="top">
-      <SiteHeader studioName={siteSettings?.studioName} logoUrl={siteSettings?.logoUrl} contactEmail={siteSettings?.contactEmail} />
+      <SiteHeader studioName={siteSettings?.studioName} logoUrl={siteSettings?.logoUrl} contactPhone={siteSettings?.contactPhone} />
       <HeroSection metrics={siteSettings?.metrics || []} siteSettings={siteSettings} />
 
       <ProjectsSection

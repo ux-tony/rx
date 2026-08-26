@@ -119,8 +119,9 @@ a:focus-visible {
   display: flex;
   align-items: center;
   gap: clamp(18px, 2vw, 36px);
-  font-size: 0.82rem;
-  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #555555;
 }
 
 .site-nav a,
@@ -236,6 +237,10 @@ a:focus-visible {
   text-transform: uppercase;
 }
 
+.hero .eyebrow {
+  font-size: clamp(0.86rem, 0.9vw, 0.96rem);
+}
+
 .hero-heading h1 {
   max-width: 11ch;
   margin: 0;
@@ -330,8 +335,8 @@ a:focus-visible {
 }
 
 .metric-card {
-  min-height: 186px;
-  padding: 30px clamp(18px, 3vw, 44px) 34px 0;
+  min-height: 214px;
+  padding: 30px clamp(18px, 3vw, 44px) 54px 0;
   display: grid;
   align-content: space-between;
   gap: 28px;
@@ -719,6 +724,10 @@ a:focus-visible {
   font-weight: 500;
 }
 
+.faq-shell .mantine-Accordion-control:hover {
+  background: transparent;
+}
+
 .faq-shell .mantine-Accordion-chevron {
   width: 28px;
   min-width: 28px;
@@ -1052,7 +1061,8 @@ a:focus-visible {
   }
 
   .category-row {
-    max-width: calc(100vw - 92px);
+    width: 100%;
+    max-width: 100%;
     flex-wrap: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
@@ -1064,6 +1074,10 @@ a:focus-visible {
 
   .category-pill-button {
     flex: 0 0 auto;
+  }
+
+  .projects-count {
+    display: none;
   }
 
   .projects-grid {

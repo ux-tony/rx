@@ -66,7 +66,7 @@ export function DiscussionModal({ contactEmail, opened, onClose }: DiscussionMod
                 autoComplete="tel"
                 label="Контактный телефон"
                 name="phone"
-                placeholder="+7 900 000-00-00"
+                placeholder="8 (928) 000-00-00"
                 radius={0}
                 type="tel"
                 required
