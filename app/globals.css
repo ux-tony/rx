@@ -372,6 +372,10 @@ a:focus-visible {
   padding-top: var(--space-section);
 }
 
+.projects-section {
+  padding-bottom: clamp(56px, 6vw, 96px);
+}
+
 .discussion-modal .mantine-Modal-content,
 .discussion-modal .mantine-Input-input,
 .discussion-modal .mantine-Textarea-input,
