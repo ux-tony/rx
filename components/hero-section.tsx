@@ -58,7 +58,7 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
             className="hero-portrait"
             fill
             priority
-            sizes="(max-width: 1180px) 100vw, 48vw"
+            sizes="100vw"
           />
         </div>
       </section>
