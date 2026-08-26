@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import type { Metric } from "@/data/site-data";
-import architectPhoto from "@/img/Foto001-hero-cube.png";
+import architectPhoto from "@/img/Foto001-hero-architectural.png";
 import { DiscussionModal } from "@/components/discussion-modal";
 import type { SiteSettings } from "@/lib/sanity/get-site-settings";
 
