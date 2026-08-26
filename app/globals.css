@@ -166,7 +166,7 @@ a:focus-visible {
   position: relative;
   min-height: clamp(880px, calc(100svh - 88px), 980px);
   display: grid;
-  grid-template-columns: minmax(0, 0.75fr) minmax(520px, 1.25fr);
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
   align-items: stretch;
   background: var(--hero-background);
   isolation: isolate;
@@ -877,7 +877,7 @@ a:focus-visible {
   }
 
   .hero {
-    grid-template-columns: minmax(0, 0.82fr) minmax(400px, 1.18fr);
+    grid-template-columns: 1fr 0.82fr;
   }
 
   .projects-grid {
