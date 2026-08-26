@@ -723,9 +723,13 @@ a:focus-visible {
 
 .faq-shell .mantine-Accordion-control {
   min-height: 0;
-  padding: 12px 28px 6px;
+  padding: 0 28px;
   font-size: clamp(0.96rem, 1.15vw, 1.08rem);
   font-weight: 500;
+}
+
+.faq-shell .mantine-Accordion-label {
+  padding: 20px 0;
 }
 
 .faq-shell .mantine-Accordion-control:hover {
@@ -1169,7 +1173,7 @@ a:focus-visible {
 
   .faq-shell .mantine-Accordion-control {
     min-height: 0;
-    padding: 12px 18px 6px;
+    padding: 0 18px;
   }
 
   .faq-shell .mantine-Accordion-panel {
