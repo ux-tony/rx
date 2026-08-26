@@ -35,6 +35,10 @@ export type SiteSettings = {
 };
 
 const placeholderPattern = /\b(mock|mvp|cms|api|desktop|mobile|mantine)\b|тестов|заглуш|демонстрацион|шаблонн|визуальн\w* систем|каталог проектов|форм\w* заявок|редактор контента/i;
+const heroEyebrow = "Архитектурная студия";
+const heroTitle = "Роман Харченко. Архитектор.";
+const heroDescription =
+  "Я создаю пространства, в которых архитектура, интерьер и ландшафт работают как единое целое. В основе каждого проекта: характер места, ясная логика и внимание к тому, как человек будет жить, работать и чувствовать себя внутри.";
 
 function cleanCopy(value?: string | null) {
   const normalized = value?.trim();
@@ -54,6 +58,23 @@ function cleanPhone(value?: string | null) {
 function cleanTelegram(value?: string | null) {
   const normalized = value?.trim().replace(/\/$/, "");
   return normalized && normalized !== "https://t.me" ? normalized : undefined;
+}
+
+function migrateHeroEyebrow(value?: string | null) {
+  const normalized = cleanCopy(value);
+  return normalized === "Студия архитектуры и дизайна" ? heroEyebrow : normalized;
+}
+
+function migrateHeroTitle(value?: string | null) {
+  const normalized = cleanCopy(value);
+  return normalized === "Архитектурная студия Романа Харченко." ? heroTitle : normalized;
+}
+
+function migrateHeroDescription(value?: string | null) {
+  const normalized = cleanCopy(value);
+  return normalized?.startsWith("Проектирование жилых и общественных интерьеров") || normalized?.startsWith("Частная архитектурная практика")
+    ? heroDescription
+    : normalized;
 }
 
 export async function getSiteSettings(): Promise<SiteSettings | null> {
@@ -81,9 +102,9 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
     return {
       ...merged,
       studioName: cleanCopy(merged.studioName),
-      heroEyebrow: cleanCopy(merged.heroEyebrow),
-      heroTitle: cleanCopy(merged.heroTitle),
-      heroDescription: cleanCopy(merged.heroDescription),
+      heroEyebrow: migrateHeroEyebrow(merged.heroEyebrow),
+      heroTitle: migrateHeroTitle(merged.heroTitle),
+      heroDescription: migrateHeroDescription(merged.heroDescription),
       seoTitle: cleanCopy(merged.seoTitle),
       seoDescription: cleanCopy(merged.seoDescription),
       primaryCtaLabel: cleanCopy(merged.primaryCtaLabel),
