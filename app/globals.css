@@ -164,10 +164,19 @@ a:focus-visible {
 
 .hero {
   position: relative;
-  min-height: min(820px, calc(100svh - 88px));
+  min-height: clamp(880px, calc(100svh - 88px), 980px);
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
   align-items: stretch;
+  background: var(--hero-background);
+  isolation: isolate;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 calc(var(--space-page) * -1);
   background: var(--hero-background);
 }
 
@@ -284,7 +293,7 @@ a:focus-visible {
 
 .hero-visual {
   position: relative;
-  min-height: min(820px, calc(100svh - 88px));
+  min-height: clamp(880px, calc(100svh - 88px), 980px);
   overflow: hidden;
   background: var(--hero-background);
 }
@@ -300,8 +309,8 @@ a:focus-visible {
 }
 
 .hero-portrait {
-  object-fit: cover;
-  object-position: center;
+  object-fit: contain;
+  object-position: center bottom;
   filter: saturate(0.82) contrast(1.03);
 }
 
