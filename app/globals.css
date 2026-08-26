@@ -747,6 +747,10 @@ a:focus-visible {
 }
 
 .faq-shell .mantine-Accordion-panel {
+  padding: 0;
+}
+
+.faq-shell .mantine-Accordion-content {
   max-width: 68rem;
   padding: 4px 28px 16px;
   color: var(--muted);
@@ -1176,7 +1180,7 @@ a:focus-visible {
     padding: 0 18px;
   }
 
-  .faq-shell .mantine-Accordion-panel {
+  .faq-shell .mantine-Accordion-content {
     padding: 4px 18px 14px;
   }
 
