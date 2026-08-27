@@ -929,7 +929,25 @@ a:focus-visible {
   }
 
   .hero {
-    grid-template-columns: 1fr 0.82fr;
+    min-height: clamp(720px, calc(100svh - 80px), 860px);
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
+  }
+
+  .hero-copy {
+    padding-top: clamp(52px, 7vw, 80px);
+    padding-right: clamp(24px, 4vw, 56px);
+    padding-bottom: clamp(52px, 7vw, 80px);
+  }
+
+  .hero-visual::after {
+    width: 64vw;
+    background: linear-gradient(90deg, var(--hero-background) 0%, var(--hero-background) 38%, color-mix(in srgb, var(--hero-background) 72%, transparent) 58%, transparent 100%);
+  }
+
+  .hero-portrait {
+    object-fit: cover;
+    object-position: right bottom;
+    transform: translateX(7%);
   }
 
   .projects-grid {
@@ -991,15 +1009,16 @@ a:focus-visible {
   }
 
   .hero {
-    min-height: auto;
-    grid-template-columns: 1fr;
+    min-height: clamp(760px, calc(100svh - 72px), 900px);
+    display: block;
   }
 
   .hero-copy {
-    min-height: auto;
-    padding: 34px 0 30px;
+    min-height: inherit;
+    padding: 34px 0 28px;
     justify-content: flex-start;
-    gap: 34px;
+    gap: 28px;
+    background: linear-gradient(90deg, var(--hero-background) 0%, var(--hero-background) 46%, color-mix(in srgb, var(--hero-background) 76%, transparent) 54%, transparent 64%);
   }
 
   .hero-heading {
@@ -1007,11 +1026,12 @@ a:focus-visible {
   }
 
   .hero-heading h1 {
-    max-width: 12ch;
+    max-width: 7ch;
     font-size: clamp(3rem, 13vw, 4.8rem);
   }
 
   .hero-heading > p:last-child {
+    max-width: 50%;
     font-size: 0.96rem;
     line-height: 1.55;
   }
@@ -1019,6 +1039,7 @@ a:focus-visible {
   .hero-actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    width: 100%;
   }
 
   .button-primary,
@@ -1028,12 +1049,15 @@ a:focus-visible {
     font-size: 0.78rem;
   }
 
+  .hero-actions .button-secondary {
+    background: color-mix(in srgb, var(--hero-background) 90%, transparent);
+  }
+
   .hero-visual {
-    position: relative;
-    inset: auto;
-    grid-column: 1;
-    margin-inline: calc(var(--space-page) * -1);
-    min-height: 62svh;
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    min-height: 0;
   }
 
   .hero-visual::after {
@@ -1042,8 +1066,9 @@ a:focus-visible {
 
   .hero-portrait {
     object-fit: cover;
-    object-position: 78% bottom;
-    transform: none;
+    object-position: right bottom;
+    transform: translateX(30%) scale(0.9);
+    transform-origin: right bottom;
   }
 
   .hero-metrics {
