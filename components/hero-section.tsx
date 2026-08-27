@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { Metric } from "@/data/site-data";
 import architectPhoto from "@/img/Foto001-hero-architectural-v5.png";
@@ -20,6 +20,8 @@ const editorialMetrics: Metric[] = [
 
 export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
   const [opened, setOpened] = useState(false);
+  const [metricsVisible, setMetricsVisible] = useState(false);
+  const metricsRef = useRef<HTMLElement>(null);
   const heroEyebrow = siteSettings?.heroEyebrow || "Архитектурная студия";
   const heroTitle = siteSettings?.heroTitle || "Роман Харченко. Архитектор.";
   const heroDescription =
@@ -30,6 +32,28 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
   const secondaryCtaLabel = siteSettings?.secondaryCtaLabel || "Обсудить задачу";
   const resolvedMetrics = siteSettings?.metrics && siteSettings.metrics.length > 0 ? siteSettings.metrics : metrics.length > 0 ? metrics : editorialMetrics;
   const architectPhotoSrc = architectPhoto;
+
+  useEffect(() => {
+    const section = metricsRef.current;
+
+    if (!section) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setMetricsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
@@ -64,7 +88,11 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
       </section>
 
       {resolvedMetrics.length > 0 ? (
-        <section className="hero-metrics" aria-label="О студии в цифрах">
+        <section
+          className={`hero-metrics${metricsVisible ? " is-visible" : ""}`}
+          aria-label="О студии в цифрах"
+          ref={metricsRef}
+        >
           {resolvedMetrics.map((metric) => (
             <article className="metric-card" key={`${metric.value}-${metric.label}`}>
               <p className="metric-value">{metric.value}</p>
