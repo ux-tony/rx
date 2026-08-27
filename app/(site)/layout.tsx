@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { ColorSchemeScript, MantineProvider, createTheme, mantineHtmlProps } from "@mantine/core";
 import { Manrope } from "next/font/google";
 import { getSiteSettings } from "@/lib/sanity/get-site-settings";
@@ -17,6 +17,12 @@ const theme = createTheme({
     fontFamily: manrope.style.fontFamily
   }
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover"
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteSettings = await getSiteSettings();
