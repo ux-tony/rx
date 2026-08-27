@@ -4,15 +4,10 @@ import { useState } from "react";
 import { Alert, Button, Group, Loader, Stack, Text } from "@mantine/core";
 import { useClient } from "sanity";
 import {
-  mockContactsSection,
   mockFaqItems,
-  mockFaqSection,
-  mockHeroSection,
   mockProjectCategories,
   mockProjects,
-  mockProjectsSection,
-  mockServices,
-  mockServicesSection
+  mockServices
 } from "@/sanity/mock-content";
 
 type UploadedImage = {
@@ -29,7 +24,27 @@ export function StudioSeedTool() {
   const [message, setMessage] = useState("");
 
   async function uploadImage(url: string, filename: string): Promise<UploadedImage> {
+    const existingAssetId = await client.fetch<string | null>(
+      '*[_type == "sanity.imageAsset" && originalFilename == $filename][0]._id',
+      { filename }
+    );
+
+    if (existingAssetId) {
+      return {
+        _type: "image",
+        asset: {
+          _type: "reference",
+          _ref: existingAssetId
+        }
+      };
+    }
+
     const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Не удалось загрузить изображение ${filename}.`);
+    }
+
     const blob = await response.blob();
     const asset = await client.assets.upload("image", blob, { filename });
 
@@ -45,49 +60,7 @@ export function StudioSeedTool() {
   async function seedMockData() {
     try {
       setStatus("loading");
-      setMessage("Импортируем mock-данные в Sanity...");
-
-      const existing = await client.fetch<{ _id: string }[]>(
-        '*[_type in ["heroSection","projectsSection","servicesSection","faqSection","contactsSection","projectCategory","project","service","faqItem"]]{_id}'
-      );
-
-      let transaction = client.transaction();
-
-      for (const doc of existing) {
-        transaction = transaction.delete(doc._id);
-      }
-
-      await transaction.commit();
-
-      await client.createOrReplace({
-        _id: "heroSection",
-        _type: "heroSection",
-        ...mockHeroSection
-      });
-
-      await client.createOrReplace({
-        _id: "projectsSection",
-        _type: "projectsSection",
-        ...mockProjectsSection
-      });
-
-      await client.createOrReplace({
-        _id: "servicesSection",
-        _type: "servicesSection",
-        ...mockServicesSection
-      });
-
-      await client.createOrReplace({
-        _id: "faqSection",
-        _type: "faqSection",
-        ...mockFaqSection
-      });
-
-      await client.createOrReplace({
-        _id: "contactsSection",
-        _type: "contactsSection",
-        ...mockContactsSection
-      });
+      setMessage("Синхронизируем категории, проекты, услуги и FAQ...");
 
       for (const category of mockProjectCategories) {
         await client.createOrReplace({
@@ -102,9 +75,13 @@ export function StudioSeedTool() {
         });
       }
 
-      for (const item of mockFaqItems) {
+      const existingFaqIds = await client.fetch<string[]>('*[_type == "faqItem"]._id');
+
+      for (const [index, item] of mockFaqItems.entries()) {
+        const existingId = index === 0 && existingFaqIds.length === 1 ? existingFaqIds[0] : null;
+
         await client.createOrReplace({
-          _id: `faq-${item.order}`,
+          _id: existingId ?? `faq-${item.order}`,
           _type: "faqItem",
           question: item.question,
           answer: item.answer,
@@ -128,9 +105,10 @@ export function StudioSeedTool() {
         const gallery =
           project.gallery && project.gallery.length > 0
             ? await Promise.all(
-                project.gallery.map((url, index) =>
-                  uploadImage(url, `${project.slug}-gallery-${index + 1}.jpg`)
-                )
+                project.gallery.map(async (url, index) => ({
+                  ...(await uploadImage(url, `${project.slug}-gallery-${index + 1}.jpg`)),
+                  _key: `${project.slug}-gallery-${index + 1}`
+                }))
               )
             : [];
 
@@ -154,7 +132,9 @@ export function StudioSeedTool() {
       }
 
       setStatus("success");
-      setMessage("Mock-данные загружены. Обновите сайт, и контент появится на фронтенде.");
+      setMessage(
+        `Готово: ${mockProjectCategories.length} категории, ${mockProjects.length} проектов, ${mockServices.length} услуги и ${mockFaqItems.length} вопросов.`
+      );
     } catch (error) {
       setStatus("error");
       setMessage(error instanceof Error ? error.message : "Не удалось импортировать mock-данные.");
@@ -166,16 +146,16 @@ export function StudioSeedTool() {
       <Stack gap="md">
         <div>
           <Text fw={700} size="xl">
-            Импорт mock-данных
+            Синхронизация контента
           </Text>
           <Text c="dimmed" mt={8}>
-            Этот импорт очистит текущие документы секций, категории проектов, проекты, услуги и FAQ, а затем загрузит стартовый контент из MVP прямо в ваш Sanity project.
+            Добавляет текущие проекты, категории, услуги и FAQ в Sanity. Hero, контакты и настройки сайта не изменяются.
           </Text>
         </div>
 
         <Group>
           <Button onClick={seedMockData} radius={0} variant="filled">
-            Загрузить mock-данные
+            Синхронизировать с Sanity
           </Button>
           {status === "loading" ? <Loader size="sm" /> : null}
         </Group>

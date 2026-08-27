@@ -3,6 +3,7 @@ import { structureTool } from "sanity/structure";
 import { sanityBasePath, sanityDataset, sanityProjectId } from "@/sanity/env";
 import { schemaTypes } from "@/sanity/schemaTypes";
 import { studioStructure } from "@/sanity/structure";
+import { mockSeedTool } from "@/sanity/plugins/mock-seed-tool";
 
 export default defineConfig({
   name: "default",
@@ -10,7 +11,7 @@ export default defineConfig({
   projectId: sanityProjectId,
   dataset: sanityDataset,
   basePath: sanityBasePath,
-  plugins: [structureTool({ structure: studioStructure })],
+  plugins: [structureTool({ structure: studioStructure }), mockSeedTool()],
   schema: {
     types: schemaTypes
   }
