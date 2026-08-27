@@ -10,6 +10,7 @@ export const projectType = defineType({
       name: "title",
       title: "Название",
       type: "string",
+      description: "Название проекта на карточке и отдельной странице.",
       validation: (rule) => rule.required()
     }),
     defineField({
@@ -20,6 +21,7 @@ export const projectType = defineType({
         source: "title",
         maxLength: 96
       },
+      description: "Адрес страницы создаётся из названия автоматически.",
       validation: (rule) => rule.required()
     }),
     defineField({
@@ -27,20 +29,14 @@ export const projectType = defineType({
       title: "Категория",
       type: "reference",
       to: [{ type: "projectCategory" }],
+      description: "Используется в фильтре проектов на главной странице.",
       validation: (rule) => rule.required()
     }),
     defineField({
-      name: "coverImage",
-      title: "Обложка",
-      type: "image",
-      options: {
-        hotspot: true
-      }
-    }),
-    defineField({
       name: "gallery",
-      title: "Галерея",
+      title: "Изображения проекта",
       type: "array",
+      description: "Загрузите всю пачку изображений проекта. Их порядок можно менять перетаскиванием.",
       of: [
         defineField({
           name: "image",
@@ -50,13 +46,24 @@ export const projectType = defineType({
             hotspot: true
           }
         })
-      ]
+      ],
+      validation: (rule) => rule.min(1).error("Добавьте хотя бы одно изображение.")
+    }),
+    defineField({
+      name: "coverImage",
+      title: "Обложка",
+      type: "image",
+      description: "Нажмите Select и выберите одно из уже загруженных изображений. Повторно загружать файл не нужно.",
+      options: {
+        hotspot: true
+      }
     }),
     defineField({
       name: "description",
       title: "Описание",
       type: "text",
-      rows: 4
+      rows: 3,
+      description: "Необязательное короткое описание на 2–3 строки. Если оставить пустым, блок не появится на сайте."
     }),
     defineField({
       name: "published",

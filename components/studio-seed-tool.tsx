@@ -101,16 +101,17 @@ export function StudioSeedTool() {
       }
 
       for (const project of mockProjects) {
-        const coverImage = await uploadImage(project.image, `${project.slug}-cover.jpg`);
-        const gallery =
-          project.gallery && project.gallery.length > 0
-            ? await Promise.all(
-                project.gallery.map(async (url, index) => ({
-                  ...(await uploadImage(url, `${project.slug}-gallery-${index + 1}.jpg`)),
-                  _key: `${project.slug}-gallery-${index + 1}`
-                }))
-              )
-            : [];
+        const gallerySources = project.gallery && project.gallery.length > 0 ? project.gallery : [project.image];
+        const gallery = await Promise.all(
+          gallerySources.map(async (url, index) => ({
+            ...(await uploadImage(url, `${project.slug}-gallery-${index + 1}.jpg`)),
+            _key: `${project.slug}-gallery-${index + 1}`
+          }))
+        );
+        const coverImage: UploadedImage = {
+          _type: "image",
+          asset: gallery[0].asset
+        };
 
         await client.createOrReplace({
           _id: `project-${project.slug}`,

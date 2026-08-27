@@ -61,7 +61,19 @@ export const projectsQuery = groq`
     "categorySlug": category->slug.current,
     description,
     "slug": slug.current,
-    "image": coverImage.asset->url,
+    "image": coalesce(coverImage.asset->url, gallery[0].asset->url),
+    "gallery": gallery[].asset->url
+  }
+`;
+
+export const projectBySlugQuery = groq`
+  *[_type == "project" && published == true && slug.current == $slug][0]{
+    title,
+    "category": category->title,
+    "categorySlug": category->slug.current,
+    description,
+    "slug": slug.current,
+    "image": coalesce(coverImage.asset->url, gallery[0].asset->url),
     "gallery": gallery[].asset->url
   }
 `;
