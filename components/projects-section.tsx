@@ -76,9 +76,6 @@ export function ProjectsSection({ projects, categories, eyebrow, title, descript
           ))}
         </div>
 
-        <p className="projects-count" aria-live="polite">
-          {visibleProjects.length} {visibleProjects.length === 1 ? "проект" : "проектов"}
-        </p>
       </div>
 
       {visibleProjects.length > 0 ? (

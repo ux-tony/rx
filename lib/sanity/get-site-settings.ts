@@ -39,9 +39,14 @@ const heroEyebrow = "Архитектурная студия";
 const heroTitle = "Роман Харченко. Архитектор.";
 const heroDescription =
   "Я создаю пространства, в которых архитектура, интерьер и ландшафт работают как единое целое. В основе каждого проекта: характер места, ясная логика и внимание к тому, как человек будет жить, работать и чувствовать себя внутри.";
-const projectsTitle = "Проекты студии.";
+const projectsEyebrow = "Проекты студии";
+const projectsTitle = "От идеи до пространства.";
+const projectsDescription =
+  "Воплощаем архитектурные идеи разного масштаба и сложности: от частных интерьеров до общественных пространств, фасадов и территорий. Каждый проект доводим до цельного, функционального и выразительного решения.";
 const servicesTitle = "Направления работы.";
-const faqTitle = "О работе над проектом.";
+const faqTitle = "Главное до начала работы.";
+const faqDescription =
+  "Здесь собраны ответы о сроках, бюджете, этапах, составе проекта и участии заказчика — всё, что поможет заранее понять процесс работы со студией.";
 
 function cleanCopy(value?: string | null) {
   const normalized = value?.trim();
@@ -83,7 +88,7 @@ function migrateHeroDescription(value?: string | null) {
 function migrateSectionTitle(value: string | null | undefined, section: "projects" | "services" | "faq") {
   const normalized = cleanCopy(value);
 
-  if (section === "projects" && normalized?.startsWith("Архитектурные пространства")) {
+  if (section === "projects" && (normalized?.replace(/\.$/, "") === "Проекты студии" || normalized?.startsWith("Архитектурные пространства"))) {
     return projectsTitle;
   }
 
@@ -91,8 +96,27 @@ function migrateSectionTitle(value: string | null | undefined, section: "project
     return servicesTitle;
   }
 
-  if (section === "faq" && normalized?.startsWith("Частые вопросы, которые помогают")) {
+  if (section === "faq" && (normalized?.replace(/\.$/, "") === "О работе над проектом" || normalized?.startsWith("Частые вопросы, которые помогают"))) {
     return faqTitle;
+  }
+
+  return normalized;
+}
+
+function migrateProjectsEyebrow(value?: string | null) {
+  const normalized = cleanCopy(value);
+  return normalized?.toLocaleLowerCase("ru-RU") === "проекты" ? projectsEyebrow : normalized;
+}
+
+function migrateSectionDescription(value: string | null | undefined, section: "projects" | "faq") {
+  const normalized = cleanCopy(value);
+
+  if (section === "projects" && normalized?.startsWith("Частные и общественные пространства")) {
+    return projectsDescription;
+  }
+
+  if (section === "faq" && normalized?.startsWith("Собрали базовые вопросы")) {
+    return faqDescription;
   }
 
   return normalized;
@@ -133,15 +157,15 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
       secondaryCtaLabel: cleanCopy(merged.secondaryCtaLabel),
       secondaryCtaHref: merged.secondaryCtaHref,
       metrics: merged.metrics?.filter((metric) => cleanCopy(metric.value) && cleanCopy(metric.label)),
-      projectsEyebrow: cleanCopy(merged.projectsEyebrow),
+      projectsEyebrow: migrateProjectsEyebrow(merged.projectsEyebrow),
       projectsTitle: migrateSectionTitle(merged.projectsTitle, "projects"),
-      projectsDescription: cleanCopy(merged.projectsDescription),
+      projectsDescription: migrateSectionDescription(merged.projectsDescription, "projects"),
       servicesEyebrow: cleanCopy(merged.servicesEyebrow),
       servicesTitle: migrateSectionTitle(merged.servicesTitle, "services"),
       servicesDescription: cleanCopy(merged.servicesDescription),
       faqEyebrow: cleanCopy(merged.faqEyebrow),
       faqTitle: migrateSectionTitle(merged.faqTitle, "faq"),
-      faqDescription: cleanCopy(merged.faqDescription),
+      faqDescription: migrateSectionDescription(merged.faqDescription, "faq"),
       contactsEyebrow: cleanCopy(merged.contactsEyebrow),
       contactsTitle: cleanCopy(merged.contactsTitle),
       contactsDescription: cleanCopy(merged.contactsDescription),

@@ -6,10 +6,10 @@ export const projectsSectionType = defineType({
   type: "document",
   __experimental_formPreviewTitle: false,
   initialValue: {
-    projectsEyebrow: "ПРОЕКТЫ",
-    projectsTitle: "Архитектурные пространства, где материал и свет работают на ощущение тишины.",
+    projectsEyebrow: "Проекты студии",
+    projectsTitle: "От идеи до пространства.",
     projectsDescription:
-      "Подборка демонстрационных кейсов для MVP. В реальном проекте этот блок подключается к CMS или headless API."
+      "Воплощаем архитектурные идеи разного масштаба и сложности: от частных интерьеров до общественных пространств, фасадов и территорий. Каждый проект доводим до цельного, функционального и выразительного решения."
   },
   fields: [
     defineField({
