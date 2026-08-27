@@ -1001,12 +1001,12 @@ a:focus-visible {
 
   .hero {
     --hero-background: #f1edeb;
-    min-height: clamp(760px, calc(100svh - 72px), 900px);
+    min-height: 0;
     display: block;
   }
 
   .hero-copy {
-    min-height: inherit;
+    min-height: 0;
     padding: 34px 0 28px;
     justify-content: flex-start;
     gap: 28px;
@@ -1058,10 +1058,14 @@ a:focus-visible {
   }
 
   .hero-portrait {
-    object-fit: cover;
+    max-width: none;
+    width: auto !important;
+    height: 100% !important;
+    right: -12% !important;
+    left: auto !important;
+    object-fit: contain;
     object-position: right bottom;
-    transform: translate(24%, -4%) scale(0.82);
-    transform-origin: right bottom;
+    transform: none;
   }
 
   .hero-metrics {
@@ -1248,10 +1252,6 @@ a:focus-visible {
 }
 
 @media (max-width: 480px) {
-  .hero {
-    min-height: clamp(720px, calc(100svh - 72px), 820px);
-  }
-
   .hero-copy {
     gap: 22px;
   }
@@ -1267,7 +1267,7 @@ a:focus-visible {
   }
 
   .hero-portrait {
-    transform: translate(32%, -7%) scale(0.7);
+    right: -32% !important;
   }
 
   .metric-card,
