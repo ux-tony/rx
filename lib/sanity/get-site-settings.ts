@@ -31,7 +31,6 @@ export type SiteSettings = {
   contactPhone?: string;
   telegramUrl?: string;
   contactImageUrl?: string;
-  architectPhotoUrl?: string;
 };
 
 const placeholderPattern = /\b(mock|mvp|cms|api|desktop|mobile|mantine)\b|тестов|заглуш|демонстрацион|шаблонн|визуальн\w* систем|каталог проектов|форм\w* заявок|редактор контента/i;

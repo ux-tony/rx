@@ -17,8 +17,7 @@ export const siteSettingsQuery = groq`
       metrics[]{
         value,
         label
-      },
-      "architectPhotoUrl": architectPhoto.asset->url
+      }
     },
     "projects": *[_type == "projectsSection"][0]{
       projectsEyebrow,

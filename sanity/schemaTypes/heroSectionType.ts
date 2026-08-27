@@ -78,14 +78,6 @@ export const heroSectionType = defineType({
       rows: 3
     }),
     defineField({
-      name: "architectPhoto",
-      title: "Фото архитектора",
-      type: "image",
-      options: {
-        hotspot: true
-      }
-    }),
-    defineField({
       name: "primaryCtaLabel",
       title: "Основная кнопка: текст",
       type: "string"
