@@ -18,6 +18,10 @@ const editorialMetrics: Metric[] = [
   { value: "03", label: "Прямой диалог с автором проекта на ключевых этапах" }
 ];
 
+function cleanMetricLabel(label: string) {
+  return label.replace(/\s+проектирования\.?$/i, "");
+}
+
 export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
   const [opened, setOpened] = useState(false);
   const [metricsVisible, setMetricsVisible] = useState(false);
@@ -96,7 +100,7 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
           {resolvedMetrics.map((metric) => (
             <article className="metric-card" key={`${metric.value}-${metric.label}`}>
               <p className="metric-value">{metric.value}</p>
-              <p className="metric-label">{metric.label}</p>
+              <p className="metric-label">{cleanMetricLabel(metric.label)}</p>
             </article>
           ))}
         </section>
