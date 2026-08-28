@@ -10,6 +10,8 @@ type CurrentProjectCommentsProps = {
   projectNumber: string;
 };
 
+const authorNameStorageKey = "rx-current-project-comment-author";
+
 export function CurrentProjectComments({ comments, enabled, projectNumber }: CurrentProjectCommentsProps) {
   const router = useRouter();
   const [status, setStatus] = useState("");
@@ -17,6 +19,7 @@ export function CurrentProjectComments({ comments, enabled, projectNumber }: Cur
   const [ownedComments, setOwnedComments] = useState<Record<string, string>>({});
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editingMessage, setEditingMessage] = useState("");
+  const [authorName, setAuthorName] = useState("");
   const storageKey = `rx-current-project-comments:${projectNumber.toLocaleUpperCase("ru-RU")}`;
 
   useEffect(() => {
@@ -27,6 +30,14 @@ export function CurrentProjectComments({ comments, enabled, projectNumber }: Cur
       setOwnedComments({});
     }
   }, [storageKey]);
+
+  useEffect(() => {
+    try {
+      setAuthorName(window.localStorage.getItem(authorNameStorageKey) || "");
+    } catch {
+      setAuthorName("");
+    }
+  }, []);
 
   function storeOwnedComments(value: Record<string, string>) {
     setOwnedComments(value);
@@ -45,7 +56,7 @@ export function CurrentProjectComments({ comments, enabled, projectNumber }: Cur
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         projectNumber,
-        authorName: data.get("authorName"),
+        authorName,
         message: data.get("message"),
         website: data.get("website")
       })
@@ -59,6 +70,7 @@ export function CurrentProjectComments({ comments, enabled, projectNumber }: Cur
     }
 
     form.reset();
+    window.localStorage.setItem(authorNameStorageKey, authorName.trim());
     if (result.commentId && result.editToken) {
       storeOwnedComments({ ...ownedComments, [result.commentId]: result.editToken });
     }
@@ -171,7 +183,15 @@ export function CurrentProjectComments({ comments, enabled, projectNumber }: Cur
         <form className="current-project-comment-form" onSubmit={handleSubmit}>
           <label>
             <span>Ваше имя</span>
-            <input autoComplete="name" maxLength={80} minLength={2} name="authorName" required />
+            <input
+              autoComplete="name"
+              maxLength={80}
+              minLength={2}
+              name="authorName"
+              onChange={(event) => setAuthorName(event.currentTarget.value)}
+              required
+              value={authorName}
+            />
           </label>
           <label>
             <span>Комментарий</span>
