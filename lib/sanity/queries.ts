@@ -77,6 +77,16 @@ export const projectBySlugQuery = groq`
   }
 `;
 
+export const currentProjectsQuery = groq`
+  *[_type == "currentProject" && published == true]{
+    projectNumber,
+    title,
+    description,
+    "image": coalesce(coverImage.asset->url, gallery[0].asset->url),
+    "gallery": gallery[].asset->url
+  }
+`;
+
 export const faqItemsQuery = groq`
   *[_type == "faqItem"] | order(order asc, _createdAt asc){
     question,

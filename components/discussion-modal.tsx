@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button, FileInput, Modal, Stack, Tabs, Text, TextInput, Textarea } from "@mantine/core";
 
 type DiscussionModalProps = {
@@ -10,6 +11,7 @@ type DiscussionModalProps = {
 };
 
 export function DiscussionModal({ contactEmail, opened, onClose }: DiscussionModalProps) {
+  const router = useRouter();
   const [projectStatus, setProjectStatus] = useState("");
 
   function closeModal() {
@@ -38,7 +40,9 @@ export function DiscussionModal({ contactEmail, opened, onClose }: DiscussionMod
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const projectNumber = String(data.get("projectNumber") || "").trim();
-    setProjectStatus(`Проект ${projectNumber} принят для поиска. Доступ к карточке подключим на следующем этапе.`);
+
+    setProjectStatus("Открываем проект...");
+    router.push(`/current-projects/${encodeURIComponent(projectNumber.toLocaleUpperCase("ru-RU"))}`);
   }
 
   return (
