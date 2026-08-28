@@ -1370,9 +1370,9 @@ a:focus-visible {
 
 .project-page-cover {
   position: relative;
-  width: calc(100% + var(--space-page) * 2);
+  width: 100%;
   min-height: clamp(560px, 78svh, 980px);
-  margin-inline: calc(var(--space-page) * -1);
+  margin-inline: auto;
   padding: 0;
   display: block;
   overflow: hidden;
@@ -1381,7 +1381,11 @@ a:focus-visible {
   cursor: zoom-in;
 }
 
-.project-page-cover img,
+.project-page-cover img {
+  object-fit: scale-down;
+  transition: transform var(--motion-slow) var(--ease-out), filter var(--motion-slow) ease;
+}
+
 .project-page-gallery-item img {
   object-fit: cover;
   transition: transform var(--motion-slow) var(--ease-out), filter var(--motion-slow) ease;
@@ -1414,8 +1418,8 @@ a:focus-visible {
 }
 
 .project-page-gallery {
-  width: calc(100% + var(--space-page) * 2);
-  margin-inline: calc(var(--space-page) * -1);
+  width: 100%;
+  margin-inline: auto;
   padding-top: clamp(10px, 1.2vw, 20px);
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
