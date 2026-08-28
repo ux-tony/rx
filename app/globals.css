@@ -469,6 +469,7 @@ a:focus-visible {
 }
 
 .projects-toolbar {
+  scroll-margin-top: 16px;
   margin-bottom: clamp(34px, 5vw, 70px);
   padding: 18px 0;
   display: flex;
@@ -914,6 +915,17 @@ a:focus-visible {
 
 .site-footer p {
   margin: 0;
+}
+
+.site-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.site-footer-arrow {
+  font-size: 1rem;
+  line-height: 1;
 }
 
 @media (max-width: 1180px) {

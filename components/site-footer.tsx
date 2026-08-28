@@ -3,10 +3,19 @@ type SiteFooterProps = {
 };
 
 export function SiteFooter({ studioName }: SiteFooterProps) {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="site-footer">
-      <p>{studioName || "Roman Kharchenko Studio"}</p>
-      <a href="#top">Наверх</a>
+      <p>
+        {studioName || "Roman Kharchenko Studio"} © {currentYear}
+      </p>
+      <a href="#top">
+        <span>Наверх</span>
+        <span className="site-footer-arrow" aria-hidden="true">
+          ↑
+        </span>
+      </a>
     </footer>
   );
 }

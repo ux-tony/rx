@@ -88,7 +88,7 @@ export function ContactStrip({
 
         <div className="contact-form-footer">
           <button className="button-primary" type="submit" disabled={!contactEmail}>
-            Подготовить обращение
+            Отправить обращение
           </button>
           <p>
             {contactEmail

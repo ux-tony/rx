@@ -32,7 +32,8 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
     siteSettings?.heroDescription ||
     "Я создаю пространства, в которых архитектура, интерьер и ландшафт работают как единое целое. В основе каждого проекта: характер места, ясная логика и внимание к тому, как человек будет жить, работать и чувствовать себя внутри.";
   const primaryCtaLabel = siteSettings?.primaryCtaLabel || "Смотреть проекты";
-  const primaryCtaHref = siteSettings?.primaryCtaHref || "#projects";
+  const configuredPrimaryCtaHref = siteSettings?.primaryCtaHref || "#project-list";
+  const primaryCtaHref = configuredPrimaryCtaHref === "#projects" ? "#project-list" : configuredPrimaryCtaHref;
   const secondaryCtaLabel = siteSettings?.secondaryCtaLabel || "Обсудить задачу";
   const resolvedMetrics = siteSettings?.metrics && siteSettings.metrics.length > 0 ? siteSettings.metrics : metrics.length > 0 ? metrics : editorialMetrics;
   const architectPhotoSrc = architectPhoto;

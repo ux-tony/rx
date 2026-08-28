@@ -14,7 +14,7 @@ export const heroSectionType = defineType({
     seoTitle: "Roman Kharchenko Studio",
     seoDescription: "Минималистичное портфолио архитектурной студии с акцентом на проекты, свет, материал и визуальную подачу.",
     primaryCtaLabel: "Смотреть проекты",
-    primaryCtaHref: "#projects",
+    primaryCtaHref: "#project-list",
     secondaryCtaLabel: "Обсудить задачу",
     secondaryCtaHref: "#contact",
     metrics: [

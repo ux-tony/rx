@@ -52,7 +52,7 @@ export function ProjectsSection({ projects, categories, eyebrow, title, descript
     <section className="content-section projects-section" id="projects">
       <SectionHeading eyebrow={eyebrow} title={title} description={description} fullWidth />
 
-      <div className="projects-toolbar">
+      <div className="projects-toolbar" id="project-list">
         <div className="category-row" aria-label="Категории проектов" role="group">
           <button
             aria-pressed={activeCategory === ALL_CATEGORY}

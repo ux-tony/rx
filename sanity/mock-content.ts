@@ -10,7 +10,7 @@ export const mockHeroSection = {
   seoDescription:
     "Портфолио архитектурной студии: жилые и общественные интерьеры, фасады, hospitality, ландшафт и концепции коммерческих территорий.",
   primaryCtaLabel: "Смотреть проекты",
-  primaryCtaHref: "#projects",
+  primaryCtaHref: "#project-list",
   secondaryCtaLabel: "Обсудить задачу",
   secondaryCtaHref: "#contact",
   metrics: [
