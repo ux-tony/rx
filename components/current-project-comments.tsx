@@ -6,10 +6,11 @@ import type { CurrentProjectComment } from "@/lib/sanity/get-current-project-com
 
 type CurrentProjectCommentsProps = {
   comments: CurrentProjectComment[];
+  enabled: boolean;
   projectNumber: string;
 };
 
-export function CurrentProjectComments({ comments, projectNumber }: CurrentProjectCommentsProps) {
+export function CurrentProjectComments({ comments, enabled, projectNumber }: CurrentProjectCommentsProps) {
   const router = useRouter();
   const [status, setStatus] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -95,6 +96,10 @@ export function CurrentProjectComments({ comments, projectNumber }: CurrentProje
     router.refresh();
   }
 
+  if (!enabled && comments.length === 0) {
+    return null;
+  }
+
   return (
     <section className="current-project-comments" aria-labelledby="current-project-comments-title">
       <div className="current-project-comments-heading">
@@ -162,26 +167,28 @@ export function CurrentProjectComments({ comments, projectNumber }: CurrentProje
         </div>
       ) : null}
 
-      <form className="current-project-comment-form" onSubmit={handleSubmit}>
-        <label>
-          <span>Ваше имя</span>
-          <input autoComplete="name" maxLength={80} minLength={2} name="authorName" required />
-        </label>
-        <label>
-          <span>Комментарий</span>
-          <textarea maxLength={2000} minLength={3} name="message" required rows={5} />
-        </label>
-        <label className="current-project-comment-honeypot" aria-hidden="true">
-          <span>Сайт</span>
-          <input autoComplete="off" name="website" tabIndex={-1} />
-        </label>
-        <button disabled={submitting} type="submit">
-          {submitting ? "Отправляем..." : "Отправить комментарий"}
-        </button>
-        <p aria-live="polite" className="current-project-comment-status">
-          {status}
-        </p>
-      </form>
+      {enabled ? (
+        <form className="current-project-comment-form" onSubmit={handleSubmit}>
+          <label>
+            <span>Ваше имя</span>
+            <input autoComplete="name" maxLength={80} minLength={2} name="authorName" required />
+          </label>
+          <label>
+            <span>Комментарий</span>
+            <textarea maxLength={2000} minLength={3} name="message" required rows={5} />
+          </label>
+          <label className="current-project-comment-honeypot" aria-hidden="true">
+            <span>Сайт</span>
+            <input autoComplete="off" name="website" tabIndex={-1} />
+          </label>
+          <button disabled={submitting} type="submit">
+            {submitting ? "Отправляем..." : "Отправить комментарий"}
+          </button>
+          <p aria-live="polite" className="current-project-comment-status">
+            {status}
+          </p>
+        </form>
+      ) : null}
     </section>
   );
 }

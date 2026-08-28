@@ -49,7 +49,11 @@ export default async function CurrentProjectPage({ params }: CurrentProjectPageP
       </header>
 
       <ProjectPageGallery coverImage={project.image} images={project.gallery} title={project.title} />
-      <CurrentProjectComments comments={comments} projectNumber={project.projectNumber} />
+      <CurrentProjectComments
+        comments={comments}
+        enabled={Boolean(process.env.SANITY_WRITE_TOKEN)}
+        projectNumber={project.projectNumber}
+      />
     </main>
   );
 }

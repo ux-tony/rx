@@ -757,6 +757,7 @@ a:focus-visible {
 .faq-shell .mantine-Accordion-chevron {
   width: 28px;
   min-width: 28px;
+  margin-left: 18px;
 }
 
 .faq-shell .mantine-Accordion-chevron svg {
