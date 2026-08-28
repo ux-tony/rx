@@ -1,4 +1,6 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
+
+import { MultiImageArrayInput } from "../components/multi-image-array-input";
 
 export const projectType = defineType({
   name: "project",
@@ -37,9 +39,11 @@ export const projectType = defineType({
       title: "Изображения проекта",
       type: "array",
       description: "Загрузите всю пачку изображений проекта. Их порядок можно менять перетаскиванием.",
+      components: {
+        input: MultiImageArrayInput
+      },
       of: [
-        defineField({
-          name: "image",
+        defineArrayMember({
           title: "Изображение",
           type: "image",
           options: {
