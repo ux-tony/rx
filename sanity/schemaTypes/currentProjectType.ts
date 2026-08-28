@@ -1,5 +1,9 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 
+import {
+  CurrentProjectPreview,
+  encodeCurrentProjectPreview
+} from "../components/current-project-preview";
 import { MultiImageArrayInput } from "../components/multi-image-array-input";
 
 export const currentProjectType = defineType({
@@ -7,6 +11,9 @@ export const currentProjectType = defineType({
   title: "Текущий проект",
   type: "document",
   __experimental_formPreviewTitle: false,
+  components: {
+    preview: CurrentProjectPreview
+  },
   fields: [
     defineField({
       name: "projectNumber",
@@ -61,9 +68,17 @@ export const currentProjectType = defineType({
   ],
   preview: {
     select: {
+      id: "_id",
       title: "title",
-      subtitle: "projectNumber",
+      projectNumber: "projectNumber",
       media: "coverImage"
+    },
+    prepare({ id, title, projectNumber, media }) {
+      return {
+        title: title || "Текущий проект",
+        subtitle: encodeCurrentProjectPreview(projectNumber, id),
+        media
+      };
     }
   }
 });

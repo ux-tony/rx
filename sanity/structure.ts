@@ -1,3 +1,4 @@
+import { CommentIcon, DocumentIcon } from "@sanity/icons";
 import type { StructureResolver } from "sanity/structure";
 
 export const studioStructure: StructureResolver = (S) =>
@@ -37,10 +38,58 @@ export const studioStructure: StructureResolver = (S) =>
         ),
       S.documentTypeListItem("projectCategory").id("project-categories").title("Категории проектов"),
       S.documentTypeListItem("project").id("projects-documents").title("Проекты (Портфолио)"),
-      S.documentTypeListItem("currentProject").id("current-projects-documents").title("Текущие проекты"),
-      S.documentTypeListItem("currentProjectComment")
-        .id("current-project-comments")
-        .title("Комментарии к текущим проектам"),
+      S.listItem()
+        .id("current-projects-documents")
+        .title("Текущие проекты")
+        .schemaType("currentProject")
+        .child(
+          S.documentTypeList("currentProject")
+            .id("current-projects-list")
+            .title("Текущие проекты")
+            .child(async (projectId, { structureContext }) => {
+              const commentCount = await structureContext
+                .getClient({ apiVersion: "2026-04-24" })
+                .fetch<number>(
+                  `count(*[
+                    _type == "currentProjectComment" &&
+                    !(_id in path("drafts.**")) &&
+                    project._ref == $projectId
+                  ])`,
+                  { projectId }
+                );
+
+              return S.list()
+                .id("current-project-content")
+                .title("Текущий проект")
+                .items([
+                  S.listItem()
+                    .id("current-project-details")
+                    .title("Данные проекта")
+                    .icon(DocumentIcon)
+                    .schemaType("currentProject")
+                    .child(
+                      S.document()
+                        .schemaType("currentProject")
+                        .documentId(projectId)
+                        .title("Данные проекта")
+                    ),
+                  S.listItem()
+                    .id("current-project-comments")
+                    .title(`Комментарии (${commentCount})`)
+                    .icon(CommentIcon)
+                    .schemaType("currentProjectComment")
+                    .child(
+                      S.documentList()
+                        .id("current-project-comments-list")
+                        .title("Комментарии")
+                        .schemaType("currentProjectComment")
+                        .filter('_type == "currentProjectComment" && project._ref == $projectId')
+                        .params({ projectId })
+                        .initialValueTemplates([])
+                    )
+                ]);
+            })
+        ),
       S.documentTypeListItem("faqItem").id("faq-documents").title("Вопросы и ответы"),
       S.documentTypeListItem("service").id("services-documents").title("Услуги")
     ]);
