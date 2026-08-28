@@ -13,9 +13,13 @@ type DiscussionModalProps = {
 export function DiscussionModal({ contactEmail, opened, onClose }: DiscussionModalProps) {
   const router = useRouter();
   const [projectStatus, setProjectStatus] = useState("");
+  const [projectStatusError, setProjectStatusError] = useState(false);
+  const [checkingProject, setCheckingProject] = useState(false);
 
   function closeModal() {
     setProjectStatus("");
+    setProjectStatusError(false);
+    setCheckingProject(false);
     onClose();
   }
 
@@ -36,13 +40,44 @@ export function DiscussionModal({ contactEmail, opened, onClose }: DiscussionMod
     window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
   }
 
-  function handleCurrentProject(event: React.FormEvent<HTMLFormElement>) {
+  async function handleCurrentProject(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const projectNumber = String(data.get("projectNumber") || "").trim();
+    const normalizedNumber = projectNumber.toLocaleUpperCase("ru-RU");
 
+    if (!normalizedNumber) {
+      return;
+    }
+
+    setCheckingProject(true);
+    setProjectStatusError(false);
     setProjectStatus("Открываем проект...");
-    router.push(`/current-projects/${encodeURIComponent(projectNumber.toLocaleUpperCase("ru-RU"))}`);
+
+    try {
+      const response = await fetch(`/api/current-projects/${encodeURIComponent(normalizedNumber)}`, {
+        cache: "no-store"
+      });
+
+      if (response.status === 404) {
+        setProjectStatus("Такой проект не найден.");
+        setProjectStatusError(true);
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error("Project check failed");
+      }
+
+      const result = (await response.json()) as { projectNumber?: string };
+      const resolvedNumber = result.projectNumber || normalizedNumber;
+      router.push(`/current-projects/${encodeURIComponent(resolvedNumber)}`);
+    } catch {
+      setProjectStatus("Не удалось проверить номер. Попробуйте ещё раз.");
+      setProjectStatusError(true);
+    } finally {
+      setCheckingProject(false);
+    }
   }
 
   return (
@@ -108,10 +143,10 @@ export function DiscussionModal({ contactEmail, opened, onClose }: DiscussionMod
           <form onSubmit={handleCurrentProject}>
             <Stack gap="md">
               <TextInput label="Номер проекта" name="projectNumber" placeholder="Например, RH-024" radius={0} required />
-              <Button type="submit" radius={0} variant="default">
-                Открыть проект
+              <Button disabled={checkingProject} loading={checkingProject} type="submit" radius={0} variant="default">
+                {checkingProject ? "Проверяем..." : "Открыть проект"}
               </Button>
-              <Text aria-live="polite" c="dimmed" size="sm">
+              <Text aria-live="polite" c={projectStatusError ? "red" : "dimmed"} size="sm">
                 {projectStatus}
               </Text>
             </Stack>
