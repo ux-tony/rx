@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Alert, Button, Group, Loader, Stack, Text } from "@mantine/core";
 import { useClient } from "sanity";
 import {
   mockFaqItems,
@@ -143,30 +142,53 @@ export function StudioSeedTool() {
   }
 
   return (
-    <div style={{ padding: 24 }}>
-      <Stack gap="md">
-        <div>
-          <Text fw={700} size="xl">
-            Синхронизация контента
-          </Text>
-          <Text c="dimmed" mt={8}>
-            Добавляет текущие проекты, категории, услуги и FAQ в Sanity. Hero, контакты и настройки сайта не изменяются.
-          </Text>
+    <div
+      style={{
+        display: "grid",
+        gap: 20,
+        maxWidth: 760,
+        padding: 32
+      }}
+    >
+      <div>
+        <h1 style={{ fontSize: 24, margin: 0 }}>Синхронизация контента</h1>
+        <p style={{ color: "#6e7680", lineHeight: 1.5, margin: "10px 0 0" }}>
+          Добавляет текущие проекты, категории, услуги и FAQ в Sanity. Hero, контакты и настройки сайта не изменяются.
+        </p>
+      </div>
+
+      <div>
+        <button
+          type="button"
+          onClick={seedMockData}
+          disabled={status === "loading"}
+          style={{
+            background: status === "loading" ? "#777" : "#111",
+            border: 0,
+            color: "#fff",
+            cursor: status === "loading" ? "wait" : "pointer",
+            font: "inherit",
+            fontWeight: 600,
+            padding: "12px 18px"
+          }}
+        >
+          {status === "loading" ? "Синхронизация..." : "Синхронизировать с Sanity"}
+        </button>
+      </div>
+
+      {status !== "idle" ? (
+        <div
+          role="status"
+          style={{
+            background: status === "error" ? "#fff0f0" : status === "success" ? "#edf9f0" : "#f1f5f9",
+            border: `1px solid ${status === "error" ? "#e5484d" : status === "success" ? "#30a46c" : "#94a3b8"}`,
+            lineHeight: 1.5,
+            padding: 14
+          }}
+        >
+          {message}
         </div>
-
-        <Group>
-          <Button onClick={seedMockData} radius={0} variant="filled">
-            Синхронизировать с Sanity
-          </Button>
-          {status === "loading" ? <Loader size="sm" /> : null}
-        </Group>
-
-        {status !== "idle" ? (
-          <Alert color={status === "error" ? "red" : status === "success" ? "green" : "blue"} radius={0}>
-            {message}
-          </Alert>
-        ) : null}
-      </Stack>
+      ) : null}
     </div>
   );
 }
