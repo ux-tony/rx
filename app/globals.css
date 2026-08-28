@@ -617,10 +617,27 @@ a:focus-visible {
   position: relative;
   background: rgba(0, 0, 0, 0.04);
   touch-action: pan-y;
+  cursor: zoom-in;
 }
 
 .project-gallery-image {
   object-fit: contain;
+  transform-origin: center;
+  transition: transform 120ms ease-out;
+  user-select: none;
+  will-change: transform;
+}
+
+.project-gallery-stage-zoomed {
+  cursor: grab;
+}
+
+.project-gallery-stage-dragging {
+  cursor: grabbing;
+}
+
+.project-gallery-stage-dragging .project-gallery-image {
+  transition: none;
 }
 
 .project-gallery-caption {
