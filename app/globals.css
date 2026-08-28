@@ -1460,6 +1460,162 @@ a:focus-visible {
   letter-spacing: -0.055em;
 }
 
+.current-project-comments {
+  margin-top: clamp(64px, 8vw, 128px);
+  padding: clamp(52px, 6vw, 88px) 0 clamp(72px, 8vw, 128px);
+  display: grid;
+  grid-template-columns: minmax(220px, 0.55fr) minmax(0, 1.45fr);
+  gap: clamp(36px, 7vw, 120px);
+  border-top: 1px solid var(--line);
+}
+
+.current-project-comments-heading h2 {
+  max-width: 10ch;
+  margin: 18px 0 0;
+  font-size: clamp(2.4rem, 4vw, 4.6rem);
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+}
+
+.current-project-comments-list {
+  display: grid;
+  gap: 0;
+}
+
+.current-project-comment {
+  padding: 0 0 32px;
+  border-bottom: 1px solid var(--line);
+}
+
+.current-project-comment + .current-project-comment {
+  padding-top: 32px;
+}
+
+.current-project-comment header {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 0.82rem;
+}
+
+.current-project-comment time {
+  color: var(--muted);
+}
+
+.current-project-comment > p,
+.current-project-comment-reply p {
+  margin: 0;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.current-project-comment-reply {
+  margin-top: 24px;
+  padding: 22px;
+  background: var(--surface);
+}
+
+.current-project-comment-reply strong {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.current-project-comment-edit {
+  margin-top: 16px;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8rem;
+}
+
+.current-project-comment-form {
+  grid-column: 2;
+  display: grid;
+  gap: 20px;
+}
+
+.current-project-comment-form label,
+.current-project-comment-editor {
+  display: grid;
+  gap: 9px;
+}
+
+.current-project-comment-form label > span {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.current-project-comment-form input,
+.current-project-comment-form textarea,
+.current-project-comment-editor textarea {
+  width: 100%;
+  padding: 14px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line-strong);
+  border-radius: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--foreground);
+  font: inherit;
+  resize: vertical;
+}
+
+.current-project-comment-form input:focus,
+.current-project-comment-form textarea:focus,
+.current-project-comment-editor textarea:focus {
+  border-bottom-color: var(--foreground);
+}
+
+.current-project-comment-form > button,
+.current-project-comment-editor button {
+  width: fit-content;
+  padding: 13px 18px;
+  border: 1px solid var(--foreground);
+  border-radius: 0;
+  background: var(--foreground);
+  color: var(--background);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.current-project-comment-editor > div {
+  display: flex;
+  gap: 10px;
+}
+
+.current-project-comment-editor button + button {
+  background: transparent;
+  color: var(--foreground);
+}
+
+.current-project-comment-form button:disabled,
+.current-project-comment-editor button:disabled {
+  cursor: wait;
+  opacity: 0.5;
+}
+
+.current-project-comment-status {
+  min-height: 1.4em;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.current-project-comment-honeypot {
+  position: absolute;
+  left: -10000px;
+}
+
 @media (max-width: 780px) {
   .project-page-intro {
     padding: 54px 0 42px;
@@ -1520,6 +1676,21 @@ a:focus-visible {
     justify-items: start;
     border-top: 1px solid var(--line);
     text-align: left;
+  }
+
+  .current-project-comments {
+    margin-top: 64px;
+    padding: 48px 0 72px;
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .current-project-comments-heading h2 {
+    max-width: 12ch;
+  }
+
+  .current-project-comment-form {
+    grid-column: 1;
   }
 }
 

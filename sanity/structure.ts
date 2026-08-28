@@ -38,6 +38,9 @@ export const studioStructure: StructureResolver = (S) =>
       S.documentTypeListItem("projectCategory").id("project-categories").title("Категории проектов"),
       S.documentTypeListItem("project").id("projects-documents").title("Проекты (Портфолио)"),
       S.documentTypeListItem("currentProject").id("current-projects-documents").title("Текущие проекты"),
+      S.documentTypeListItem("currentProjectComment")
+        .id("current-project-comments")
+        .title("Комментарии к текущим проектам"),
       S.documentTypeListItem("faqItem").id("faq-documents").title("Вопросы и ответы"),
       S.documentTypeListItem("service").id("services-documents").title("Услуги")
     ]);

@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import { ProjectPageGallery } from "@/components/project-page-gallery";
+import { CurrentProjectComments } from "@/components/current-project-comments";
 import { getCurrentProjectByNumber } from "@/lib/sanity/get-current-project-by-number";
+import { getCurrentProjectComments } from "@/lib/sanity/get-current-project-comments";
 
 type CurrentProjectPageProps = {
   params: Promise<{ number: string }>;
@@ -36,6 +38,8 @@ export default async function CurrentProjectPage({ params }: CurrentProjectPageP
     notFound();
   }
 
+  const comments = await getCurrentProjectComments(project.id);
+
   return (
     <main className="page-shell project-page current-project-page" id="top">
       <header className="project-page-intro">
@@ -45,6 +49,7 @@ export default async function CurrentProjectPage({ params }: CurrentProjectPageP
       </header>
 
       <ProjectPageGallery coverImage={project.image} images={project.gallery} title={project.title} />
+      <CurrentProjectComments comments={comments} projectNumber={project.projectNumber} />
     </main>
   );
 }

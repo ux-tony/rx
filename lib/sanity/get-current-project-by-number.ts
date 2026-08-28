@@ -2,6 +2,7 @@ import { sanityClient } from "@/lib/sanity/client";
 import { currentProjectsQuery } from "@/lib/sanity/queries";
 
 export type CurrentProject = {
+  id: string;
   projectNumber: string;
   title: string;
   description?: string;
@@ -19,11 +20,12 @@ export async function getCurrentProjectByNumber(projectNumber: string): Promise<
       (candidate) => candidate.projectNumber?.trim().toLocaleUpperCase("ru-RU") === normalizedNumber
     );
 
-    if (!item?.projectNumber || !item.title || !item.image) {
+    if (!item?.id || !item.projectNumber || !item.title || !item.image) {
       return null;
     }
 
     return {
+      id: item.id,
       projectNumber: item.projectNumber,
       title: item.title,
       description: item.description?.trim() || undefined,

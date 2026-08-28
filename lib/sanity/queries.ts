@@ -79,11 +79,26 @@ export const projectBySlugQuery = groq`
 
 export const currentProjectsQuery = groq`
   *[_type == "currentProject" && published == true]{
+    "id": _id,
     projectNumber,
     title,
     description,
     "image": coalesce(coverImage.asset->url, gallery[0].asset->url),
     "gallery": gallery[].asset->url
+  }
+`;
+
+export const currentProjectCommentsQuery = groq`
+  *[
+    _type == "currentProjectComment" &&
+    visible == true &&
+    project._ref == $projectId
+  ] | order(createdAt asc){
+    _id,
+    authorName,
+    message,
+    createdAt,
+    reply
   }
 `;
 
