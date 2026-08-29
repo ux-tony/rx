@@ -8,3 +8,4 @@ coverage/
 .playwright-cli/
 .env.local
 *.tsbuildinfo
+backups/
