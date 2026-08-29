@@ -128,7 +128,7 @@ export function DiscussionModal({ contactEmail, opened, onClose }: DiscussionMod
                 clearable
               />
               <Button disabled={!contactEmail} type="submit" radius={0}>
-                Продолжить в почте
+                Отправить
               </Button>
               {!contactEmail ? (
                 <Text c="dimmed" size="sm">
