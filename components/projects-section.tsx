@@ -76,6 +76,19 @@ export function ProjectsSection({ projects, categories, eyebrow, title, descript
           ))}
         </div>
 
+        <label className="category-select">
+          <span className="category-select-label">Категория проектов</span>
+          <span className="category-select-control">
+            <select value={activeCategory} onChange={(event) => selectCategory(event.currentTarget.value)}>
+              <option value={ALL_CATEGORY}>Все проекты</option>
+              {availableCategories.map((category) => (
+                <option key={category.slug} value={category.title}>
+                  {category.title}
+                </option>
+              ))}
+            </select>
+          </span>
+        </label>
       </div>
 
       {visibleProjects.length > 0 ? (

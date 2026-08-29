@@ -503,6 +503,10 @@ a:focus-visible {
   color: var(--foreground);
 }
 
+.category-select {
+  display: none;
+}
+
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1165,24 +1169,52 @@ a:focus-visible {
     font-size: clamp(2.5rem, 10vw, 3.7rem);
   }
 
-  .projects-toolbar {
-    align-items: flex-end;
-  }
-
   .category-row {
-    width: 100%;
-    max-width: 100%;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .category-row::-webkit-scrollbar {
     display: none;
   }
 
-  .category-pill-button {
-    flex: 0 0 auto;
+  .category-select {
+    display: grid;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .category-select-label {
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .category-select-control {
+    position: relative;
+    display: block;
+  }
+
+  .category-select-control::after {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    width: 9px;
+    height: 9px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    content: "";
+    pointer-events: none;
+    transform: translateY(-70%) rotate(45deg);
+  }
+
+  .category-select select {
+    width: 100%;
+    min-height: 52px;
+    padding: 0 46px 0 14px;
+    appearance: none;
+    border: 1px solid var(--line);
+    border-radius: 0;
+    background: var(--background);
+    color: var(--foreground);
+    font: inherit;
   }
 
   .projects-grid {
