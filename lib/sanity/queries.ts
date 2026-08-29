@@ -2,7 +2,7 @@ import { groq } from "next-sanity";
 
 export const siteSettingsQuery = groq`
   {
-    "hero": *[_type == "heroSection"][0]{
+    "hero": *[_id == "heroSection"][0]{
       studioName,
       heroEyebrow,
       "logoUrl": logo.asset->url,
@@ -13,35 +13,33 @@ export const siteSettingsQuery = groq`
       primaryCtaLabel,
       primaryCtaHref,
       secondaryCtaLabel,
-      secondaryCtaHref,
       metrics[]{
         value,
         label
       }
     },
-    "projects": *[_type == "projectsSection"][0]{
+    "projects": *[_id == "projectsSection"][0]{
       projectsEyebrow,
       projectsTitle,
       projectsDescription
     },
-    "services": *[_type == "servicesSection"][0]{
+    "services": *[_id == "servicesSection"][0]{
       servicesEyebrow,
       servicesTitle,
       servicesDescription
     },
-    "faq": *[_type == "faqSection"][0]{
+    "faq": *[_id == "faqSection"][0]{
       faqEyebrow,
       faqTitle,
       faqDescription
     },
-    "contacts": *[_type == "contactsSection"][0]{
+    "contacts": *[_id == "contactsSection"][0]{
       contactsEyebrow,
       contactsTitle,
       contactsDescription,
       contactEmail,
       contactPhone,
-      telegramUrl,
-      "contactImageUrl": contactImage.asset->url
+      telegramUrl
     }
   }
 `;

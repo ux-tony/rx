@@ -12,16 +12,6 @@ type HeroSectionProps = {
   siteSettings?: SiteSettings | null;
 };
 
-const editorialMetrics: Metric[] = [
-  { value: "01", label: "Единая концепция от первого эскиза до реализации" },
-  { value: "02", label: "Материал, свет и функция работают как одно целое" },
-  { value: "03", label: "Прямой диалог с автором проекта на ключевых этапах" }
-];
-
-function cleanMetricLabel(label: string) {
-  return label.replace(/\s+проектирования\.?$/i, "");
-}
-
 export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
   const [opened, setOpened] = useState(false);
   const [metricsVisible, setMetricsVisible] = useState(false);
@@ -32,10 +22,9 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
     siteSettings?.heroDescription ||
     "Я создаю пространства, в которых архитектура, интерьер и ландшафт работают как единое целое. В основе каждого проекта: характер места, ясная логика и внимание к тому, как человек будет жить, работать и чувствовать себя внутри.";
   const primaryCtaLabel = siteSettings?.primaryCtaLabel || "Смотреть проекты";
-  const configuredPrimaryCtaHref = siteSettings?.primaryCtaHref || "#project-list";
-  const primaryCtaHref = configuredPrimaryCtaHref === "#projects" ? "#project-list" : configuredPrimaryCtaHref;
+  const primaryCtaHref = siteSettings?.primaryCtaHref || "#project-list";
   const secondaryCtaLabel = siteSettings?.secondaryCtaLabel || "Обсудить задачу";
-  const resolvedMetrics = siteSettings?.metrics && siteSettings.metrics.length > 0 ? siteSettings.metrics : metrics.length > 0 ? metrics : editorialMetrics;
+  const resolvedMetrics = siteSettings?.metrics && siteSettings.metrics.length > 0 ? siteSettings.metrics : metrics;
   const architectPhotoSrc = architectPhoto;
 
   useEffect(() => {
@@ -101,7 +90,7 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
           {resolvedMetrics.map((metric) => (
             <article className="metric-card" key={`${metric.value}-${metric.label}`}>
               <p className="metric-value">{metric.value}</p>
-              <p className="metric-label">{cleanMetricLabel(metric.label)}</p>
+              <p className="metric-label">{metric.label}</p>
             </article>
           ))}
         </section>

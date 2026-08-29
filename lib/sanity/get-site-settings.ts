@@ -13,7 +13,6 @@ export type SiteSettings = {
   primaryCtaLabel?: string;
   primaryCtaHref?: string;
   secondaryCtaLabel?: string;
-  secondaryCtaHref?: string;
   metrics?: Metric[];
   projectsEyebrow?: string;
   projectsTitle?: string;
@@ -30,95 +29,11 @@ export type SiteSettings = {
   contactEmail?: string;
   contactPhone?: string;
   telegramUrl?: string;
-  contactImageUrl?: string;
 };
-
-const placeholderPattern = /\b(mock|mvp|cms|api|desktop|mobile|mantine)\b|тестов|заглуш|демонстрацион|шаблонн|визуальн\w* систем|каталог проектов|форм\w* заявок|редактор контента/i;
-const heroEyebrow = "Архитектурная студия";
-const heroTitle = "Роман Харченко. Архитектор.";
-const heroDescription =
-  "Я создаю пространства, в которых архитектура, интерьер и ландшафт работают как единое целое. В основе каждого проекта: характер места, ясная логика и внимание к тому, как человек будет жить, работать и чувствовать себя внутри.";
-const projectsEyebrow = "Проекты студии";
-const projectsTitle = "От идеи до пространства.";
-const projectsDescription =
-  "Воплощаем архитектурные идеи разного масштаба и сложности: от частных интерьеров до общественных пространств, фасадов и территорий. Каждый проект доводим до цельного, функционального и выразительного решения.";
-const servicesTitle = "Направления работы.";
-const faqTitle = "Главное до начала работы.";
-const faqDescription =
-  "Здесь собраны ответы о сроках, бюджете, этапах, составе проекта и участии заказчика — всё, что поможет заранее понять процесс работы со студией.";
 
 function cleanCopy(value?: string | null) {
   const normalized = value?.trim();
-  return normalized && !placeholderPattern.test(normalized) ? normalized : undefined;
-}
-
-function cleanEmail(value?: string | null) {
-  const normalized = value?.trim();
-  return normalized && !normalized.endsWith(".test") && normalized.includes("@") ? normalized : undefined;
-}
-
-function cleanPhone(value?: string | null) {
-  const normalized = value?.trim();
-  return normalized && !/999\D*000\D*00\D*00/.test(normalized) ? normalized : undefined;
-}
-
-function cleanTelegram(value?: string | null) {
-  const normalized = value?.trim().replace(/\/$/, "");
-  return normalized && normalized !== "https://t.me" ? normalized : undefined;
-}
-
-function migrateHeroEyebrow(value?: string | null) {
-  const normalized = cleanCopy(value);
-  return normalized === "Студия архитектуры и дизайна" ? heroEyebrow : normalized;
-}
-
-function migrateHeroTitle(value?: string | null) {
-  const normalized = cleanCopy(value);
-  return normalized === "Архитектурная студия Романа Харченко." ? heroTitle : normalized;
-}
-
-function migrateHeroDescription(value?: string | null) {
-  const normalized = cleanCopy(value);
-  return normalized?.startsWith("Проектирование жилых и общественных интерьеров") || normalized?.startsWith("Частная архитектурная практика")
-    ? heroDescription
-    : normalized;
-}
-
-function migrateSectionTitle(value: string | null | undefined, section: "projects" | "services" | "faq") {
-  const normalized = cleanCopy(value);
-
-  if (section === "projects" && (normalized?.replace(/\.$/, "") === "Проекты студии" || normalized?.startsWith("Архитектурные пространства"))) {
-    return projectsTitle;
-  }
-
-  if (section === "services" && normalized?.startsWith("Проектирование пространств от первой идеи")) {
-    return servicesTitle;
-  }
-
-  if (section === "faq" && (normalized?.replace(/\.$/, "") === "О работе над проектом" || normalized?.startsWith("Частые вопросы, которые помогают"))) {
-    return faqTitle;
-  }
-
-  return normalized;
-}
-
-function migrateProjectsEyebrow(value?: string | null) {
-  const normalized = cleanCopy(value);
-  return normalized?.toLocaleLowerCase("ru-RU") === "проекты" ? projectsEyebrow : normalized;
-}
-
-function migrateSectionDescription(value: string | null | undefined, section: "projects" | "faq") {
-  const normalized = cleanCopy(value);
-
-  if (section === "projects" && normalized?.startsWith("Частные и общественные пространства")) {
-    return projectsDescription;
-  }
-
-  if (section === "faq" && normalized?.startsWith("Собрали базовые вопросы")) {
-    return faqDescription;
-  }
-
-  return normalized;
+  return normalized || undefined;
 }
 
 export async function getSiteSettings(): Promise<SiteSettings | null> {
@@ -146,31 +61,32 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
     return {
       ...merged,
       studioName: cleanCopy(merged.studioName),
-      heroEyebrow: migrateHeroEyebrow(merged.heroEyebrow),
-      heroTitle: migrateHeroTitle(merged.heroTitle),
-      heroDescription: migrateHeroDescription(merged.heroDescription),
+      heroEyebrow: cleanCopy(merged.heroEyebrow),
+      heroTitle: cleanCopy(merged.heroTitle),
+      heroDescription: cleanCopy(merged.heroDescription),
       seoTitle: cleanCopy(merged.seoTitle),
       seoDescription: cleanCopy(merged.seoDescription),
       primaryCtaLabel: cleanCopy(merged.primaryCtaLabel),
-      primaryCtaHref: merged.primaryCtaHref,
+      primaryCtaHref: cleanCopy(merged.primaryCtaHref),
       secondaryCtaLabel: cleanCopy(merged.secondaryCtaLabel),
-      secondaryCtaHref: merged.secondaryCtaHref,
-      metrics: merged.metrics?.filter((metric) => cleanCopy(metric.value) && cleanCopy(metric.label)),
-      projectsEyebrow: migrateProjectsEyebrow(merged.projectsEyebrow),
-      projectsTitle: migrateSectionTitle(merged.projectsTitle, "projects"),
-      projectsDescription: migrateSectionDescription(merged.projectsDescription, "projects"),
+      metrics: merged.metrics
+        ?.map((metric) => ({ value: cleanCopy(metric.value), label: cleanCopy(metric.label) }))
+        .filter((metric): metric is Metric => Boolean(metric.value && metric.label)),
+      projectsEyebrow: cleanCopy(merged.projectsEyebrow),
+      projectsTitle: cleanCopy(merged.projectsTitle),
+      projectsDescription: cleanCopy(merged.projectsDescription),
       servicesEyebrow: cleanCopy(merged.servicesEyebrow),
-      servicesTitle: migrateSectionTitle(merged.servicesTitle, "services"),
+      servicesTitle: cleanCopy(merged.servicesTitle),
       servicesDescription: cleanCopy(merged.servicesDescription),
       faqEyebrow: cleanCopy(merged.faqEyebrow),
-      faqTitle: migrateSectionTitle(merged.faqTitle, "faq"),
-      faqDescription: migrateSectionDescription(merged.faqDescription, "faq"),
+      faqTitle: cleanCopy(merged.faqTitle),
+      faqDescription: cleanCopy(merged.faqDescription),
       contactsEyebrow: cleanCopy(merged.contactsEyebrow),
       contactsTitle: cleanCopy(merged.contactsTitle),
       contactsDescription: cleanCopy(merged.contactsDescription),
-      contactEmail: cleanEmail(merged.contactEmail),
-      contactPhone: cleanPhone(merged.contactPhone),
-      telegramUrl: cleanTelegram(merged.telegramUrl)
+      contactEmail: cleanCopy(merged.contactEmail),
+      contactPhone: cleanCopy(merged.contactPhone),
+      telegramUrl: cleanCopy(merged.telegramUrl)
     };
   } catch {
     return null;

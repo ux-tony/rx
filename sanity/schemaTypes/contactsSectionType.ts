@@ -6,14 +6,12 @@ export const contactsSectionType = defineType({
   type: "document",
   __experimental_formPreviewTitle: false,
   initialValue: {
-    contactsEyebrow: "Сотрудничество",
-    contactsTitle:
-      "Открыты к новым частным и коммерческим проектам, где важны качество среды, ясная архитектурная логика и внимательная работа с деталями.",
+    contactsEyebrow: "КОНТАКТЫ",
+    contactsTitle: "Расскажите о будущем проекте.",
     contactsDescription:
-      "Подключаемся к интерьерным и архитектурным задачам разного масштаба: от частных пространств до гостиниц, ресторанов, фасадов и территорий коммерческих объектов. На старте обсуждаем задачу, рамку бюджета и состав этапов, чтобы собрать рабочий маршрут без лишних итераций.",
-    contactEmail: "studio@rx-architect.test",
-    contactPhone: "+7 (999) 000-00-00",
-    telegramUrl: "https://t.me/"
+      "Опишите задачу, масштаб и желаемые сроки. Мы свяжемся с вами, уточним вводные и предложим понятный следующий шаг.",
+    contactEmail: "rx@4758585.ru",
+    contactPhone: "8 (928) 000-00-00"
   },
   fields: [
     defineField({
@@ -36,11 +34,14 @@ export const contactsSectionType = defineType({
     defineField({
       name: "contactEmail",
       title: "Email",
-      type: "string"
+      description: "Используется формой обращения и формой обсуждения нового проекта.",
+      type: "string",
+      validation: (rule) => rule.email()
     }),
     defineField({
       name: "contactPhone",
       title: "Телефон",
+      description: "Показывается в шапке сайта, разделе контактов и на страницах проектов.",
       type: "string"
     }),
     defineField({
@@ -48,14 +49,6 @@ export const contactsSectionType = defineType({
       title: "Telegram URL",
       type: "string"
     }),
-    defineField({
-      name: "contactImage",
-      title: "Изображение справа",
-      type: "image",
-      options: {
-        hotspot: true
-      }
-    })
   ],
   preview: {
     prepare() {

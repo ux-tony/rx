@@ -1,30 +1,28 @@
 import { faqItems, projectCategories, projects, services } from "@/data/site-data";
 
 export const mockHeroSection = {
-  studioName: "Roman Kharchenko Studio",
+  studioName: "Роман Харченко",
   heroEyebrow: "Архитектурная студия",
-  heroTitle: "Роман Харченко. Архитектор.",
+  heroTitle: "Романа Харченко",
   heroDescription:
     "Я создаю пространства, в которых архитектура, интерьер и ландшафт работают как единое целое. В основе каждого проекта: характер места, ясная логика и внимание к тому, как человек будет жить, работать и чувствовать себя внутри.",
-  seoTitle: "Roman Kharchenko Studio",
-  seoDescription:
-    "Портфолио архитектурной студии: жилые и общественные интерьеры, фасады, hospitality, ландшафт и концепции коммерческих территорий.",
+  seoTitle: "RX Architect",
+  seoDescription: "Минималистичное портфолио архитектора с акцентом на проекты и визуальную подачу.",
   primaryCtaLabel: "Смотреть проекты",
   primaryCtaHref: "#project-list",
   secondaryCtaLabel: "Обсудить задачу",
-  secondaryCtaHref: "#contact",
   metrics: [
     {
-      value: "18",
-      label: "концепций и предварительных сценариев для будущей коллекции портфолио"
+      value: "100+",
+      label: "реализованных проектов"
     },
     {
-      value: "2-3",
-      label: "формата подачи, чтобы сайт одинаково уверенно работал на desktop и mobile"
+      value: "3",
+      label: "направления, закрывающие полный цикл"
     },
     {
       value: "1",
-      label: "контактный маршрут от первого обращения до запуска проектной работы"
+      label: "цель — создавать пространства, которые работают"
     }
   ]
 };
@@ -51,14 +49,12 @@ export const mockFaqSection = {
 };
 
 export const mockContactsSection = {
-  contactsEyebrow: "Сотрудничество",
-  contactsTitle:
-    "Открыты к новым частным и коммерческим проектам, где важны качество среды, ясная архитектурная логика и внимательная работа с деталями.",
+  contactsEyebrow: "КОНТАКТЫ",
+  contactsTitle: "Расскажите о будущем проекте.",
   contactsDescription:
-    "Подключаемся к интерьерным и архитектурным задачам разного масштаба: от частных пространств до гостиниц, ресторанов, фасадов и территорий коммерческих объектов. На старте обсуждаем задачу, рамку бюджета и состав этапов, чтобы собрать рабочий маршрут без лишних итераций.",
-  contactEmail: "studio@rx-architect.test",
-  contactPhone: "+7 (999) 000-00-00",
-  telegramUrl: "https://t.me/"
+    "Опишите задачу, масштаб и желаемые сроки. Мы свяжемся с вами, уточним вводные и предложим понятный следующий шаг.",
+  contactEmail: "rx@4758585.ru",
+  contactPhone: "8 (928) 000-00-00"
 };
 
 export const mockProjectCategories = projectCategories.map((category, index) => ({

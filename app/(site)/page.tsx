@@ -1,4 +1,3 @@
-import { faqItems, projects, services } from "@/data/site-data";
 import { ContactStrip } from "@/components/contact-strip";
 import { FaqSection } from "@/components/faq-section";
 import { HeroSection } from "@/components/hero-section";
@@ -44,17 +43,13 @@ export default async function HomePage() {
     getFaqItems()
   ]);
 
-  const resolvedProjects = cmsProjects.length > 0 ? cmsProjects : projects;
-  const resolvedServices = cmsServices.length > 0 ? cmsServices : services;
-  const resolvedFaqItems = cmsFaqItems.length > 0 ? cmsFaqItems : faqItems;
-
   return (
     <main className="page-shell" id="top">
       <SiteHeader studioName={siteSettings?.studioName} logoUrl={siteSettings?.logoUrl} contactPhone={siteSettings?.contactPhone} />
       <HeroSection metrics={siteSettings?.metrics || []} siteSettings={siteSettings} />
 
       <ProjectsSection
-        projects={resolvedProjects}
+        projects={cmsProjects}
         categories={cmsProjectCategories}
         eyebrow={siteSettings?.projectsEyebrow || fallbackProjectsHeading.eyebrow}
         title={siteSettings?.projectsTitle || fallbackProjectsHeading.title}
@@ -71,7 +66,7 @@ export default async function HomePage() {
         </div>
 
         <div className="service-list" aria-label="Услуги студии">
-          {resolvedServices.map((service) => (
+          {cmsServices.map((service) => (
             <article className="service-card" key={`${service.index}-${service.title}`}>
               <p className="service-index">{service.index}</p>
               <h3>{service.title}</h3>
@@ -82,7 +77,7 @@ export default async function HomePage() {
       </section>
 
       <FaqSection
-        items={resolvedFaqItems}
+        items={cmsFaqItems}
         eyebrow={siteSettings?.faqEyebrow || fallbackFaqHeading.eyebrow}
         title={siteSettings?.faqTitle || fallbackFaqHeading.title}
         description={siteSettings?.faqDescription || fallbackFaqHeading.description}

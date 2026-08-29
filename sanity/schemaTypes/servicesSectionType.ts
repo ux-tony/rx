@@ -7,7 +7,7 @@ export const servicesSectionType = defineType({
   __experimental_formPreviewTitle: false,
   initialValue: {
     servicesEyebrow: "Услуги",
-    servicesTitle: "Проектирование пространств от первой идеи до согласованного архитектурного образа.",
+    servicesTitle: "Направления работы.",
     servicesDescription:
       "Студия разрабатывает жилые и общественные интерьеры, фасады зданий, гостиницы и рестораны, а также ландшафтный дизайн и концепции территорий для коммерческих объектов."
   },

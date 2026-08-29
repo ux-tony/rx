@@ -3,10 +3,15 @@
 import { useState } from "react";
 import { useClient } from "sanity";
 import {
+  mockContactsSection,
   mockFaqItems,
+  mockFaqSection,
+  mockHeroSection,
   mockProjectCategories,
   mockProjects,
-  mockServices
+  mockProjectsSection,
+  mockServices,
+  mockServicesSection
 } from "@/sanity/mock-content";
 
 type UploadedImage = {
@@ -59,7 +64,67 @@ export function StudioSeedTool() {
   async function seedMockData() {
     try {
       setStatus("loading");
-      setMessage("Синхронизируем категории, проекты, услуги и FAQ...");
+      setMessage("Синхронизируем секции сайта, категории, проекты, услуги и FAQ...");
+
+      const existingHero = await client.fetch<{ logo?: UploadedImage } | null>(
+        '*[_id == "heroSection"][0]{logo}'
+      );
+
+      await client.createOrReplace({
+        _id: "heroSection",
+        _type: "heroSection",
+        ...mockHeroSection,
+        metrics: mockHeroSection.metrics.map((metric, index) => ({
+          ...metric,
+          _key: `metric-${index + 1}`
+        })),
+        ...(existingHero?.logo ? { logo: existingHero.logo } : {})
+      });
+
+      await client.createOrReplace({
+        _id: "projectsSection",
+        _type: "projectsSection",
+        ...mockProjectsSection
+      });
+
+      await client.createOrReplace({
+        _id: "servicesSection",
+        _type: "servicesSection",
+        ...mockServicesSection
+      });
+
+      await client.createOrReplace({
+        _id: "faqSection",
+        _type: "faqSection",
+        ...mockFaqSection
+      });
+
+      await client.createOrReplace({
+        _id: "contactsSection",
+        _type: "contactsSection",
+        ...mockContactsSection
+      });
+
+      const singletonDraftIds = [
+        "drafts.heroSection",
+        "drafts.projectsSection",
+        "drafts.servicesSection",
+        "drafts.faqSection",
+        "drafts.contactsSection"
+      ];
+      const existingSingletonDraftIds = await client.fetch<string[]>('*[_id in $ids]._id', {
+        ids: singletonDraftIds
+      });
+
+      if (existingSingletonDraftIds.length > 0) {
+        let cleanupTransaction = client.transaction();
+
+        for (const draftId of existingSingletonDraftIds) {
+          cleanupTransaction = cleanupTransaction.delete(draftId);
+        }
+
+        await cleanupTransaction.commit();
+      }
 
       for (const category of mockProjectCategories) {
         await client.createOrReplace({
@@ -133,7 +198,7 @@ export function StudioSeedTool() {
 
       setStatus("success");
       setMessage(
-        `Готово: ${mockProjectCategories.length} категории, ${mockProjects.length} проектов, ${mockServices.length} услуги и ${mockFaqItems.length} вопросов.`
+        `Готово: 5 секций сайта, ${mockProjectCategories.length} категорий, ${mockProjects.length} проектов, ${mockServices.length} услуг и ${mockFaqItems.length} вопросов.`
       );
     } catch (error) {
       setStatus("error");
@@ -153,7 +218,8 @@ export function StudioSeedTool() {
       <div>
         <h1 style={{ fontSize: 24, margin: 0 }}>Синхронизация контента</h1>
         <p style={{ color: "#6e7680", lineHeight: 1.5, margin: "10px 0 0" }}>
-          Добавляет текущие проекты, категории, услуги и FAQ в Sanity. Hero, контакты и настройки сайта не изменяются.
+          Переносит текущий контент сайта в Sanity: Hero, заголовки разделов, контакты, категории, проекты,
+          услуги и FAQ. После синхронизации весь этот контент редактируется из админки.
         </p>
       </div>
 

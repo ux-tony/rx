@@ -6,29 +6,28 @@ export const heroSectionType = defineType({
   type: "document",
   __experimental_formPreviewTitle: false,
   initialValue: {
-    studioName: "Roman Kharchenko Studio",
+    studioName: "Роман Харченко",
     heroEyebrow: "Архитектурная студия",
-    heroTitle: "Роман Харченко. Архитектор.",
+    heroTitle: "Романа Харченко",
     heroDescription:
       "Я создаю пространства, в которых архитектура, интерьер и ландшафт работают как единое целое. В основе каждого проекта: характер места, ясная логика и внимание к тому, как человек будет жить, работать и чувствовать себя внутри.",
-    seoTitle: "Roman Kharchenko Studio",
-    seoDescription: "Минималистичное портфолио архитектурной студии с акцентом на проекты, свет, материал и визуальную подачу.",
+    seoTitle: "RX Architect",
+    seoDescription: "Минималистичное портфолио архитектора с акцентом на проекты и визуальную подачу.",
     primaryCtaLabel: "Смотреть проекты",
     primaryCtaHref: "#project-list",
     secondaryCtaLabel: "Обсудить задачу",
-    secondaryCtaHref: "#contact",
     metrics: [
       {
-        value: "18",
-        label: "концептов в коллекции MVP для будущего каталога"
+        value: "100+",
+        label: "реализованных проектов"
       },
       {
-        value: "2-3",
-        label: "колонки на desktop с сохранением чистой мобильной сетки"
+        value: "3",
+        label: "направления, закрывающие полный цикл"
       },
       {
         value: "1",
-        label: "акцентный оттенок во всей визуальной системе"
+        label: "цель — создавать пространства, которые работают"
       }
     ]
   },
@@ -36,7 +35,7 @@ export const heroSectionType = defineType({
     defineField({
       name: "studioName",
       title: "Название студии",
-      description: "Брендовое название студии. Сейчас используется как служебное имя и alt для логотипа.",
+      description: "Показывается рядом с логотипом в шапке и в копирайте футера.",
       type: "string"
     }),
     defineField({
@@ -85,16 +84,13 @@ export const heroSectionType = defineType({
     defineField({
       name: "primaryCtaHref",
       title: "Основная кнопка: ссылка",
+      description: "Для перехода к карточкам проектов используйте #project-list.",
       type: "string"
     }),
     defineField({
       name: "secondaryCtaLabel",
       title: "Вторая кнопка: текст",
-      type: "string"
-    }),
-    defineField({
-      name: "secondaryCtaHref",
-      title: "Вторая кнопка: ссылка",
+      description: "Кнопка открывает форму обсуждения проекта.",
       type: "string"
     }),
     defineField({
