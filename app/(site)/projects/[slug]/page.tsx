@@ -20,15 +20,15 @@ const resolveProject = cache(async (slug: string) => {
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = await resolveProject(slug);
+  const [project, siteSettings] = await Promise.all([resolveProject(slug), getSiteSettings()]);
 
   if (!project) {
     return { title: "Проект не найден" };
   }
 
   return {
-    title: `${project.title} | Roman Kharchenko Studio`,
-    description: project.description || `${project.title}. Проект архитектурной студии Романа Харченко.`
+    title: siteSettings?.studioName ? `${project.title} | ${siteSettings.studioName}` : project.title,
+    description: project.description
   };
 }
 

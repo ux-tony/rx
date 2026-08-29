@@ -8,9 +8,9 @@ import { SectionHeading } from "@/components/section-heading";
 type ProjectsSectionProps = {
   projects: Project[];
   categories: ProjectCategory[];
-  eyebrow: string;
-  title: string;
-  description: string;
+  eyebrow?: string;
+  title?: string;
+  description?: string;
 };
 
 const ALL_CATEGORY = "all";

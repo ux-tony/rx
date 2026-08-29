@@ -15,12 +15,9 @@ export function FaqSection({ items, eyebrow, title, description }: FaqSectionPro
   return (
     <section className="faq-shell" id="faq">
       <SectionHeading
-        eyebrow={eyebrow || "Вопросы и ответы"}
-        title={title || "Главное до начала работы."}
-        description={
-          description ||
-          "Здесь собраны ответы о сроках, бюджете, этапах, составе проекта и участии заказчика — всё, что поможет заранее понять процесс работы со студией."
-        }
+        eyebrow={eyebrow}
+        title={title}
+        description={description}
         fullWidth
       />
 

@@ -45,12 +45,9 @@ export function ContactStrip({
   return (
     <section className="contact-strip" id="contact">
       <div className="contact-copy">
-        <p className="eyebrow">{eyebrow || "Контакты"}</p>
-        <h2>{title || "Расскажите о будущем проекте."}</h2>
-        <p>
-          {description ||
-            "Опишите задачу, масштаб и желаемые сроки. Мы свяжемся с вами, уточним вводные и предложим понятный следующий шаг."}
-        </p>
+        {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
+        {title ? <h2>{title}</h2> : null}
+        {description ? <p>{description}</p> : null}
 
         <div className="contact-links" aria-label="Прямые контакты студии">
           {contactEmail ? <a href={`mailto:${contactEmail}`}>{contactEmail}</a> : null}

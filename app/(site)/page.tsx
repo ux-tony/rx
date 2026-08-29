@@ -13,27 +13,6 @@ import { getSiteSettings } from "@/lib/sanity/get-site-settings";
 
 export const dynamic = "force-dynamic";
 
-const fallbackProjectsHeading = {
-  eyebrow: "Проекты студии",
-  title: "От идеи до пространства.",
-  description:
-    "Воплощаем архитектурные идеи разного масштаба и сложности: от частных интерьеров до общественных пространств, фасадов и территорий. Каждый проект доводим до цельного, функционального и выразительного решения."
-};
-
-const fallbackServicesHeading = {
-  eyebrow: "Услуги",
-  title: "Направления работы.",
-  description:
-    "Студия разрабатывает жилые и общественные интерьеры, фасады зданий, гостиницы и рестораны, а также ландшафтный дизайн и концепции территорий для коммерческих объектов."
-};
-
-const fallbackFaqHeading = {
-  eyebrow: "Вопросы и ответы",
-  title: "Главное до начала работы.",
-  description:
-    "Здесь собраны ответы о сроках, бюджете, этапах, составе проекта и участии заказчика — всё, что поможет заранее понять процесс работы со студией."
-};
-
 export default async function HomePage() {
   const [siteSettings, cmsProjects, cmsProjectCategories, cmsServices, cmsFaqItems] = await Promise.all([
     getSiteSettings(),
@@ -51,17 +30,17 @@ export default async function HomePage() {
       <ProjectsSection
         projects={cmsProjects}
         categories={cmsProjectCategories}
-        eyebrow={siteSettings?.projectsEyebrow || fallbackProjectsHeading.eyebrow}
-        title={siteSettings?.projectsTitle || fallbackProjectsHeading.title}
-        description={siteSettings?.projectsDescription || fallbackProjectsHeading.description}
+        eyebrow={siteSettings?.projectsEyebrow}
+        title={siteSettings?.projectsTitle}
+        description={siteSettings?.projectsDescription}
       />
 
       <section className="content-section split-layout" id="services">
         <div>
           <SectionHeading
-            eyebrow={siteSettings?.servicesEyebrow || fallbackServicesHeading.eyebrow}
-            title={siteSettings?.servicesTitle || fallbackServicesHeading.title}
-            description={siteSettings?.servicesDescription || fallbackServicesHeading.description}
+            eyebrow={siteSettings?.servicesEyebrow}
+            title={siteSettings?.servicesTitle}
+            description={siteSettings?.servicesDescription}
           />
         </div>
 
@@ -78,9 +57,9 @@ export default async function HomePage() {
 
       <FaqSection
         items={cmsFaqItems}
-        eyebrow={siteSettings?.faqEyebrow || fallbackFaqHeading.eyebrow}
-        title={siteSettings?.faqTitle || fallbackFaqHeading.title}
-        description={siteSettings?.faqDescription || fallbackFaqHeading.description}
+        eyebrow={siteSettings?.faqEyebrow}
+        title={siteSettings?.faqTitle}
+        description={siteSettings?.faqDescription}
       />
 
       <ContactStrip

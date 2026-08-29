@@ -28,10 +28,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const siteSettings = await getSiteSettings();
 
   return {
-    title: siteSettings?.seoTitle || "RX Architect",
-    description:
-      siteSettings?.seoDescription ||
-      "Минималистичное портфолио архитектора с акцентом на проекты и визуальную подачу."
+    title: siteSettings?.seoTitle,
+    description: siteSettings?.seoDescription
   };
 }
 

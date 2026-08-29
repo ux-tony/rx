@@ -10,14 +10,14 @@ type SiteHeaderProps = {
 };
 
 export function SiteHeader({ studioName, logoUrl, contactPhone, rootHref = "" }: SiteHeaderProps) {
-  const name = studioName || "Roman Kharchenko Studio";
+  const name = studioName?.trim() || "";
   const displayName = name.replace(/\s+Studio$/i, "").replace(/^Roman Kharchenko$/i, "Роман Харченко");
-  const phone = contactPhone || "8 (928) 000-00-00";
-  const phoneHref = `tel:${phone.replace(/[^\d+]/g, "")}`;
+  const phone = contactPhone?.trim();
+  const phoneHref = phone ? `tel:${phone.replace(/[^\d+]/g, "")}` : null;
 
   return (
     <header className="site-header">
-      <a className="site-brand" href={`${rootHref}#top`} aria-label={`${name}: к началу страницы`}>
+      <a className="site-brand" href={`${rootHref}#top`} aria-label={`${name || "Студия"}: к началу страницы`}>
         {logoUrl ? (
           <span className="site-brand-mark">
             <Image alt="" fill sizes="40px" src={logoUrl} />
@@ -27,7 +27,7 @@ export function SiteHeader({ studioName, logoUrl, contactPhone, rootHref = "" }:
             RX
           </span>
         )}
-        <span>{displayName}</span>
+        {displayName ? <span>{displayName}</span> : null}
       </a>
 
       <nav className="site-nav" aria-label="Основная навигация">
@@ -37,9 +37,11 @@ export function SiteHeader({ studioName, logoUrl, contactPhone, rootHref = "" }:
         <a href={`${rootHref}#contact`}>Контакты</a>
       </nav>
 
-      <a className="site-header-cta" href={phoneHref} aria-label={`Позвонить: ${phone}`}>
-        {phone}
-      </a>
+      {phone && phoneHref ? (
+        <a className="site-header-cta" href={phoneHref} aria-label={`Позвонить: ${phone}`}>
+          {phone}
+        </a>
+      ) : null}
     </header>
   );
 }

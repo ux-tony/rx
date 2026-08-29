@@ -16,14 +16,12 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
   const [opened, setOpened] = useState(false);
   const [metricsVisible, setMetricsVisible] = useState(false);
   const metricsRef = useRef<HTMLElement>(null);
-  const heroEyebrow = siteSettings?.heroEyebrow || "Архитектурная студия";
-  const heroTitle = siteSettings?.heroTitle || "Роман Харченко. Архитектор.";
-  const heroDescription =
-    siteSettings?.heroDescription ||
-    "Я создаю пространства, в которых архитектура, интерьер и ландшафт работают как единое целое. В основе каждого проекта: характер места, ясная логика и внимание к тому, как человек будет жить, работать и чувствовать себя внутри.";
-  const primaryCtaLabel = siteSettings?.primaryCtaLabel || "Смотреть проекты";
-  const primaryCtaHref = siteSettings?.primaryCtaHref || "#project-list";
-  const secondaryCtaLabel = siteSettings?.secondaryCtaLabel || "Обсудить задачу";
+  const heroEyebrow = siteSettings?.heroEyebrow;
+  const heroTitle = siteSettings?.heroTitle;
+  const heroDescription = siteSettings?.heroDescription;
+  const primaryCtaLabel = siteSettings?.primaryCtaLabel;
+  const primaryCtaHref = siteSettings?.primaryCtaHref;
+  const secondaryCtaLabel = siteSettings?.secondaryCtaLabel;
   const resolvedMetrics = siteSettings?.metrics && siteSettings.metrics.length > 0 ? siteSettings.metrics : metrics;
   const architectPhotoSrc = architectPhoto;
 
@@ -51,21 +49,25 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
 
   return (
     <>
-      <section className="hero" aria-labelledby="hero-title">
+      <section className="hero" aria-labelledby={heroTitle ? "hero-title" : undefined}>
         <div className="hero-copy">
           <div className="hero-heading">
-            <p className="eyebrow">{heroEyebrow}</p>
-            <h1 id="hero-title">{heroTitle}</h1>
-            <p>{heroDescription}</p>
+            {heroEyebrow ? <p className="eyebrow">{heroEyebrow}</p> : null}
+            {heroTitle ? <h1 id="hero-title">{heroTitle}</h1> : null}
+            {heroDescription ? <p>{heroDescription}</p> : null}
           </div>
 
           <div className="hero-actions">
-            <a className="button-primary" href={primaryCtaHref}>
-              {primaryCtaLabel}
-            </a>
-            <button className="button-secondary button-reset" onClick={() => setOpened(true)} type="button">
-              {secondaryCtaLabel}
-            </button>
+            {primaryCtaLabel && primaryCtaHref ? (
+              <a className="button-primary" href={primaryCtaHref}>
+                {primaryCtaLabel}
+              </a>
+            ) : null}
+            {secondaryCtaLabel ? (
+              <button className="button-secondary button-reset" onClick={() => setOpened(true)} type="button">
+                {secondaryCtaLabel}
+              </button>
+            ) : null}
           </div>
         </div>
 
