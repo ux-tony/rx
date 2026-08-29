@@ -11,7 +11,7 @@ type SiteHeaderProps = {
 
 export function SiteHeader({ studioName, logoUrl, contactPhone, rootHref = "" }: SiteHeaderProps) {
   const name = studioName || "Roman Kharchenko Studio";
-  const displayName = name.replace(/\s+Studio$/i, "");
+  const displayName = name.replace(/\s+Studio$/i, "").replace(/^Roman Kharchenko$/i, "Роман Харченко");
   const phone = contactPhone || "8 (928) 000-00-00";
   const phoneHref = `tel:${phone.replace(/[^\d+]/g, "")}`;
 
