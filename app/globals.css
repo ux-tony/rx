@@ -1495,14 +1495,29 @@ a:focus-visible {
   width: 100%;
   margin-inline: auto;
   padding-top: clamp(10px, 1.2vw, 20px);
-  column-count: 2;
-  column-gap: clamp(10px, 1.2vw, 20px);
+}
+
+.project-page-gallery-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 1.2vw, 20px);
+  align-items: start;
+}
+
+.project-page-gallery-column {
+  display: grid;
+  gap: clamp(10px, 1.2vw, 20px);
+  align-content: start;
+}
+
+.project-page-gallery-mobile {
+  display: none;
 }
 
 .project-page-gallery-item {
   position: relative;
   width: 100%;
-  margin: 0 0 clamp(10px, 1.2vw, 20px);
+  margin: 0;
   padding: 0;
   display: block;
   break-inside: avoid;
@@ -1731,13 +1746,21 @@ a:focus-visible {
   }
 
   .project-page-gallery {
-    column-count: 1;
-    column-gap: 0;
+    padding-top: 10px;
+  }
+
+  .project-page-gallery-columns {
+    display: none;
+  }
+
+  .project-page-gallery-mobile {
+    display: grid;
+    gap: 10px;
   }
 
   .project-page-gallery-item,
   .project-page-gallery-item:nth-child(n) {
-    margin-bottom: 10px;
+    margin: 0;
   }
 
   .project-page-navigation {

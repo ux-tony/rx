@@ -11,7 +11,7 @@ type ProjectPageGalleryProps = {
 };
 
 function getImageDimensions(src: string) {
-  const match = src.match(/-(\d+)x(\d+)-[a-z0-9]+(?:\?|$)/i);
+  const match = src.match(/-(\d+)x(\d+)(?:\.[a-z0-9]+|-[a-z0-9]+)(?:\?|$)/i);
 
   return match
     ? { width: Number(match[1]), height: Number(match[2]) }
@@ -30,6 +30,45 @@ export function ProjectPageGallery({ title, coverImage, images }: ProjectPageGal
   const allImages = useMemo(() => Array.from(new Set([coverImage, ...images].filter(Boolean))), [coverImage, images]);
   const galleryImages = allImages.filter((image) => image !== coverImage);
   const coverDimensions = getImageDimensions(coverImage);
+  const galleryItems = galleryImages.map((image, index) => ({
+    dimensions: getImageDimensions(image),
+    image,
+    index
+  }));
+  const masonryColumns = [[], []] as Array<typeof galleryItems>;
+  const masonryColumnHeights = [0, 0];
+
+  [...galleryItems]
+    .sort((first, second) =>
+      second.dimensions.height / second.dimensions.width - first.dimensions.height / first.dimensions.width
+    )
+    .forEach((item) => {
+      const columnIndex = masonryColumnHeights[0] <= masonryColumnHeights[1] ? 0 : 1;
+      masonryColumns[columnIndex].push(item);
+      masonryColumnHeights[columnIndex] += item.dimensions.height / item.dimensions.width;
+    });
+
+  masonryColumns.forEach((column) => column.sort((first, second) => first.index - second.index));
+
+  function renderGalleryItem(item: (typeof galleryItems)[number], keyPrefix: string) {
+    return (
+      <button
+        aria-label={`Открыть изображение ${item.index + 2} проекта ${title}`}
+        className="project-page-gallery-item"
+        key={`${keyPrefix}-${item.image}`}
+        onClick={() => openImage(item.image)}
+        type="button"
+      >
+        <Image
+          alt=""
+          height={item.dimensions.height}
+          sizes="(max-width: 780px) 100vw, 50vw"
+          src={item.image}
+          width={item.dimensions.width}
+        />
+      </button>
+    );
+  }
 
   function resetZoom() {
     setScale(1);
@@ -163,27 +202,16 @@ export function ProjectPageGallery({ title, coverImage, images }: ProjectPageGal
 
       {galleryImages.length > 0 ? (
         <section className="project-page-gallery" aria-label={`Галерея проекта ${title}`}>
-          {galleryImages.map((image, index) => {
-            const dimensions = getImageDimensions(image);
-
-            return (
-              <button
-                aria-label={`Открыть изображение ${index + 2} проекта ${title}`}
-                className="project-page-gallery-item"
-                key={image}
-                onClick={() => openImage(image)}
-                type="button"
-              >
-                <Image
-                  alt=""
-                  height={dimensions.height}
-                  sizes="(max-width: 780px) 100vw, 50vw"
-                  src={image}
-                  width={dimensions.width}
-                />
-              </button>
-            );
-          })}
+          <div className="project-page-gallery-columns">
+            {masonryColumns.map((column, columnIndex) => (
+              <div className="project-page-gallery-column" key={columnIndex}>
+                {column.map((item) => renderGalleryItem(item, `desktop-${columnIndex}`))}
+              </div>
+            ))}
+          </div>
+          <div className="project-page-gallery-mobile">
+            {galleryItems.map((item) => renderGalleryItem(item, "mobile"))}
+          </div>
         </section>
       ) : null}
 
