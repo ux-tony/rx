@@ -16,6 +16,7 @@ export const heroSectionType = defineType({
     primaryCtaLabel: "Смотреть проекты",
     primaryCtaHref: "#project-list",
     secondaryCtaLabel: "Обсудить задачу",
+    heroBackgroundColor: "#ffffff",
     metrics: [
       {
         value: "100+",
@@ -62,6 +63,26 @@ export const heroSectionType = defineType({
       title: "Описание",
       type: "text",
       rows: 4
+    }),
+    defineField({
+      name: "heroImage",
+      title: "Главное изображение Hero",
+      description: "Фотография или готовая широкая композиция для первого экрана.",
+      type: "image",
+      options: {
+        hotspot: true
+      }
+    }),
+    defineField({
+      name: "heroBackgroundColor",
+      title: "Цвет фона Hero",
+      description: "Цвет в формате HEX, например #ffffff.",
+      type: "string",
+      validation: (rule) =>
+        rule.regex(/^#[0-9a-f]{6}$/i, {
+          name: "HEX",
+          invert: false
+        })
     }),
     defineField({
       name: "seoTitle",

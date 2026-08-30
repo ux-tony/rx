@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import type { Metric } from "@/data/site-data";
 import architectPhoto from "@/img/Foto001-hero-architectural-v6-clean.png";
@@ -23,7 +23,10 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
   const primaryCtaHref = siteSettings?.primaryCtaHref;
   const secondaryCtaLabel = siteSettings?.secondaryCtaLabel;
   const resolvedMetrics = siteSettings?.metrics && siteSettings.metrics.length > 0 ? siteSettings.metrics : metrics;
-  const architectPhotoSrc = architectPhoto;
+  const architectPhotoSrc = siteSettings?.heroImageUrl || architectPhoto;
+  const heroStyle = siteSettings?.heroBackgroundColor
+    ? ({ "--hero-background": siteSettings.heroBackgroundColor } as CSSProperties)
+    : undefined;
 
   useEffect(() => {
     const section = metricsRef.current;
@@ -49,7 +52,7 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
 
   return (
     <>
-      <section className="hero" aria-labelledby={heroTitle ? "hero-title" : undefined}>
+      <section className="hero" aria-labelledby={heroTitle ? "hero-title" : undefined} style={heroStyle}>
         <div className="hero-copy">
           <div className="hero-heading">
             {heroEyebrow ? <p className="eyebrow">{heroEyebrow}</p> : null}
@@ -78,6 +81,7 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
             className="hero-portrait"
             fill
             priority
+            quality={100}
             sizes="100vw"
           />
         </div>

@@ -8,6 +8,8 @@ export const siteSettingsQuery = groq`
       "logoUrl": logo.asset->url,
       heroTitle,
       heroDescription,
+      "heroImageUrl": heroImage.asset->url,
+      heroBackgroundColor,
       seoTitle,
       seoDescription,
       primaryCtaLabel,
