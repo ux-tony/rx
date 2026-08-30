@@ -10,6 +10,14 @@ type ProjectPageGalleryProps = {
   images: string[];
 };
 
+function getImageDimensions(src: string) {
+  const match = src.match(/-(\d+)x(\d+)-[a-z0-9]+(?:\?|$)/i);
+
+  return match
+    ? { width: Number(match[1]), height: Number(match[2]) }
+    : { width: 1600, height: 1000 };
+}
+
 export function ProjectPageGallery({ title, coverImage, images }: ProjectPageGalleryProps) {
   const [opened, setOpened] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -21,6 +29,7 @@ export function ProjectPageGallery({ title, coverImage, images }: ProjectPageGal
   const touchStartX = useRef<number | null>(null);
   const allImages = useMemo(() => Array.from(new Set([coverImage, ...images].filter(Boolean))), [coverImage, images]);
   const galleryImages = allImages.filter((image) => image !== coverImage);
+  const coverDimensions = getImageDimensions(coverImage);
 
   function resetZoom() {
     setScale(1);
@@ -141,23 +150,40 @@ export function ProjectPageGallery({ title, coverImage, images }: ProjectPageGal
   return (
     <>
       <button className="project-page-cover" onClick={() => openImage(coverImage)} type="button">
-        <Image alt={`Обложка проекта ${title}`} fill priority sizes="100vw" src={coverImage} />
+        <Image
+          alt={`Обложка проекта ${title}`}
+          height={coverDimensions.height}
+          priority
+          sizes="100vw"
+          src={coverImage}
+          width={coverDimensions.width}
+        />
         <span>Смотреть изображение</span>
       </button>
 
       {galleryImages.length > 0 ? (
         <section className="project-page-gallery" aria-label={`Галерея проекта ${title}`}>
-          {galleryImages.map((image, index) => (
-            <button
-              aria-label={`Открыть изображение ${index + 2} проекта ${title}`}
-              className="project-page-gallery-item"
-              key={image}
-              onClick={() => openImage(image)}
-              type="button"
-            >
-              <Image alt="" fill sizes="(max-width: 780px) 100vw, 60vw" src={image} />
-            </button>
-          ))}
+          {galleryImages.map((image, index) => {
+            const dimensions = getImageDimensions(image);
+
+            return (
+              <button
+                aria-label={`Открыть изображение ${index + 2} проекта ${title}`}
+                className="project-page-gallery-item"
+                key={image}
+                onClick={() => openImage(image)}
+                type="button"
+              >
+                <Image
+                  alt=""
+                  height={dimensions.height}
+                  sizes="(max-width: 780px) 100vw, 50vw"
+                  src={image}
+                  width={dimensions.width}
+                />
+              </button>
+            );
+          })}
         </section>
       ) : null}
 

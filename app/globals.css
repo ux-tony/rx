@@ -1442,7 +1442,6 @@ a:focus-visible {
 .project-page-cover {
   position: relative;
   width: 100%;
-  min-height: clamp(560px, 78svh, 980px);
   margin-inline: auto;
   padding: 0;
   display: block;
@@ -1453,12 +1452,16 @@ a:focus-visible {
 }
 
 .project-page-cover img {
-  object-fit: scale-down;
+  width: 100%;
+  height: auto;
+  display: block;
   transition: transform var(--motion-slow) var(--ease-out), filter var(--motion-slow) ease;
 }
 
 .project-page-gallery-item img {
-  object-fit: cover;
+  width: 100%;
+  height: auto;
+  display: block;
   transition: transform var(--motion-slow) var(--ease-out), filter var(--motion-slow) ease;
 }
 
@@ -1492,47 +1495,21 @@ a:focus-visible {
   width: 100%;
   margin-inline: auto;
   padding-top: clamp(10px, 1.2vw, 20px);
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: clamp(10px, 1.2vw, 20px);
+  column-count: 2;
+  column-gap: clamp(10px, 1.2vw, 20px);
 }
 
 .project-page-gallery-item {
   position: relative;
-  grid-column: span 6;
-  aspect-ratio: 4 / 3;
-  min-width: 0;
+  width: 100%;
+  margin: 0 0 clamp(10px, 1.2vw, 20px);
   padding: 0;
+  display: block;
+  break-inside: avoid;
   overflow: hidden;
   border: 0;
   background: var(--surface);
   cursor: zoom-in;
-}
-
-.project-page-gallery-item:nth-child(6n + 1) {
-  grid-column: span 7;
-  aspect-ratio: 4 / 3;
-}
-
-.project-page-gallery-item:nth-child(6n + 2) {
-  grid-column: span 5;
-  aspect-ratio: 3 / 4;
-}
-
-.project-page-gallery-item:nth-child(6n + 3),
-.project-page-gallery-item:nth-child(6n + 6) {
-  grid-column: 1 / -1;
-  aspect-ratio: 16 / 9;
-}
-
-.project-page-gallery-item:nth-child(6n + 4) {
-  grid-column: span 5;
-  aspect-ratio: 3 / 4;
-}
-
-.project-page-gallery-item:nth-child(6n + 5) {
-  grid-column: span 7;
-  aspect-ratio: 4 / 3;
 }
 
 .project-page-navigation {
@@ -1747,7 +1724,6 @@ a:focus-visible {
 
   .project-page-cover {
     min-height: 0;
-    aspect-ratio: 4 / 5;
   }
 
   .project-page-cover > span {
@@ -1755,18 +1731,13 @@ a:focus-visible {
   }
 
   .project-page-gallery {
-    grid-template-columns: 1fr;
-    gap: 10px;
+    column-count: 1;
+    column-gap: 0;
   }
 
   .project-page-gallery-item,
   .project-page-gallery-item:nth-child(n) {
-    grid-column: 1;
-    aspect-ratio: 4 / 5;
-  }
-
-  .project-page-gallery-item:nth-child(3n) {
-    aspect-ratio: 4 / 3;
+    margin-bottom: 10px;
   }
 
   .project-page-navigation {
