@@ -338,13 +338,13 @@ a:focus-visible {
 }
 
 .hero.has-portrait-image .hero-visual::after {
-  width: 58%;
+  width: 50%;
   background: linear-gradient(
     90deg,
     var(--hero-background) 0%,
-    color-mix(in srgb, var(--hero-background) 90%, transparent) 22%,
-    color-mix(in srgb, var(--hero-background) 55%, transparent) 48%,
-    color-mix(in srgb, var(--hero-background) 18%, transparent) 74%,
+    color-mix(in srgb, var(--hero-background) 78%, transparent) 18%,
+    color-mix(in srgb, var(--hero-background) 36%, transparent) 42%,
+    color-mix(in srgb, var(--hero-background) 10%, transparent) 68%,
     transparent 100%
   );
 }
