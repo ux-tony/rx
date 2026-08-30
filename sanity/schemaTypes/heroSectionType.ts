@@ -16,7 +16,7 @@ export const heroSectionType = defineType({
     primaryCtaLabel: "Смотреть проекты",
     primaryCtaHref: "#project-list",
     secondaryCtaLabel: "Обсудить задачу",
-    heroBackgroundColor: "#ffffff",
+    heroBackgroundColor: "#cecbca",
     metrics: [
       {
         value: "100+",
