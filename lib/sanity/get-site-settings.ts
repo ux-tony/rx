@@ -9,6 +9,7 @@ export type SiteSettings = {
   heroTitle?: string;
   heroDescription?: string;
   heroImageUrl?: string;
+  heroImageAspectRatio?: number;
   heroBackgroundColor?: string;
   seoTitle?: string;
   seoDescription?: string;
@@ -67,6 +68,7 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
       heroTitle: cleanCopy(merged.heroTitle),
       heroDescription: cleanCopy(merged.heroDescription),
       heroImageUrl: cleanCopy(merged.heroImageUrl),
+      heroImageAspectRatio: merged.heroImageAspectRatio,
       heroBackgroundColor: cleanCopy(merged.heroBackgroundColor),
       seoTitle: cleanCopy(merged.seoTitle),
       seoDescription: cleanCopy(merged.seoDescription),

@@ -24,6 +24,9 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
   const secondaryCtaLabel = siteSettings?.secondaryCtaLabel;
   const resolvedMetrics = siteSettings?.metrics && siteSettings.metrics.length > 0 ? siteSettings.metrics : metrics;
   const architectPhotoSrc = siteSettings?.heroImageUrl || architectPhoto;
+  const portraitHeroImage = Boolean(
+    siteSettings?.heroImageUrl && siteSettings.heroImageAspectRatio && siteSettings.heroImageAspectRatio < 1
+  );
   const heroStyle = siteSettings?.heroBackgroundColor
     ? ({ "--hero-background": siteSettings.heroBackgroundColor } as CSSProperties)
     : undefined;
@@ -52,7 +55,11 @@ export function HeroSection({ metrics, siteSettings }: HeroSectionProps) {
 
   return (
     <>
-      <section className="hero" aria-labelledby={heroTitle ? "hero-title" : undefined} style={heroStyle}>
+      <section
+        className={`hero${portraitHeroImage ? " has-portrait-image" : ""}`}
+        aria-labelledby={heroTitle ? "hero-title" : undefined}
+        style={heroStyle}
+      >
         <div className="hero-copy">
           <div className="hero-heading">
             {heroEyebrow ? <p className="eyebrow">{heroEyebrow}</p> : null}

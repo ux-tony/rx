@@ -9,6 +9,7 @@ export const siteSettingsQuery = groq`
       heroTitle,
       heroDescription,
       "heroImageUrl": heroImage.asset->url,
+      "heroImageAspectRatio": heroImage.asset->metadata.dimensions.aspectRatio,
       heroBackgroundColor,
       seoTitle,
       seoDescription,
