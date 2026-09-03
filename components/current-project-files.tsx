@@ -131,6 +131,9 @@ export function CurrentProjectFiles({ enabled, files, projectNumber }: CurrentPr
                 <a href={`/api/current-project-files/download?projectNumber=${encodeURIComponent(projectNumber)}&fileId=${encodeURIComponent(file.id)}`}>
                   <span>{file.name}</span>
                   <small>{[formatFileSize(file.size), formatUploadDate(file.uploadedAt)].filter(Boolean).join(" · ")}</small>
+                  <svg aria-hidden="true" className="current-project-file-download-icon" viewBox="0 0 24 24">
+                    <path d="M12 3v12m-5-5 5 5 5-5M5 21h14" />
+                  </svg>
                 </a>
               </li>
             ))}
