@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { cache } from "react";
 import { ProjectPageGallery } from "@/components/project-page-gallery";
 import { CurrentProjectComments } from "@/components/current-project-comments";
+import { CurrentProjectFiles } from "@/components/current-project-files";
 import { getCurrentProjectByNumber } from "@/lib/sanity/get-current-project-by-number";
 import { getCurrentProjectComments } from "@/lib/sanity/get-current-project-comments";
 
@@ -49,6 +50,11 @@ export default async function CurrentProjectPage({ params }: CurrentProjectPageP
       </header>
 
       <ProjectPageGallery coverImage={project.image} images={project.gallery} title={project.title} />
+      <CurrentProjectFiles
+        enabled={Boolean(process.env.BLOB_READ_WRITE_TOKEN && process.env.SANITY_WRITE_TOKEN)}
+        files={project.files}
+        projectNumber={project.projectNumber}
+      />
       <CurrentProjectComments
         comments={comments}
         enabled={Boolean(process.env.SANITY_WRITE_TOKEN)}

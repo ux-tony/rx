@@ -6,6 +6,6 @@ coverage/
 *.log
 .tools/
 .playwright-cli/
-.env.local
+.env*.local
 *.tsbuildinfo
 backups/

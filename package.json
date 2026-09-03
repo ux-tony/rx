@@ -13,6 +13,7 @@
     "@mantine/core": "^7.17.8",
     "@mantine/hooks": "^7.17.8",
     "@sanity/vision": "^4.14.2",
+    "@vercel/blob": "^2.8.0",
     "next": "^15.3.0",
     "next-sanity": "^11.6.6",
     "react": "^19.0.0",

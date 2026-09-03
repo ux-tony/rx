@@ -8,6 +8,16 @@ export type CurrentProject = {
   description?: string;
   image: string;
   gallery: string[];
+  files: CurrentProjectFile[];
+};
+
+export type CurrentProjectFile = {
+  id: string;
+  name: string;
+  pathname: string;
+  size: number;
+  contentType?: string;
+  uploadedAt: string;
 };
 
 type SanityCurrentProject = Partial<CurrentProject>;
@@ -30,7 +40,11 @@ export async function getCurrentProjectByNumber(projectNumber: string): Promise<
       title: item.title,
       description: item.description?.trim() || undefined,
       image: item.image,
-      gallery: item.gallery || []
+      gallery: item.gallery || [],
+      files: (item.files || []).filter(
+        (file): file is CurrentProjectFile =>
+          Boolean(file?.id && file.name && file.pathname && typeof file.size === "number" && file.uploadedAt)
+      )
     };
   } catch {
     return null;

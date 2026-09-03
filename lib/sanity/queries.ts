@@ -85,7 +85,15 @@ export const currentProjectsQuery = groq`
     title,
     description,
     "image": coalesce(coverImage.asset->url, gallery[0].asset->url),
-    "gallery": gallery[].asset->url
+    "gallery": gallery[].asset->url,
+    "files": files[]{
+      "id": _key,
+      name,
+      pathname,
+      size,
+      contentType,
+      uploadedAt
+    }
   }
 `;
 

@@ -60,6 +60,33 @@ export const currentProjectType = defineType({
       options: { hotspot: true }
     }),
     defineField({
+      name: "files",
+      title: "Файлы клиента",
+      description: "Файлы, загруженные клиентом со страницы текущего проекта.",
+      type: "array",
+      of: [
+        defineArrayMember({
+          name: "projectFile",
+          title: "Файл",
+          type: "object",
+          fields: [
+            defineField({ name: "name", title: "Название", type: "string", readOnly: true }),
+            defineField({ name: "pathname", title: "Путь в хранилище", type: "string", readOnly: true }),
+            defineField({ name: "size", title: "Размер, байт", type: "number", readOnly: true }),
+            defineField({ name: "contentType", title: "Тип файла", type: "string", readOnly: true }),
+            defineField({ name: "uploadedAt", title: "Загружен", type: "datetime", readOnly: true })
+          ],
+          preview: {
+            select: { title: "name", size: "size" },
+            prepare({ title, size }) {
+              const sizeLabel = typeof size === "number" ? `${(size / 1024 / 1024).toFixed(1)} МБ` : "";
+              return { title: title || "Файл", subtitle: sizeLabel };
+            }
+          }
+        })
+      ]
+    }),
+    defineField({
       name: "published",
       title: "Открыть доступ по номеру",
       type: "boolean",
